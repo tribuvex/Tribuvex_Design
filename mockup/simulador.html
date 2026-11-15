@@ -21,7 +21,7 @@
     <p class="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">SIM · D2</p>
     <h1 class="mt-1 text-2xl font-bold tracking-tight">Simulador de escenarios</h1>
     <p class="mt-2 max-w-2xl text-sm text-muted-foreground">
-      Compara opciones excluyentes antes de fijarlas en PC3. El motor recalcula; no inventa cifras.
+      Compara opciones excluyentes antes de fijarlas en Control 3. El motor recalcula; no inventa cifras.
     </p>
 
     <div class="mt-6 rounded-xl border border-border bg-card p-5 shadow-tribuvex">
@@ -65,7 +65,7 @@
     <p id="winner" class="mt-4 hidden rounded-lg border border-success/30 bg-success-subtle px-4 py-3 text-sm text-success-foreground"></p>
 
     <div class="mt-6 flex flex-wrap gap-2">
-      <button type="button" id="btn-apply" class="hidden rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-white hover:bg-accent-hover">Aplicar escenario elegido en PC3</button>
+      <button type="button" id="btn-apply" class="hidden rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-white hover:bg-accent-hover">Aplicar escenario elegido en Control 3</button>
       <a href="./expediente.html?etapa=4&perfil=multi" class="rounded-lg border border-border px-4 py-2.5 text-sm font-semibold hover:bg-muted">Volver a cédulas</a>
     </div>
   </main>
@@ -77,12 +77,12 @@
       document.getElementById("btn-apply").classList.remove("hidden");
       var w = document.getElementById("winner");
       w.classList.remove("hidden");
-      w.innerHTML = "<strong>Menor saldo:</strong> escenario A (costos) · diferencia $ 430.000. Decisión humana en PC3.";
+      w.innerHTML = "<strong>Menor saldo:</strong> escenario A (costos) · diferencia $ 430.000. Decisión humana en Control 3.";
       TribuvexPc.toast("Simulación lista", "Ambos escenarios calculados por el motor.");
     });
     document.getElementById("btn-apply").addEventListener("click", function () {
       var esc = document.querySelector('input[name="esc"]:checked').value;
-      TribuvexPc.toast("Escenario " + esc.toUpperCase(), "Queda propuesto para PC3. Aún no fija la etapa.");
+      TribuvexPc.toast("Escenario " + esc.toUpperCase(), "Queda propuesto para Control 3. Aún no fija la etapa.");
       setTimeout(function () { location.href = "./pc/pc3.html"; }, 700);
     });
   </script>

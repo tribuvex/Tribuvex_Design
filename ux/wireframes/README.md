@@ -8,7 +8,7 @@ Fidelidad: **baja** (estructura, jerarquía, estados, copy del `CONTENT_MODEL.md
 |----|----------|---------|------------|
 | W-01 | Dashboard expedientes (A2/A4) | `A2-dashboard.md` | `A2-dashboard.html` |
 | W-02 | Expediente workspace (A6) | `A6-expediente.md` | `A6-expediente.html` |
-| W-03 | Punto de control (PC1–PC5) | `PC-checkpoint.md` | usa `pages/checkpoint-preview.html` (PC2; mismos chrome) |
+| W-03 | Control (Control 1–Control 5) | `PC-checkpoint.md` | usa `pages/checkpoint-preview.html` (Control 2; mismos chrome) |
 | W-04 | Paquete (A9) | `A9-paquete.md` | — |
 
 **Estados a cubrir en cada uno:** default · vacío · loading · error · (PC) interrupt.

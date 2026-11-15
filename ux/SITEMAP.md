@@ -1,11 +1,11 @@
 # Tribuvex — Information architecture / Sitemap (MN)
 
-**Alcance:** Mediano Nuevo — app web del contador/revisor para **fase 0–1** (MVP asalariado: 7 etapas, PC1 / PC3 / PC5).  
-**Fuera de este corte (anotado como F2/F3):** portal contribuyente (§16 abierto), cola de riesgo avanzada, lotes, PC2/PC4 UI completa, admin plataforma.  
+**Alcance:** Mediano Nuevo — app web del contador/revisor para **fase 0–1** (MVP asalariado: 7 etapas, Control 1 / Control 3 / Control 5).  
+**Fuera de este corte (anotado como F2/F3):** portal contribuyente (§16 abierto), cola de riesgo avanzada, lotes, Control 2/Control 4 UI completa, admin plataforma.  
 **Overrides UI:** `pages/dashboard.md`, `expediente.md`, `checkpoint.md`.  
 **PRD:** roles §3, grafo §8–10, fases §15, RNF-02 roles.
 
-Breadcrumbs cuando profundidad ≥ 3 (p. ej. Expedientes → Cliente → Etapa → PC). Nav lateral sticky con offset de contenido (`pages/dashboard`).
+Breadcrumbs cuando profundidad ≥ 3 (p. ej. Expedientes → Cliente → Etapa → Control). Nav lateral sticky con offset de contenido (`pages/dashboard`).
 
 ---
 
@@ -37,9 +37,9 @@ flowchart TB
   end
 
   subgraph pc [Interrupciones — no son ítems de nav]
-    S1 -.-> PC1[PC1 Ruta y alcance]
-    S4 -.-> PC3[PC3 Depuración]
-    S7 -.-> PC5[PC5 Borrador final]
+    S1 -.-> Control 1[Control 1 Ruta y alcance]
+    S4 -.-> Control 3[Control 3 Depuración]
+    S7 -.-> Control 5[Control 5 Borrador final]
   end
 
   subgraph secondary [Secundaria]
@@ -69,12 +69,12 @@ flowchart TB
 | A5 | Nuevo expediente | `/app/expedientes/nuevo` | 2 | CTA desde A2/A4 | preparador | 1 | — |
 | A6 | Expediente workspace | `/app/expedientes/:id` | 2 | — | preparador, revisor | 1 | `expediente.md` |
 | E1–E7 | Etapas del grafo | `/app/expedientes/:id?etapa=1..7` | 3 | Stepper in-page | preparador, revisor (RO) | 1 | `expediente.md` |
-| PC1 | Checkpoint ruta | modal/ruta interrupt | 4 | No nav | preparador | 1 | `checkpoint.md` |
-| PC3 | Checkpoint depuración | idem | 4 | No nav | preparador | 1 | `checkpoint.md` |
-| PC5 | Checkpoint borrador | idem | 4 | No nav | preparador; revisor si riesgo | 1 | `checkpoint.md` |
+| Control 1 | Checkpoint ruta | modal/ruta interrupt | 4 | No nav | preparador | 1 | `checkpoint.md` |
+| Control 3 | Checkpoint depuración | idem | 4 | No nav | preparador | 1 | `checkpoint.md` |
+| Control 5 | Checkpoint borrador | idem | 4 | No nav | preparador; revisor si riesgo | 1 | `checkpoint.md` |
 | A7 | Bitácora | `/app/expedientes/:id/bitacora` | 3 | Secondary / tab | preparador, revisor | 1 | — |
 | A8 | Traza casilla | panel en A6 o `/.../traza/:casilla` | 3–4 | In-context | preparador, revisor | 1 | `expediente.md` |
-| A9 | Paquete | `/app/expedientes/:id/paquete` | 3 | Tras PC5 | preparador, revisor | 1 | — |
+| A9 | Paquete | `/app/expedientes/:id/paquete` | 3 | Tras Control 5 | preparador, revisor | 1 | — |
 | A10 | Admin entidad | `/app/admin` | 1 | Primary si rol | administrador (+ independiente) | 1 mínimo† | — |
 
 \*Admin puede ver dashboard operativo según permiso.  
@@ -103,7 +103,7 @@ flowchart TB
 ### Breadcrumbs
 
 `Expedientes / {Cliente} / AG {año} / {Etapa}`  
-Si hay PC abierto: `… / {Etapa} / PC{n}`
+Si hay Control abierto: `… / {Etapa} / Control {n}`
 
 ---
 
@@ -114,9 +114,9 @@ Si hay PC abierto: `… / {Etapa} / PC{n}`
 | Cliente → Expedientes | Un cliente tiene 0..n expedientes (uno por año gravable típico) |
 | Expediente → Etapas | Orden fijo B1; no se salta etapa con efecto sin PC/aprobación |
 | Etapa → PC | PC interrumpe; no es página hermana permanente en el sitemap de nav |
-| PC omitido | PC2/PC4 (F2): si no hay diferencias, no hay nodo UI; solo entrada en bitácora |
-| Fuera de alcance | Desde PC1/E1 → estado “Derivado a manual” (terminal suave, sin E7 paquete automático) |
-| Revisor | Entra por A2 filtrado “Pendiente revisor” / riesgo; foco PC5; bitácora RO+aprobar |
+| PC omitido | Control 2/Control 4 (F2): si no hay diferencias, no hay nodo UI; solo entrada en bitácora |
+| Fuera de alcance | Desde Control 1/E1 → estado “Derivado a manual” (terminal suave, sin E7 paquete automático) |
+| Revisor | Entra por A2 filtrado “Pendiente revisor” / riesgo; foco Control 5; bitácora RO+aprobar |
 | Multitenencia | Ningún nodo cruza entidades; tenant del token (RNF-01) |
 
 ---
@@ -129,7 +129,7 @@ Si hay PC abierto: `… / {Etapa} / PC{n}`
 | Sesión expirada | Vuelta a A1; returnUrl a A6 si seguro |
 | Sin permiso de cliente | 403 / empty state; no filtrar en silencio datos ajenos |
 | Modelo caído | A6 operable: motor + expediente; banner degradación (RNF-10) — no nuevo nodo |
-| Paquete sin PC5 | A9 no disponible / disabled con explicación |
+| Paquete sin Control 5 | A9 no disponible / disabled con explicación |
 
 ---
 
@@ -137,8 +137,8 @@ Si hay PC abierto: `… / {Etapa} / PC{n}`
 
 | ID | Nodo | Fase | Nota |
 |----|------|------|------|
-| PC2 | Cruce exógena | 2 | Mismo patrón `checkpoint.md` |
-| PC4 | Patrimonio | 2 | Incluye aceptación de riesgo escrita |
+| Control 2 | Cruce exógena | 2 | Mismo patrón `checkpoint.md` |
+| Control 4 | Patrimonio | 2 | Incluye aceptación de riesgo escrita |
 | A11 | Cola de riesgo / lotes | 3 | Primary para revisor en temporada |
 | A12 | Extemporánea / corrección | 3 | Entrada desde A5 o A6 · mockup `mockup/extemporanea.html` |
 | P1 | Portal contribuyente — home | 3 | Árbol **separado** (sin sidebar contador); §16 |
@@ -162,9 +162,9 @@ flowchart LR
 |------|------------|---------|---------------|---------------|
 | A1–A2 | ✓ | ✓ | ✓ | — (portal F3) |
 | A3–A5 | ✓ | RO lista | ✓ clientes | — |
-| A6 E1–E7 | ✓ | RO + PC5 | — | — |
-| PC1 PC3 | ✓ | — / RO | — | — |
-| PC5 | ✓ | ✓ si riesgo | — | — |
+| A6 E1–E7 | ✓ | RO + Control 5 | — | — |
+| Control 1 Control 3 | ✓ | — / RO | — | — |
+| Control 5 | ✓ | ✓ si riesgo | — | — |
 | A7–A9 | ✓ | ✓ | — | — |
 | A10 | —※ | — | ✓ | — |
 

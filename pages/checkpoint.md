@@ -1,11 +1,11 @@
 # Page Override: checkpoint
 
-> Overrides `MASTER.md` for human control points PC1–PC5 (approve / edit / reject).
+> Overrides `MASTER.md` for human control points Control 1–Control 5 (approve / edit / reject).
 
 **Surfaces:** modal, full-width panel, or route interrupt inside expediente  
-**Users:** Contador preparador; Revisor on high-risk / PC5  
+**Users:** Contador preparador; Revisor on high-risk / Control 5  
 **Density:** Slightly airier than tables — padding `--space-6`, actions always visible  
-**PRD mapping:** PC1 ruta · PC2 exógena · PC3 depuración · PC4 patrimonio · PC5 borrador
+**PRD mapping:** Control 1 ruta · Control 2 exógena · Control 3 depuración · Control 4 patrimonio · Control 5 borrador
 
 ---
 
@@ -19,7 +19,7 @@
 | Disclaimer | RNF-17: system assists; professional responsibility is the accountant’s |
 | Actions | Sticky footer: **Aprobar** · **Editar** · **Rechazar** (order fixed) |
 
-PC2/PC4 may auto-skip with audit note when there is nothing to decide — show read-only “Omitido — sin diferencias” badge info, not a fake approval dialog.
+Control 2/Control 4 may auto-skip with audit note when there is nothing to decide — show read-only “Omitido — sin diferencias” badge info, not a fake approval dialog.
 
 ---
 
@@ -40,17 +40,17 @@ After failed validation (e.g. reject without reason): focus error summary (`role
 
 | PC | Emphasize |
 |----|-----------|
-| PC1 | Residencia, obligación, out-of-scope derivation |
-| PC2 | Difference list: soporte vs exógena + proposed action |
-| PC3 | Cédula grid, capped deductions, exclusive options |
-| PC4 | YoY patrimonio; written risk acceptance if proceeding |
-| PC5 | Full 210 preview, saldo, verifier findings before package |
+| Control 1 | Residencia, obligación, out-of-scope derivation |
+| Control 2 | Difference list: soporte vs exógena + proposed action |
+| Control 3 | Cédula grid, capped deductions, exclusive options |
+| Control 4 | YoY patrimonio; written risk acceptance if proceeding |
+| Control 5 | Full 210 preview, saldo, verifier findings before package |
 
 ---
 
 ## Icons (Phosphor)
 
-`CheckCircle` approve · `PencilSimple` edit · `XCircle` reject · `Warning` PC4 risk · `ShieldCheck` audit
+`CheckCircle` approve · `PencilSimple` edit · `XCircle` reject · `Warning` Control 4 risk · `ShieldCheck` audit
 
 ---
 
@@ -59,8 +59,8 @@ After failed validation (e.g. reject without reason): focus error summary (`role
 - ❌ One-click approve with no summary of what changed  
 - ❌ Soft-colored reject that looks like secondary  
 - ❌ Closing overlay without persisting interrupt state  
-- ❌ Hidden consent / silent “accept risk” on PC4  
+- ❌ Hidden consent / silent “accept risk” on Control 4  
 
 ## Preview
 
-Open `checkpoint-preview.html` (PC2 demo: approve / edit / reject with error summary). Component states: `../components.md`.
+Open `checkpoint-preview.html` (Control 2 demo: approve / edit / reject with error summary). Component states: `../components.md`.

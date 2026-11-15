@@ -1,11 +1,11 @@
-# F-04 — PC5 Borrador final
+# F-04 — Control 5 Borrador final
 
 **Objetivo:** Aprobar el borrador completo del 210 (saldo, hallazgos del verificador) antes de generar el paquete.  
 **Actores:** Contador preparador; **Revisor** si alertas altas (doble aprobación PRD §10).  
-**PRD:** §10 PC5, RF-18, D5 verificador, RNF-17.  
-**Sitemap:** E7 → PC5 → A9.  
+**PRD:** §10 Control 5, RF-18, D5 verificador, RNF-17.  
+**Sitemap:** E7 → Control 5 → A9.  
 **UI:** `checkpoint.md`; disclaimer RNF-17 siempre visible.  
-**Diagrama:** `PUNTOS_DE_CONTROL.md` → PC5 (el de abajo es el mismo flujo).  
+**Diagrama:** `PUNTOS_DE_CONTROL.md` → Control 5 (el de abajo es el mismo flujo).  
 **Wireflow:** [`../wireflows/WF-04-pc5.html`](../wireflows/WF-04-pc5.html).
 
 ---
@@ -20,22 +20,22 @@ Borrador armado + (en fase 2+) verificador independiente; grafo interrumpe antes
 
 | # | Quién | Qué | UI |
 |---|-------|-----|-----|
-| 1 | Sistema | Muestra 210 resumido, saldo a pagar/favor, anticipo, alertas | PC5 body |
+| 1 | Sistema | Muestra 210 resumido, saldo a pagar/favor, anticipo, alertas | Control 5 body |
 | 2 | Sistema | Lista hallazgos del verificador (si hay) | Badges danger/warning |
 | 3 | Contador | Revisa traza de casillas críticas | A8 |
 | 4 | Contador | Aprobar / Devolver a etapa / Rechazar | Footer |
 | 5a | Sistema | Si riesgo alto: estado “Pendiente revisor” | A2 cola (F3 UI; MVP: flag + notify) |
-| 5b | Revisor | Segundo visto bueno en PC5 | Misma UI RO + Aprobar/Rechazar |
+| 5b | Revisor | Segundo visto bueno en Control 5 | Misma UI RO + Aprobar/Rechazar |
 | 6 | Sistema | Tras aprobaciones requeridas → genera paquete | A9 |
 
 ```mermaid
 flowchart TD
-  E7[E7 Borrador] --> PC5[PC5]
-  PC5 -->|Aprobar sin riesgo| A9[Paquete]
-  PC5 -->|Aprobar con riesgo alto| R[Pendiente revisor]
+  E7[E7 Borrador] --> Control 5[Control 5]
+  Control 5 -->|Aprobar sin riesgo| A9[Paquete]
+  Control 5 -->|Aprobar con riesgo alto| R[Pendiente revisor]
   R -->|Revisor aprueba| A9
-  PC5 -->|Devolver| Ex[Etapa elegida]
-  PC5 -->|Rechazar| Stop[Bloqueado]
+  Control 5 -->|Devolver| Ex[Etapa elegida]
+  Control 5 -->|Rechazar| Stop[Bloqueado]
 ```
 
 ---
@@ -55,7 +55,7 @@ flowchart TD
 
 ## Sistema
 
-- Paquete solo tras PC5 satisfecho (y revisor si aplica).  
+- Paquete solo tras Control 5 satisfecho (y revisor si aplica).  
 - Verificador no calcula impuesto; señala inconsistencias.  
 - Disclaimer: el sistema asiste; responsabilidad profesional del contador.  
 - Post-A9: contador puede subir acuse/recibo después (RF-19) — flujo aparte.
@@ -76,7 +76,7 @@ flowchart TD
 
 | Caso | Flujo |
 |------|-------|
-| Sin verificador en MVP temprano | PC5 igual; lista de hallazgos vacía con nota |
+| Sin verificador en MVP temprano | Control 5 igual; lista de hallazgos vacía con nota |
 | Riesgo bajo | Una sola aprobación preparador |
 | Contador independiente | Misma persona preparador+revisor: una aprobación basta **o** auto-segundo paso explícito (decidir en decision log) |
 
@@ -88,5 +88,5 @@ flowchart TD
 |-----------|--------|
 | Aprobado completo | `paquete_listo` · A9 habilitado |
 | Pendiente revisor | Visible en dashboard; E7 cerrado a edición de cifras |
-| Devuelto | Etapa destino abierta; PC5 pendiente de nuevo |
+| Devuelto | Etapa destino abierta; Control 5 pendiente de nuevo |
 | Rechazado | Sin paquete; bitácora |

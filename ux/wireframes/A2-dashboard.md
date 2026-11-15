@@ -17,7 +17,7 @@ Escanear expedientes, filtrar por riesgo/estado, abrir o crear.
 │ · Administración  │ ┌─────────────────────────────────────────────┐ │
 │                   │ │ Cliente│Doc│AG│Etapa│Estado│Riesgo│Pendiente│ │
 │                   │ ├─────────────────────────────────────────────┤ │
-│                   │ │ Juan P.│…│2026│3·Soportes│Esperando│—│PC3  │ │
+│                   │ │ Juan P.│…│2026│3·Soportes│Esperando│—│Control 3  │ │
 │                   │ │ …                                           │ │
 │                   │ └─────────────────────────────────────────────┘ │
 └───────────────────┴─────────────────────────────────────────────────┘

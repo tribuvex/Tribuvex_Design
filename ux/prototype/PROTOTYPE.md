@@ -5,12 +5,12 @@
 | Campo | Valor |
 |-------|-------|
 | **Versión** | 0.1.0 · 2026-11-14 |
-| **Alcance** | Dashboard → Expediente AG 2026 asalariado → PC3 (depuración) → toast / bitácora simulada |
+| **Alcance** | Dashboard → Expediente AG 2026 asalariado → Control 3 (depuración) → toast / bitácora simulada |
 | **Fidelidad** | Media-alta visual (tokens reales) + interacción básica (nav, PC approve/edit/reject) |
-| **Escenario** | Contador preparador; Juan Pérez; etapa E4; interrupt PC3 |
+| **Escenario** | Contador preparador; Juan Pérez; etapa E4; interrupt Control 3 |
 | **Datos** | Ficticios; no conecta API |
 | **Stack** | HTML + CSS (`tokens.css`) + JS vanilla |
-| **Limitaciones** | Sin OAuth, sin SSE real, sin PC1/PC2/PC4/PC5 flujos completos, sin portal, sin persistencia |
+| **Limitaciones** | Sin OAuth, sin SSE real, sin Control 1/Control 2/Control 4/Control 5 flujos completos, sin portal, sin persistencia |
 | **Evalúa** | Jerarquía, CTAs PC, disclaimer RNF-17, traza panel, densidad app |
 | **Entry** | Abrir `index.html` en el navegador |
 

@@ -45,7 +45,7 @@ Trabajar las 7 etapas, ver avance SSE, abrir traza y recibir interrupciones PC.
 | Pausado | Banner: “Expediente pausado…” + CTA Reanudar |
 | Degradación modelo | Banner RNF-10 copy content model |
 | PC abierto | Overlay/panel encima (W-03); fondo A6 `aria-hidden` |
-| Revisor RO | Sin edición de cifras; puede abrir PC5 |
+| Revisor RO | Sin edición de cifras; puede abrir Control 5 |
 
 ## Breakpoints
 

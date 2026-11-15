@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tribuvex — Checkpoint PC2 Preview</title>
+  <title>Tribuvex — Checkpoint Control 2 Preview</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -321,7 +321,7 @@
       <div class="stage" role="listitem">6 Patrimonio</div>
       <div class="stage" role="listitem">7 Paquete</div>
     </div>
-    <p style="color:var(--muted-foreground)">El grafo está interrumpido en PC2. Resuelve el punto de control para continuar.</p>
+    <p style="color:var(--muted-foreground)">El grafo está interrumpido en Control 2. Resuelve el control para continuar.</p>
   </div>
 
   <div class="overlay" role="presentation">
@@ -334,7 +334,7 @@
     >
       <div class="cp-header">
         <div class="meta">
-          <span class="badge badge-warning"><span class="dot" aria-hidden="true"></span>PC2 · Cruce con exógena</span>
+          <span class="badge badge-warning"><span class="dot" aria-hidden="true"></span>Control 2 · Cruce con exógena</span>
           <span class="badge badge-info">1 diferencia</span>
         </div>
         <h1 id="cp-title">Conciliación con información exógena</h1>
@@ -436,7 +436,7 @@
 
       document.getElementById("btn-approve").addEventListener("click", function () {
         clearError();
-        showToast("Aprobación registrada", "PC2 cerrado. El grafo puede reanudarse.");
+        showToast("Aprobación registrada", "Control 2 cerrado. El grafo puede reanudarse.");
       });
 
       document.getElementById("btn-edit").addEventListener("click", function () {
@@ -460,7 +460,7 @@
       });
 
       document.getElementById("btn-omit-demo").addEventListener("click", function () {
-        showToast("Omitido — sin diferencias", "En producción PC2/PC4 se saltan con constancia en bitácora, sin este diálogo.");
+        showToast("Omitido — sin diferencias", "En producción Control 2/Control 4 se saltan con constancia en bitácora, sin este diálogo.");
       });
 
       window.setTimeout(function () {

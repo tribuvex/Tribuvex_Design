@@ -1,5 +1,15 @@
 # Design decisions — Tribuvex
 
+## 2026-11-15 · Renombrar PC → Control N (UI)
+
+| Campo | Valor |
+|-------|-------|
+| **Problema** | “PC” se lee como computadora; no comunica la pausa de decisión. |
+| **Decisión** | En **UI visible**: **Control 1…5** (+ nombre). IDs técnicos (`pc1.html`, keys `pc.*`, query `?pc=`) se mantienen. |
+| **Portal** | No mostrar “Control N” ni el acrónimo antiguo. |
+| **Dónde** | `CONTENT_MODEL`, mockup, wireflows labels, hub |
+| **Revisar si** | Capacitación interna sigue usando “PC” en voz; alinear glosario oral |
+
 ## 2026-11-15 · Copy portal sin jerga MUISCA
 
 | Campo | Valor |
@@ -11,11 +21,11 @@
 | **Responsable** | UX / Content |
 | **Revisar si** | Legal exige citar MUISCA por nombre en el portal |
 
-## 2026-11-15 · Opciones excluyentes A/B (PC3 · SIM)
+## 2026-11-15 · Opciones excluyentes A/B (Control 3 · SIM)
 
 | Campo | Valor |
 |-------|-------|
-| **Problema** | PC3 y SIM invertían A/B (25 % vs costos). |
-| **Decisión** | **A · Costos y gastos** · **B · Exención 25 %** (alineado a `CONTENT_MODEL` §PC3). |
+| **Problema** | Control 3 y SIM invertían A/B (25 % vs costos). |
+| **Decisión** | **A · Costos y gastos** · **B · Exención 25 %** (alineado a `CONTENT_MODEL` §Control 3). |
 | **Dónde** | `pc/pc3.html`, `simulador.html`, `CONTENT_MODEL` §SIM, `stages.js` |
 | **Revisar si** | Normativa o piloto pide otro orden por defecto |

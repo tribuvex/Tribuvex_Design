@@ -1,7 +1,7 @@
 # Pendientes UI — Mockup vs PRD
 
 **Fuente:** `01_PRD/PRD_Tribuvex.md` · `ux/SITEMAP.md` · `ux/CONTENT_MODEL.md`  
-**Inventario actual:** mockup A1–A13 + RN/OP/LOT + F2 + SIM/CAL/IMP/MEM + estados + portal + PC1–PC5.  
+**Inventario actual:** mockup A1–A13 + RN/OP/LOT + F2 + SIM/CAL/IMP/MEM + estados + portal + Control 1–Control 5.  
 **Actualizado:** 2026-11-15 (OAuth A1 · mockup HTML cerrado vs PRD)
 
 Leyenda de prioridad:
@@ -18,7 +18,7 @@ Leyenda de prioridad:
 ## Ya cubierto (no rehacer)
 
 - A1 Login · A2/A4 Expedientes · A3 Clientes · A5 Nuevo · A6 Expediente (stepper E1–E7)  
-- PC1–PC5 (aprobar / editar / rechazar + disclaimer) · A7 Bitácora · A8 Traza (panel) · A9 Paquete  
+- Control 1–Control 5 (aprobar / editar / rechazar + disclaimer) · A7 Bitácora · A8 Traza (panel) · A9 Paquete  
 - A10 Admin · A11 Cola · A12 Extemporánea · A13 Onboarding · RN · OP · LOT  
 - F2 Multi-cédula · SIM · CAL · IMP · MEM · Portal P1–P3 · estados de sistema 
 
@@ -55,11 +55,11 @@ Leyenda de prioridad:
 | 403 / sin permiso de cliente | SITEMAP excepciones | **P0** | ✅ `sin-permiso.html` |
 | Sesión expirada → login + returnUrl | SITEMAP | **P1** | ✅ `login.html?expired=1&returnUrl=…` |
 | Expediente pausado (UI reanudar) | RF-23 · CONTENT_MODEL | **P0** | ✅ `expediente.html?pausado=1` |
-| Paquete bloqueado sin PC5 | CONTENT_MODEL A9 | **P0** | ✅ `paquete.html?blocked=1` |
-| Derivado a análisis manual (terminal suave) | RF-22 · PC1 · SITEMAP | **P0** | ✅ `derivado.html` (desde PC1) |
+| Paquete bloqueado sin Control 5 | CONTENT_MODEL A9 | **P0** | ✅ `paquete.html?blocked=1` |
+| Derivado a análisis manual (terminal suave) | RF-22 · Control 1 · SITEMAP | **P0** | ✅ `derivado.html` (desde Control 1) |
 | No obligado → declaración voluntaria | RF-03 | **P0** | ✅ `expediente.html?etapa=2&voluntario=1` |
-| PC2 / PC4 omitido (badge en bitácora, sin modal) | §10 PC · SITEMAP | **P1** | ✅ fila Omitido en bitácora |
-| Doble aprobación revisor en PC5 | §10 riesgo | **P0** | ✅ `pc/pc5.html?revisor=1` |
+| Control 2 / Control 4 omitido (badge en bitácora, sin modal) | §10 PC · SITEMAP | **P1** | ✅ fila Omitido en bitácora |
+| Doble aprobación revisor en Control 5 | §10 riesgo | **P0** | ✅ `pc/pc5.html?revisor=1` |
 
 ---
 
@@ -73,13 +73,13 @@ Leyenda de prioridad:
 | E4 Cédulas | RF-08–12 seis cédulas, topes, opciones excluyentes | ✅ Asalariado + `?perfil=multi` (F2) | **P1** |
 | E5 Liquidación | RF-13–14 tabla 241, anticipo | ✅ KPIs + desglose + traza | **P0** |
 | E6 Patrimonio | RF-15 comparación YoY | ✅ Cards YoY + no justificado | **P1** |
-| E7 Borrador | Preview 210 + verificador | ✅ Casillas preview + PC5 / paquete | **P0** |
+| E7 Borrador | Preview 210 + verificador | ✅ Casillas preview + Control 5 / paquete | **P0** |
 | A8 Traza | RF-21 explicación clara | ✅ Panel + versión motor | **P0** |
 | A9 + RF-19 | Subir acuse/recibo + conservación | ✅ Upload acuse/recibo + toast | **P1** |
 | A10 Admin | Usuarios, permisos por cliente, retención | ✅ Tabla permisos + retención | **P1** |
-| A11 Cola riesgo | Priorización temporada | ✅ Orden + PC5 revisor + alto | **P1** |
-| PC2 | Pedir soporte al cliente como acción | ✅ Select decisión + CTA pedir soporte | **P1** |
-| PC5 | Devolver a etapa + hallazgo verificador | ✅ Select + variante revisor | **P0** |
+| A11 Cola riesgo | Priorización temporada | ✅ Orden + Control 5 revisor + alto | **P1** |
+| Control 2 | Pedir soporte al cliente como acción | ✅ Select decisión + CTA pedir soporte | **P1** |
+| Control 5 | Devolver a etapa + hallazgo verificador | ✅ Select + variante revisor | **P0** |
 | Portal P2 | Confianza / tipos de archivo; sin credenciales DIAN | ✅ `portal/upload.html` · tipos + confianza | **P1** |
 | Portal P3 | Saldo estimado + aceptar borrador | ✅ `portal/borrador.html` · KPI + aceptar | **P1** |
 | Login | OAuth 2.1 (RNF-02) | ✅ IdP buttons + redirect + `?oauth=error` · demo password | **P1** |
@@ -93,16 +93,16 @@ Leyenda de prioridad:
 | 1 | Expediente nuevo | Cubierto (A5→E3) |
 | 2 | Asalariado típico | Cubierto (camino feliz) |
 | 3 | Varias cédulas | ✅ `expediente.html?etapa=4&perfil=multi` + SIM |
-| 4 | Diferencias exógena | ✅ PC2 + pedir soporte |
+| 4 | Diferencias exógena | ✅ Control 2 + pedir soporte |
 | 5 | Extemporánea / corrección | ✅ A12 |
-| 6 | Fuera de alcance | ✅ PC1 derivar + `derivado.html` |
+| 6 | Fuera de alcance | ✅ Control 1 derivar + `derivado.html` |
 | 7 | Temporada alta / lotes | ✅ LOT + CAL + A11 |
 
 ---
 
 ## 5. Orden sugerido para el mockup (siguiente oleada)
 
-1. **Estados P0:** empty lists, error login, degradación, pausado/reanudar, paquete bloqueado, voluntaria E2, derivado manual, doble OK PC5  
+1. **Estados P0:** empty lists, error login, degradación, pausado/reanudar, paquete bloqueado, voluntaria E2, derivado manual, doble OK Control 5  
 2. **Profundizar E1–E3–E5–E7 + traza** al nivel CONTENT_MODEL (formularios y tablas, no solo copy)  
 3. **A12 extemporánea** + **estado RF-19** post-paquete  
 4. **RN parámetros AG** + **A13 onboarding independiente**  
@@ -118,16 +118,16 @@ Leyenda de prioridad:
 - [x] Banner RNF-10 degradación  
 - [x] 403 sin permiso (+ 404)  
 - [x] Pausado + Reanudar  
-- [x] Paquete bloqueado pre-PC5  
+- [x] Paquete bloqueado pre-Control 5  
 - [x] E2 declaración voluntaria  
 - [x] Estado «Derivado a manual»  
-- [x] PC5 doble aprobación revisor  
+- [x] Control 5 doble aprobación revisor  
 - [x] UI kit `#estados-sistema` + catálogo `estados.html`  
 - [x] E1–E7 formularios/tablas ricos (asalariado) + UI kit `#etapas`  
 - [x] A12 Extemporánea / corrección + UI kit `#a12`  
 - [x] RF-19 acuse/recibo usable  
 - [x] Admin permisos por cliente  
-- [x] PC2 pedir soporte al cliente  
+- [x] Control 2 pedir soporte al cliente  
 - [x] returnUrl post-sesión expirada  
 - [x] A13 onboarding independiente  
 - [x] RN parámetros AG (RNF-16)  

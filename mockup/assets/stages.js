@@ -35,11 +35,11 @@
         '<div class="mt-5 rounded-lg border border-border bg-muted/50 p-4 text-sm">' +
         '<p class="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Conclusión del motor</p>' +
         '<p class="mt-1 font-semibold text-foreground">Residente fiscal · Formulario 210 en alcance</p>' +
-        '<p class="mt-1 text-xs text-muted-foreground">Reglas AG2026.1 · pendiente confirmación en PC1</p>' +
+        '<p class="mt-1 text-xs text-muted-foreground">Reglas AG2026.1 · pendiente confirmación en Control 1</p>' +
         "</div>";
       html.actions =
         '<button type="button" class="rounded-lg border border-border px-4 py-2 text-sm font-semibold hover:bg-muted" onclick="TribuvexPc.toast(\'Guardado\',\'Criterios de residencia actualizados.\')">Guardar</button>' +
-        '<a class="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accent-hover" href="./pc/pc1.html">Abrir PC1</a>';
+        '<a class="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accent-hover" href="./pc/pc1.html">Abrir Control 1</a>';
     } else if (etapa === 2) {
       if (voluntario) {
         html.body =
@@ -97,7 +97,7 @@
         '<button type="button" class="mt-3 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accent-hover" onclick="TribuvexPc.toast(\'Subida simulada\',\'En producción inicia extracción con confianza por campo.\')">Subir documentos</button>' +
         "</div>";
       html.actions =
-        '<a class="rounded-lg border border-primary px-4 py-2 text-sm font-semibold text-primary hover:bg-muted" href="./pc/pc2.html">Abrir PC2 (si hay diferencias)</a>' +
+        '<a class="rounded-lg border border-primary px-4 py-2 text-sm font-semibold text-primary hover:bg-muted" href="./pc/pc2.html">Abrir Control 2 (si hay diferencias)</a>' +
         '<a class="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accent-hover" href="./expediente.html?etapa=4' + q + '">Continuar a cédulas</a>';
     } else if (etapa === 4) {
       if (multi) {
@@ -126,10 +126,10 @@
           "<tr><td class='px-3 py-2.5'>Venta de activo</td><td class='px-3 py-2.5'>Ganancias ocasionales</td><td class='px-3 py-2.5 font-mono'>$ 12.000.000</td><td class='px-3 py-2.5 font-mono text-xs'>15 %</td><td class='px-3 py-2.5'><span class='rounded-full bg-success-subtle px-2 py-0.5 text-xs font-semibold text-success-foreground'>OK</span></td><td class='px-3 py-2.5'>" +
           traceBtn("GO", "$ 12.000.000", "Escritura", "Ganancia ocasional", "Art. 300 ET") + "</td></tr>" +
           "</tbody></table></div>" +
-          '<p class="mt-3 text-xs text-muted-foreground">Límites cruzados y opciones excluyentes se confirman en PC3. Cifras solo del motor.</p>';
+          '<p class="mt-3 text-xs text-muted-foreground">Límites cruzados y opciones excluyentes se confirman en Control 3. Cifras solo del motor.</p>';
         html.actions =
           '<a class="rounded-lg border border-secondary px-4 py-2 text-sm font-semibold text-secondary hover:bg-muted" href="./simulador.html">Simular escenarios</a>' +
-          '<a class="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accent-hover" href="./pc/pc3.html">Abrir PC3</a>';
+          '<a class="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accent-hover" href="./pc/pc3.html">Abrir Control 3</a>';
       } else {
         html.body =
           '<div class="mb-3 text-xs text-muted-foreground">Demo multi-cédula: <a class="font-semibold text-secondary underline" href="./expediente.html?etapa=4&perfil=multi">abrir perfil varias cédulas</a></div>' +
@@ -153,9 +153,9 @@
           traceBtn("49", "$ 0", "Sin soporte", "Clasificación pendiente", "—") +
           "</td></tr>" +
           "</tbody></table></div>" +
-          '<p class="mt-3 text-xs text-muted-foreground">Los dudosos se confirman en PC3. No hay cifras editables del modelo: solo del motor.</p>';
+          '<p class="mt-3 text-xs text-muted-foreground">Los dudosos se confirman en Control 3. No hay cifras editables del modelo: solo del motor.</p>';
         html.actions =
-          '<a class="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accent-hover" href="./pc/pc3.html">Abrir PC3</a>';
+          '<a class="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accent-hover" href="./pc/pc3.html">Abrir Control 3</a>';
       }
     } else if (etapa === 5) {
       html.body =
@@ -189,9 +189,9 @@
         '<p class="font-semibold">Incremento $ 42.000.000</p>' +
         '<p class="mt-1 text-xs">Justificado por rentas: $ 29.600.000 · <strong>Sin justificar: $ 12.400.000</strong></p>' +
         "</div>" +
-        '<p class="mt-3 text-xs text-muted-foreground">Si no hay alerta, PC4 se omite y queda constancia en bitácora.</p>';
+        '<p class="mt-3 text-xs text-muted-foreground">Si no hay alerta, Control 4 se omite y queda constancia en bitácora.</p>';
       html.actions =
-        '<a class="rounded-lg border border-primary px-4 py-2 text-sm font-semibold text-primary hover:bg-muted" href="./pc/pc4.html">Abrir PC4</a>' +
+        '<a class="rounded-lg border border-primary px-4 py-2 text-sm font-semibold text-primary hover:bg-muted" href="./pc/pc4.html">Abrir Control 4</a>' +
         '<a class="rounded-lg bg-muted px-4 py-2 text-sm font-semibold hover:bg-border" href="./expediente.html?etapa=7">Continuar (si omitido)</a>';
     } else {
       html.body =
@@ -213,9 +213,9 @@
         "</td></tr>" +
         "</tbody></table></div>";
       html.actions =
-        '<a class="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accent-hover" href="./pc/pc5.html">Abrir PC5</a>' +
+        '<a class="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accent-hover" href="./pc/pc5.html">Abrir Control 5</a>' +
         '<a class="rounded-lg border border-border px-4 py-2 text-sm font-semibold hover:bg-muted" href="./paquete.html?blocked=1">Paquete (bloqueado)</a>' +
-        '<a class="rounded-lg bg-muted px-4 py-2 text-sm font-semibold hover:bg-border" href="./paquete.html">Paquete (tras PC5)</a>' +
+        '<a class="rounded-lg bg-muted px-4 py-2 text-sm font-semibold hover:bg-border" href="./paquete.html">Paquete (tras Control 5)</a>' +
         '<a class="rounded-lg px-3 py-2 text-xs font-semibold text-secondary hover:underline" href="./extemporanea.html">A12 Extemporánea / corrección</a>';
     }
 

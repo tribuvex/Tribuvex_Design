@@ -25,8 +25,8 @@
 |-----------|---------|
 | `pages/dashboard.md` | Lista de expedientes / cola de riesgo |
 | `pages/expediente.md` | Workspace: pipeline + trazabilidad |
-| `pages/checkpoint.md` | PC1–PC5 aprobar / editar / rechazar |
-| `pages/checkpoint-preview.html` | HTML vivo de PC2 (tokens + dark mode) |
+| `pages/checkpoint.md` | Control 1–Control 5 aprobar / editar / rechazar |
+| `pages/checkpoint-preview.html` | HTML vivo de Control 2 (tokens + dark mode) |
 | `pages/portal-contribuyente.md` | Portal del contribuyente |
 
 **Components:** `components.md` — estados (default/hover/focus/active/disabled/loading) para Button, Badge, Field, Card, Table, Modal, Toast, Tabs, Skeleton, Checkpoint.

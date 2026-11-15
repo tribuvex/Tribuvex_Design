@@ -32,7 +32,7 @@ Mapa de **qué se dice** en la UI. Fuente: PRD, `SITEMAP.md`, `flows/*`, `pages/
 | Cédula | Grupo de rentas (trabajo, capital, …) | no usar |
 | Soporte | Documento fuente (220, extracto, …) | “documento” |
 | Traza | Soporte + regla + artículo detrás de una cifra | “de dónde sale este valor” (raro en portal) |
-| Punto de control (PC) | Pausa para tu decisión | no mostrar el acrónimo al contribuyente |
+| Control N (id técnico `pcN`) | Pausa para tu decisión humana | no mostrar “Control N” ni “PC” al contribuyente |
 | Bitácora | Quién aprobó qué y cuándo | no usar |
 | Paquete | Archivos listos para presentar en MUISCA | “resumen para tu contador” |
 | Motor de reglas | Calculadora determinista versionada | no usar |
@@ -46,9 +46,9 @@ Mapa de **qué se dice** en la UI. Fuente: PRD, `SITEMAP.md`, `flows/*`, `pages/
 
 | Key | Label | Variante | Uso |
 |-----|-------|----------|-----|
-| `cta.approve` | Aprobar | primary / accent | Todo PC |
-| `cta.edit` | Editar | secondary outline | Todo PC |
-| `cta.reject` | Rechazar | destructive | Todo PC |
+| `cta.approve` | Aprobar | primary / accent | Todo Control |
+| `cta.edit` | Editar | secondary outline | Todo Control |
+| `cta.reject` | Rechazar | destructive | Todo Control |
 | `cta.view_trace` | Ver traza | info / ghost | Casillas, tablas |
 | `cta.pause` | Pausar expediente | ghost | A6 |
 | `cta.resume` | Reanudar | primary | Dashboard / A6 |
@@ -58,9 +58,9 @@ Mapa de **qué se dice** en la UI. Fuente: PRD, `SITEMAP.md`, `flows/*`, `pages/
 | `cta.download_package` | Descargar paquete | primary | A9 |
 | `cta.upload` | Subir documentos | primary | E3 / portal |
 | `cta.accept_draft` | Aceptar borrador | secondary→primary cuando listo | Portal |
-| `cta.derive_manual` | Derivar a análisis manual | secondary o warning | PC1 |
-| `cta.return_stage` | Devolver a una etapa | secondary | PC5 |
-| `cta.ask_support` | Pedir soporte al cliente | secondary | PC2 |
+| `cta.derive_manual` | Derivar a análisis manual | secondary o warning | Control 1 |
+| `cta.return_stage` | Devolver a una etapa | secondary | Control 5 |
+| `cta.ask_support` | Pedir soporte al cliente | secondary | Control 2 |
 
 **Prohibido como CTA de producto:** Presentar en MUISCA · Firmar · Pagar · Guardar clave DIAN.
 
@@ -195,7 +195,7 @@ Mapa de **qué se dice** en la UI. Fuente: PRD, `SITEMAP.md`, `flows/*`, `pages/
 | Título | Paquete de presentación |
 | Intro | Descarga los archivos para presentar en MUISCA. Tribuvex no presenta por ti. |
 | CTA | Descargar paquete |
-| Bloqueado | El paquete estará disponible cuando apruebes el borrador final (PC5). |
+| Bloqueado | El paquete estará disponible cuando apruebes el borrador final (Control 5). |
 
 ### A10 Admin
 | Elemento | Copy |
@@ -254,16 +254,16 @@ Mapa de **qué se dice** en la UI. Fuente: PRD, `SITEMAP.md`, `flows/*`, `pages/
 | Elemento | Copy |
 |----------|------|
 | Badge | Perfil · varias cédulas |
-| Nota | Límites cruzados y opciones excluyentes se confirman en PC3. Cifras solo del motor. |
-| CTA | Simular escenarios · Abrir PC3 |
+| Nota | Límites cruzados y opciones excluyentes se confirman en Control 3. Cifras solo del motor. |
+| CTA | Simular escenarios · Abrir Control 3 |
 
 ### SIM Simulador
 | Elemento | Copy |
 |----------|------|
 | Título | Simulador de escenarios |
-| Summary | Compara opciones excluyentes antes de fijarlas en PC3. El motor recalcula; no inventa cifras. |
+| Summary | Compara opciones excluyentes antes de fijarlas en Control 3. El motor recalcula; no inventa cifras. |
 | Opciones | A · Costos y gastos · B · Exención 25 % |
-| CTA | Calcular ambos · Aplicar escenario elegido en PC3 |
+| CTA | Calcular ambos · Aplicar escenario elegido en Control 3 |
 
 ### CAL Calendario NIT
 | Elemento | Copy |
@@ -277,7 +277,7 @@ Mapa de **qué se dice** en la UI. Fuente: PRD, `SITEMAP.md`, `flows/*`, `pages/
 |----------|------|
 | Título | Importación y exportación |
 | Summary | Trae datos desde software contable o exporta el paquete. Sin credenciales MUISCA. |
-| Gate | La importación no omite puntos de control humanos. |
+| Gate | La importación no omite controles humanos. |
 
 ### MEM Memoria entre años
 | Elemento | Copy |
@@ -288,7 +288,7 @@ Mapa de **qué se dice** en la UI. Fuente: PRD, `SITEMAP.md`, `flows/*`, `pages/
 
 ---
 
-## 8. Puntos de control — copy por PC
+## 8. Controles — copy por PC
 
 ### CTAs y errores comunes (todos)
 
@@ -300,49 +300,49 @@ Mapa de **qué se dice** en la UI. Fuente: PRD, `SITEMAP.md`, `flows/*`, `pages/
 | `pc.reject_reason_error` | Indica el motivo del rechazo. |
 | `pc.toast_approved` | Aprobación registrada. El flujo puede continuar. |
 | `pc.toast_rejected` | Rechazo registrado. La etapa no se cerró. |
-| `pc.toast_edit` | Modo edición. El punto de control sigue abierto. |
+| `pc.toast_edit` | Modo edición. El control sigue abierto. |
 
-### PC1 — Ruta y alcance
+### Control 1 — Ruta y alcance
 | Elemento | Copy |
 |----------|------|
-| Badge | PC1 · Ruta y alcance |
+| Badge | Control 1 · Ruta y alcance |
 | Título | Confirmación de ruta |
 | Summary | Revisa residencia, obligación preliminar y si el caso está en el alcance del Formulario 210. |
 | Derivar CTA | Derivar a análisis manual |
 | Success path | Ruta confirmada. Sigue la obligación de declarar. |
 
-### PC2 — Exógena (F2)
+### Control 2 — Exógena (F2)
 | Elemento | Copy |
 |----------|------|
-| Badge | PC2 · Cruce con exógena |
+| Badge | Control 2 · Cruce con exógena |
 | Título | Conciliación con información exógena |
 | Summary | Hay diferencias entre tus soportes y lo reportado a la DIAN. Elige qué hacer en cada una. |
 | Columnas | Concepto · Soporte · Exógena · Diferencia · Acción propuesta |
 | Omitido | Omitido — sin diferencias |
 
-### PC3 — Depuración
+### Control 3 — Depuración
 | Elemento | Copy |
 |----------|------|
-| Badge | PC3 · Depuración |
+| Badge | Control 3 · Depuración |
 | Título | Clasificación y límites de cédula |
 | Summary | Revisa rentas, deducciones y topes aplicados (incluidos límites en UVT). |
 | Excluyente | No puedes combinar costos/gastos de honorarios con la exención del 25 %. Elige una opción. |
 | Opción A | Aplicar costos y gastos |
 | Opción B | Aplicar exención del 25 % |
 
-### PC4 — Patrimonio (F2)
+### Control 4 — Patrimonio (F2)
 | Elemento | Copy |
 |----------|------|
-| Badge | PC4 · Patrimonio |
+| Badge | Control 4 · Patrimonio |
 | Título | Coherencia patrimonial |
 | Summary | El incremento patrimonial no queda del todo justificado con las rentas e ingresos registrados. |
 | ACK riesgo | Acepto el riesgo y dejo constancia escrita en la bitácora. |
 | ACK error | Debes confirmar la aceptación del riesgo por escrito para continuar. |
 
-### PC5 — Borrador final
+### Control 5 — Borrador final
 | Elemento | Copy |
 |----------|------|
-| Badge | PC5 · Borrador final |
+| Badge | Control 5 · Borrador final |
 | Título | Aprobación del borrador |
 | Summary | Revisa el Formulario 210, el saldo y los hallazgos antes de generar el paquete. |
 | Hallazgos | Hallazgos del verificador |
@@ -363,7 +363,7 @@ Mapa de **qué se dice** en la UI. Fuente: PRD, `SITEMAP.md`, `flows/*`, `pages/
 | E4 | Cédulas | Cada ingreso debe tener cédula. Los dudosos te los marcamos. |
 | E5 | Liquidación | Impuesto, descuentos, anticipo y saldo los calcula el motor de reglas. |
 | E6 | Patrimonio | Comparamos el patrimonio líquido con el año anterior. |
-| E7 | Borrador | Vista previa del 210 antes del punto de control final. |
+| E7 | Borrador | Vista previa del 210 antes del control final. |
 
 ---
 
@@ -411,7 +411,7 @@ Mapa de **qué se dice** en la UI. Fuente: PRD, `SITEMAP.md`, `flows/*`, `pages/
 
 **Casillas / traza lista:** Casilla · Concepto · Valor · Soporte · Estado · (Ver traza)
 
-**Cédula PC3:** Concepto · Valor · Tope aplicado · Nota
+**Cédula Control 3:** Concepto · Valor · Tope aplicado · Nota
 
 **Bitácora:** Fecha · Usuario · Rol · Acción · Detalle · Versión reglas
 
@@ -438,7 +438,7 @@ Cambios a labels de PC o disclaimer → entrada en [`DESIGN_DECISIONS.md`](./DES
 | Nav + stepper + badges | Sí |
 | A1–A10 | Sí |
 | E1–E7 | Sí |
-| PC1–PC5 | Sí |
+| Control 1–Control 5 | Sí |
 | Portal P1–P3 | Sí (F3) |
 | Errores / legal | Sí |
 | Glosario bilingüe contador/portal | Sí |

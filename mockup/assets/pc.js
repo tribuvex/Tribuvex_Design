@@ -46,7 +46,7 @@
 
     document.getElementById("btn-edit")?.addEventListener("click", function () {
       clearErr();
-      toast("Modo edición", "El punto de control sigue abierto.");
+      toast("Modo edición", "El control sigue abierto.");
     });
 
     document.getElementById("btn-reject")?.addEventListener("click", function () {

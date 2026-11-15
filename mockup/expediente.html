@@ -106,15 +106,15 @@
         ["Cédulas", "Clasificación y depuración", "Cada ingreso debe tener cédula. Los dudosos te los marcamos."],
         ["Liquidación", "Liquidación y saldo", "Impuesto, descuentos, anticipo y saldo los calcula el motor de reglas."],
         ["Patrimonio", "Coherencia patrimonial", "Comparamos el patrimonio líquido con el año anterior."],
-        ["Paquete", "Borrador y paquete", "Vista previa del 210 antes del punto de control final."]
+        ["Paquete", "Borrador y paquete", "Vista previa del 210 antes del control final."]
       ];
 
       var pcMeta = {
-        "1": { name: "PC1 · Ruta y alcance", href: "./pc/pc1.html" },
-        "2": { name: "PC2 · Cruce con exógena", href: "./pc/pc2.html" },
-        "3": { name: "PC3 · Depuración", href: "./pc/pc3.html" },
-        "4": { name: "PC4 · Patrimonio", href: "./pc/pc4.html" },
-        "5": { name: "PC5 · Borrador final", href: "./pc/pc5.html" }
+        "1": { name: "Control 1 · Ruta y alcance", href: "./pc/pc1.html" },
+        "2": { name: "Control 2 · Cruce con exógena", href: "./pc/pc2.html" },
+        "3": { name: "Control 3 · Depuración", href: "./pc/pc3.html" },
+        "4": { name: "Control 4 · Patrimonio", href: "./pc/pc4.html" },
+        "5": { name: "Control 5 · Borrador final", href: "./pc/pc5.html" }
       };
 
       var stepper = document.getElementById("stepper");
@@ -178,7 +178,7 @@
           pcMeta[pc].name +
           '</strong>. <a class="underline font-semibold" href="' +
           pcMeta[pc].href +
-          '">Abrir punto de control</a>';
+          '">Abrir control</a>';
         document.getElementById("crumb-extra").textContent =
           "Juan Pérez / AG 2026 / " + labels[etapa - 1][0] + " / " + pcMeta[pc].name;
       }

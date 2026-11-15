@@ -3,7 +3,7 @@
 > Overrides `MASTER.md` for the expediente workspace: pipeline, agent stream, casilla traceability.
 
 **Route ideas:** `/expedientes/:id`  
-**Users:** Contador preparador (primary), Revisor (read + PC5)  
+**Users:** Contador preparador (primary), Revisor (read + Control 5)  
 **Density:** Dense; split panes on ≥1280px  
 **Related:** checkpoints use `pages/checkpoint.md` when interrupted
 

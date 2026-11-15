@@ -57,6 +57,10 @@ Fecha: 2026-11-14 · Fuente: ui-ux-pro-max (`ux`, `html-tailwind`) + MASTER Trib
 - [x] Stepper del expediente: estados completed / current / upcoming más explícitos
 - [x] Unificar tokens mockup (`theme.js`) ↔ `tokens.css` (evitar drift)
 
+## Oleada rename PC → Control N (2026-11-15)
+
+UI visible: **Control 1…5**. IDs técnicos (`pc/pcN.html`, `?pc=`, keys `pc.*`) sin cambio. Ver `ux/DESIGN_DECISIONS.md`.
+
 ## Oleada copy audit (2026-11-15)
 
 Fuente: ui-ux-pro-max (`ux` / `html-tailwind`) + `CONTENT_MODEL.md`.
@@ -64,7 +68,7 @@ Fuente: ui-ux-pro-max (`ux` / `html-tailwind`) + `CONTENT_MODEL.md`.
 | Sev | Hallazgo | Fix |
 |-----|----------|-----|
 | Alta | MUISCA en portal | `portal/index.html` · `portal/borrador.html` → variante DIAN |
-| Alta | A/B PC3 ≠ SIM | Unificado **A costos · B 25 %** |
+| Alta | A/B Control 3 ≠ SIM | Unificado **A costos · B 25 %** |
 | Media | Hint aceptar borrador | Canónico + CTA disabled hasta docs listos |
 | Media | “Copiloto” en login | → “Asistente” |
 | Baja | Hub A9 label | “Paquete de presentación” |

@@ -1,7 +1,7 @@
-# W-03 — Punto de control (PC1–PC5)
+# W-03 — Control (Control 1–Control 5)
 
 **Copy:** `CONTENT_MODEL` §4 + §8 · **UI:** `pages/checkpoint.md` · **Diagramas:** `flows/PUNTOS_DE_CONTROL.md`  
-**HTML de referencia:** `pages/checkpoint-preview.html` (PC2 chrome = mismo para todos)
+**HTML de referencia:** `pages/checkpoint-preview.html` (Control 2 chrome = mismo para todos)
 
 ## Objetivo
 
@@ -32,11 +32,11 @@ Orden de botones **fijo**. Focus inicial: Aprobar (o título).
 
 | PC | Cuerpo wireframe |
 |----|------------------|
-| PC1 | Lista conclusión residencia / alcance + CTA Derivar |
-| PC2 | Tabla diferencias (columnas §12) |
-| PC3 | Tabla cédula + selector excluyente si aplica |
-| PC4 | Comparación YoY + checkbox ACK riesgo |
-| PC5 | Resumen 210 + saldo + hallazgos + ACK + Devolver a etapa |
+| Control 1 | Lista conclusión residencia / alcance + CTA Derivar |
+| Control 2 | Tabla diferencias (columnas §12) |
+| Control 3 | Tabla cédula + selector excluyente si aplica |
+| Control 4 | Comparación YoY + checkbox ACK riesgo |
+| Control 5 | Resumen 210 + saldo + hallazgos + ACK + Devolver a etapa |
 
 ## Estados
 
@@ -44,9 +44,9 @@ Orden de botones **fijo**. Focus inicial: Aprobar (o título).
 |--------|-----|
 | Default | Dialog abierto, interrupt activo |
 | Error rechazo | Error summary arriba + campo motivo en error |
-| Omitido (PC2/PC4) | **No** este chrome; badge “Omitido — sin diferencias” en A6/bitácora |
+| Omitido (Control 2/Control 4) | **No** este chrome; badge “Omitido — sin diferencias” en A6/bitácora |
 | Loading decisión | Botones disabled + spinner en CTA pulsado |
-| Solo lectura revisor | PC5: Aprobar/Rechazar/Devolver; sin editar cifras |
+| Solo lectura revisor | Control 5: Aprobar/Rechazar/Devolver; sin editar cifras |
 
 ## No mostrar
 
