@@ -1,6 +1,6 @@
 # Tribuvex — Entregables UX (progresivo, anclado al PRD)
 
-Plan de entregables UX alineado a `01_PRD/PRD_Tribuvex.md` (fases 0–4, roles, 7 etapas, PC1–PC5) y al design system en `design-system/tribuvex/`.
+Plan de entregables UX alineado a `01_PRD/PRD_Tribuvex.md` (fases 0–4, roles, 7 etapas, PC1–PC5) y al design system en `Tribuvex_Design/`.
 
 ## Cómo leer prioridades
 

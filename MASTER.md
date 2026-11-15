@@ -1,6 +1,6 @@
 # Design System Master File
 
-> **LOGIC:** When building a specific page, first check `design-system/tribuvex/pages/[page-name].md`.
+> **LOGIC:** When building a specific page, first check `pages/[page-name].md`.
 > If that file exists, its rules **override** this Master file.
 > If not, strictly follow the rules below.
 
@@ -13,11 +13,11 @@
 **Stack:** React + Tailwind CSS  
 **Design Dials:** Variance 4/10 | Motion 4/10 | Density 8/10 (Dense / Dashboard)
 
-**Preview:** open `design-system/tribuvex/ui-kit-preview.html` in a browser (aligned with mockup polish: shell, PC modal, toast, error summary, no emoji icons).
+**Preview:** open `ui-kit-preview.html` in a browser (aligned with mockup polish: shell, PC modal, toast, error summary, no emoji icons).
 
 **Tokens (implementable):**
-- `design-system/tribuvex/tokens.css` — primitive → semantic → component + Tailwind v4 `@theme inline`
-- `design-system/tribuvex/tokens.json` — handoff / inventory of the same layers
+- `tokens.css` — primitive → semantic → component + Tailwind v4 `@theme inline`
+- `tokens.json` — handoff / inventory of the same layers
 
 **Page overrides** (rules here win over this Master when building that page):
 
@@ -35,7 +35,7 @@
 
 **React + Tailwind v4 usage:**
 ```css
-@import "./design-system/tribuvex/tokens.css";
+@import "./tokens.css";
 ```
 Then use complete utilities: `bg-primary`, `text-muted-foreground`, `bg-accent`, `border-border`, `font-sans`, `rounded-md`.  
 Dark mode: add class `dark` on `<html>`. Do not interpolate class names (`bg-${color}`).

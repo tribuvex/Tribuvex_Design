@@ -51,8 +51,6 @@ Repo vivo de **UI kit**, **mockup HTML** y **wireflows**. No incluye PRD ni arqu
 2. Settings → Pages → Deploy from branch `main` / root `/`.
 3. URL esperada: `https://<org>.github.io/<repo>/` → `index.html`.
 
-En Documentación, `design-system/tribuvex` → symlink a esta carpeta.
-
 Local:
 
 ```bash

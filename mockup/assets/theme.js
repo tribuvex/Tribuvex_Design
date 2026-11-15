@@ -1,6 +1,6 @@
 /**
  * Tribuvex Tailwind CDN theme.
- * Source of truth for hex values: design-system/tribuvex/tokens.css
+ * Source of truth for hex values: tokens.css (repo root)
  * (primitive --tvx-* → semantic --primary / --background / …).
  * Dark mode surfaces & semantic pairs are overridden in app.css to match .dark in tokens.css
  * (CDN utilities bake light hex at build-time).

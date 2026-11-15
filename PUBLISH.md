@@ -1,11 +1,10 @@
-# Publish — repo aparte (vive dentro de Documentación)
+# Publish — repo aparte (dentro de Documentación)
 
 Paquete listo en:
 
 `Tribuvex_Documentacion/Tribuvex_Design`
 
-Tiene su propio `.git` (rama `main`).  
-`design-system/tribuvex` es un **symlink** a esta carpeta (una sola fuente de verdad).
+Tiene su propio `.git` (rama `main`). Fuente de verdad única del design system vivo.
 
 ## Crear remoto y publicar
 
@@ -33,5 +32,3 @@ Landing: `https://<org>.github.io/Tribuvex_Design/`
 cd Tribuvex_Design
 npx serve .
 ```
-
-Editar aquí o vía `design-system/tribuvex/` (mismo contenido).
