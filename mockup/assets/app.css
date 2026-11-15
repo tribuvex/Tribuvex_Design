@@ -77,36 +77,46 @@ select::-ms-expand { display: none; }
 
 /*
  * Dark mode — mirrors tokens.css .dark semantic pairs.
- * CDN Tailwind bakes light hex; these !important overrides keep contrast ≥ WCAG AA
- * for body text, muted, borders, and status chips.
+ * CDN Tailwind bakes light hex; opacity utilities (bg-card/90, bg-muted/80, …)
+ * do NOT match .bg-card / .bg-muted — cover them with [class*="…/"] or avoid opacity.
  */
 .dark body,
-.dark .bg-background {
+.dark .bg-background,
+.dark [class*="bg-background/"] {
   background-color: #0b1220 !important;
   color: #e2e8f0 !important;
 }
 .dark .bg-card,
-.dark .bg-white {
+.dark .bg-white,
+.dark [class*="bg-card/"] {
   background-color: #121a2b !important;
   color: #e2e8f0 !important;
 }
 .dark .bg-muted,
-.dark .bg-slate-100 {
+.dark .bg-slate-100,
+.dark [class*="bg-muted/"] {
   background-color: #1a2438 !important;
 }
 .dark .text-foreground { color: #e2e8f0 !important; }
+/* Slate-300 — ≥4.5:1 on #0b1220 / #121a2b / #1a2438 */
 .dark .text-muted-foreground,
 .dark .text-slate-500 {
-  color: #94a3b8 !important;
+  color: #cbd5e1 !important;
+}
+.dark .tvx-table thead {
+  background-color: #1a2438 !important;
+  color: #e2e8f0 !important;
+}
+.dark .tvx-table thead th {
+  color: #e2e8f0 !important;
 }
 .dark .text-primary { color: #7a9cc0 !important; }
 .dark .text-secondary { color: #60a5fa !important; }
-.dark .text-accent { color: #22c55e !important; }
+.dark .text-accent { color: #4ade80 !important; }
 .dark .border-border,
 .dark .border-slate-200,
-.dark .border-primary,
 .dark .divide-border > :not([hidden]) ~ :not([hidden]) {
-  border-color: #2a3548 !important;
+  border-color: #3d4f6a !important;
 }
 .dark .border-primary { border-color: #7a9cc0 !important; }
 .dark .shadow-tribuvex,
@@ -117,22 +127,86 @@ select::-ms-expand { display: none; }
   background-color: rgba(26, 36, 56, 0.9);
 }
 
-/* Status chips — tokens.css dark subtle/foreground */
-.dark .bg-warning-subtle { background-color: rgb(217 119 6 / 0.2) !important; }
-.dark .text-warning-foreground { color: #fbbf24 !important; }
-.dark .bg-destructive-subtle { background-color: rgb(220 38 38 / 0.2) !important; }
-.dark .text-destructive { color: #f87171 !important; }
-.dark .bg-success-subtle { background-color: rgb(22 163 74 / 0.2) !important; }
-.dark .text-success-foreground { color: #4ade80 !important; }
-.dark .bg-info-subtle { background-color: rgb(37 99 235 / 0.25) !important; }
-.dark .text-info-foreground { color: #60a5fa !important; }
-.dark .bg-accent { background-color: #22c55e !important; color: #0b1220 !important; }
-.dark .hover\:bg-accent-hover:hover { background-color: #16a34a !important; }
-.dark .bg-secondary { background-color: #60a5fa !important; color: #0b1220 !important; }
-.dark .bg-accent.text-white,
-.dark .bg-secondary.text-white,
+/*
+ * Status chips — solid dark tints (not translucent on light surfaces).
+ * Translucent subtle + light foreground on undeclared light card = ~1:1 FAIL.
+ */
+.dark .bg-warning-subtle,
+.dark [class*="bg-warning-subtle/"] {
+  background-color: #78350f !important;
+}
+.dark .text-warning-foreground { color: #fde68a !important; }
+.dark .bg-destructive-subtle,
+.dark [class*="bg-destructive-subtle/"] {
+  background-color: #7f1d1d !important;
+}
+.dark .text-destructive,
+.dark .text-destructive-foreground { color: #fecaca !important; }
+.dark .bg-success-subtle,
+.dark [class*="bg-success-subtle/"] {
+  background-color: #14532d !important;
+}
+.dark .text-success-foreground { color: #bbf7d0 !important; }
+.dark .bg-info-subtle,
+.dark [class*="bg-info-subtle/"] {
+  background-color: #1e3a8a !important;
+}
+.dark .text-info-foreground { color: #bfdbfe !important; }
+
+/*
+ * Accent CTAs
+ * Light: white on #15803d (≥5:1). Avoid mid-green + dark ink (passes AA but looks muddy).
+ * Dark: bright green + dark ink (white on #22c55e fails).
+ */
+.bg-accent,
+.bg-accent.text-white {
+  background-color: #15803d !important;
+  color: #ffffff !important;
+}
+.hover\:bg-accent-hover:hover,
+.hover\:bg-accent-hover:hover.text-white {
+  background-color: #166534 !important;
+  color: #ffffff !important;
+}
+.dark .bg-accent,
+.dark .bg-accent.text-white {
+  background-color: #22c55e !important;
+  color: #052e16 !important;
+}
+.dark .hover\:bg-accent-hover:hover,
 .dark .hover\:bg-accent-hover:hover.text-white {
+  background-color: #16a34a !important;
+  color: #052e16 !important;
+}
+.dark .bg-secondary,
+.dark .bg-secondary.text-white {
+  background-color: #60a5fa !important;
   color: #0b1220 !important;
+}
+
+/*
+ * Light chips / status text — CDN pairs that failed AA:
+ * warning-foreground #B45309 on #FFEDD5 ≈ 4.38; destructive #DC2626 on #FEE2E2 ≈ 3.95
+ */
+.text-warning-foreground { color: #92400e !important; }
+.text-destructive { color: #b91c1c !important; }
+.bg-destructive,
+.bg-destructive.text-white,
+.hover\:bg-destructive-hover:hover {
+  color: #ffffff !important;
+}
+.bg-warning,
+.bg-warning.text-white {
+  color: #1c1917 !important;
+}
+
+/* Topbar / sticky chrome — never leave light surfaces under .dark */
+.dark #shell-top header,
+.dark header.border-b.bg-card,
+.dark header[class*="bg-card"] {
+  background-color: #121a2b !important;
+  color: #e2e8f0 !important;
+  border-color: #3d4f6a !important;
 }
 
 /* Stepper — completed / current / upcoming */
@@ -174,39 +248,39 @@ select::-ms-expand { display: none; }
 .tvx-step--current {
   border-color: #d97706;
   background: #ffedd5;
-  color: #b45309;
+  color: #92400e;
   box-shadow: 0 0 0 2px rgb(217 119 6 / 0.15);
 }
 .tvx-step--current .tvx-step-num {
   background: #d97706;
-  color: #fff;
+  color: #1c1917;
 }
 .tvx-step--todo {
   border-color: transparent;
   background: #e9eef5;
-  color: #64748b;
+  color: #475569;
 }
 .tvx-step--todo .tvx-step-num {
   background: #cbd5e1;
-  color: #475569;
+  color: #334155;
 }
 .dark .tvx-step--done {
-  background: rgb(22 163 74 / 0.2);
-  border-color: rgb(74 222 128 / 0.35);
-  color: #4ade80;
+  background: #14532d;
+  border-color: rgb(74 222 128 / 0.45);
+  color: #bbf7d0;
 }
 .dark .tvx-step--done .tvx-step-num { background: #16a34a; color: #0b1220; }
 .dark .tvx-step--current {
-  background: rgb(217 119 6 / 0.2);
+  background: #78350f;
   border-color: #fbbf24;
-  color: #fbbf24;
+  color: #fde68a;
 }
 .dark .tvx-step--current .tvx-step-num { background: #f59e0b; color: #0b1220; }
 .dark .tvx-step--todo {
   background: #1a2438;
-  color: #94a3b8;
+  color: #cbd5e1;
 }
-.dark .tvx-step--todo .tvx-step-num { background: #2a3548; color: #94a3b8; }
+.dark .tvx-step--todo .tvx-step-num { background: #2a3548; color: #e2e8f0; }
 
 /* Page density — shared list/detail chrome */
 .tvx-page-eyebrow {
@@ -230,7 +304,7 @@ select::-ms-expand { display: none; }
   color: #475569;
 }
 .dark .tvx-page-eyebrow,
-.dark .tvx-page-lead { color: #94a3b8; }
+.dark .tvx-page-lead { color: #cbd5e1; }
 
 /* Phosphor icon system */
 .tvx-icon {
@@ -257,7 +331,7 @@ select::-ms-expand { display: none; }
   margin-bottom: 1rem;
   color: #64748b;
 }
-.dark .tvx-empty .tvx-icon { color: #94a3b8; }
+.dark .tvx-empty .tvx-icon { color: #cbd5e1; }
 
 /* Portal upload dropzone */
 .tvx-dropzone {
@@ -383,29 +457,29 @@ select::-ms-expand { display: none; }
 .dark .tvx-empty h2,
 .dark .tvx-empty .tvx-empty-title { color: #e2e8f0; }
 .dark .tvx-empty p,
-.dark .tvx-empty-icon { color: #94a3b8; }
+.dark .tvx-empty-icon { color: #cbd5e1; }
 .dark .tvx-banner--muted {
   background: #1a2438;
-  border-color: #2a3548;
+  border-color: #3d4f6a;
   color: #cbd5e1;
 }
 .dark .tvx-banner--info {
-  background: rgb(37 99 235 / 0.25);
+  background: #1e3a8a;
   border-color: #60a5fa;
-  color: #60a5fa;
+  color: #bfdbfe;
 }
 .dark .tvx-banner--warning {
-  background: rgb(217 119 6 / 0.2);
+  background: #78350f;
   border-color: #fbbf24;
-  color: #fbbf24;
+  color: #fde68a;
 }
 .dark .tvx-banner--danger {
-  background: rgb(220 38 38 / 0.2);
+  background: #7f1d1d;
   border-color: #f87171;
-  color: #f87171;
+  color: #fecaca;
 }
 .dark .tvx-banner--success {
-  background: rgb(22 163 74 / 0.2);
+  background: #14532d;
   border-color: #4ade80;
-  color: #4ade80;
+  color: #bbf7d0;
 }

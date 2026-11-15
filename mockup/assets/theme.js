@@ -13,13 +13,15 @@ tailwind.config = {
         /* tokens.css :root semantic */
         primary: { DEFAULT: "#1E3A5F", hover: "#254A73", foreground: "#FFFFFF" },
         secondary: { DEFAULT: "#2563EB", hover: "#3B82F6", foreground: "#FFFFFF" },
-        accent: { DEFAULT: "#16A34A", hover: "#15803D", foreground: "#FFFFFF" },
-        warning: { DEFAULT: "#D97706", subtle: "#FFEDD5", foreground: "#B45309" },
+        /* Light CTAs: white on green-700 (≥5:1). Mid green + dark ink looked muddy. */
+        accent: { DEFAULT: "#15803D", hover: "#166534", foreground: "#FFFFFF" },
+        /* Chip text must hit ≥4.5:1 on *-subtle (amber-700 / red-600 failed AA) */
+        warning: { DEFAULT: "#D97706", subtle: "#FFEDD5", foreground: "#92400E" },
         destructive: {
           DEFAULT: "#DC2626",
           hover: "#B91C1C",
           subtle: "#FEE2E2",
-          foreground: "#FFFFFF",
+          foreground: "#991B1B",
         },
         success: { subtle: "#DCFCE7", foreground: "#15803D" },
         info: { subtle: "#DBEAFE", foreground: "#1E40AF" },

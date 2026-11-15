@@ -32,7 +32,7 @@
         field("activos", "Activos principales en Colombia", "Sí", "") +
         field("intereses", "Centro de intereses vitales", "Colombia", "") +
         "</div>" +
-        '<div class="mt-5 rounded-lg border border-border bg-muted/50 p-4 text-sm">' +
+        '<div class="mt-5 rounded-lg border border-border bg-muted p-4 text-sm">' +
         '<p class="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Conclusión del motor</p>' +
         '<p class="mt-1 font-semibold text-foreground">Residente fiscal · Formulario 210 en alcance</p>' +
         '<p class="mt-1 text-xs text-muted-foreground">Reglas AG2026.1 · pendiente confirmación en Control 1</p>' +
@@ -45,7 +45,7 @@
         html.body =
           '<div class="tvx-banner tvx-banner--info mb-4" role="status"><div><strong>No obligado a declarar</strong> según umbrales UVT del AG. Puedes cerrar el expediente o declarar de forma voluntaria.</div></div>' +
           '<div class="overflow-hidden rounded-xl border border-border">' +
-          '<table class="tvx-table w-full text-left text-sm"><thead class="bg-muted/80 text-[11px] uppercase text-muted-foreground"><tr>' +
+          '<table class="tvx-table w-full text-left text-sm"><thead class="bg-muted text-[11px] uppercase text-muted-foreground"><tr>' +
           "<th class='px-3 py-2.5'>Condición</th><th class='px-3 py-2.5'>Umbral</th><th class='px-3 py-2.5'>Valor</th><th class='px-3 py-2.5'>Resultado</th></tr></thead><tbody class='divide-y divide-border'>" +
           "<tr><td class='px-3 py-2.5'>Patrimonio bruto</td><td class='px-3 py-2.5 font-mono text-xs'>4.500 UVT</td><td class='px-3 py-2.5 font-mono text-xs'>$ 48.000.000</td><td class='px-3 py-2.5'><span class='rounded-full bg-success-subtle px-2 py-0.5 text-xs font-semibold text-success-foreground'>Bajo</span></td></tr>" +
           "<tr><td class='px-3 py-2.5'>Ingresos brutos</td><td class='px-3 py-2.5 font-mono text-xs'>1.400 UVT</td><td class='px-3 py-2.5 font-mono text-xs'>$ 22.000.000</td><td class='px-3 py-2.5'><span class='rounded-full bg-success-subtle px-2 py-0.5 text-xs font-semibold text-success-foreground'>Bajo</span></td></tr>" +
@@ -60,7 +60,7 @@
       } else {
         html.body =
           '<div class="overflow-hidden rounded-xl border border-border">' +
-          '<table class="tvx-table w-full text-left text-sm"><thead class="bg-muted/80 text-[11px] uppercase text-muted-foreground"><tr>' +
+          '<table class="tvx-table w-full text-left text-sm"><thead class="bg-muted text-[11px] uppercase text-muted-foreground"><tr>' +
           "<th class='px-3 py-2.5'>Condición</th><th class='px-3 py-2.5'>Umbral</th><th class='px-3 py-2.5'>Valor</th><th class='px-3 py-2.5'>Resultado</th></tr></thead><tbody class='divide-y divide-border'>" +
           "<tr><td class='px-3 py-2.5'>Patrimonio bruto</td><td class='px-3 py-2.5 font-mono text-xs'>4.500 UVT</td><td class='px-3 py-2.5 font-mono text-xs'>$ 210.000.000</td><td class='px-3 py-2.5'><span class='rounded-full bg-warning-subtle px-2 py-0.5 text-xs font-semibold text-warning-foreground'>Supera</span></td></tr>" +
           "<tr><td class='px-3 py-2.5'>Ingresos brutos</td><td class='px-3 py-2.5 font-mono text-xs'>1.400 UVT</td><td class='px-3 py-2.5 font-mono text-xs'>$ 86.400.000</td><td class='px-3 py-2.5'><span class='rounded-full bg-warning-subtle px-2 py-0.5 text-xs font-semibold text-warning-foreground'>Supera</span></td></tr>" +
@@ -91,7 +91,7 @@
         '<li class="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-border px-3 py-2.5 text-sm">' +
         "<span>Declaración AG anterior</span><span class=\"rounded-full bg-success-subtle px-2 py-0.5 text-xs font-semibold text-success-foreground\">Recibido</span></li>" +
         "</ul>" +
-        '<div class="mt-4 rounded-xl border border-dashed border-border bg-muted/30 px-4 py-6 text-center">' +
+        '<div class="mt-4 rounded-xl border border-dashed border-border bg-muted px-4 py-6 text-center">' +
         '<p class="text-sm font-semibold">Sube soportes (PDF, imagen o hoja de cálculo)</p>' +
         '<p class="mt-1 text-xs text-muted-foreground">Sin credenciales DIAN ni firma electrónica</p>' +
         '<button type="button" class="mt-3 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accent-hover" onclick="TribuvexPc.toast(\'Subida simulada\',\'En producción inicia extracción con confianza por campo.\')">Subir documentos</button>' +
@@ -111,7 +111,7 @@
           '<span class="rounded-full bg-muted px-2.5 py-1 font-semibold">Dividendos</span>' +
           '<span class="rounded-full bg-muted px-2.5 py-1 font-semibold">Ganancias ocasionales</span></div>' +
           '<div class="overflow-x-auto rounded-xl border border-border">' +
-          '<table class="tvx-table w-full min-w-[720px] text-left text-sm"><thead class="bg-muted/80 text-[11px] uppercase text-muted-foreground"><tr>' +
+          '<table class="tvx-table w-full min-w-[720px] text-left text-sm"><thead class="bg-muted text-[11px] uppercase text-muted-foreground"><tr>' +
           "<th class='px-3 py-2.5'>Concepto</th><th class='px-3 py-2.5'>Cédula</th><th class='px-3 py-2.5'>Valor</th><th class='px-3 py-2.5'>Límite cruzado</th><th class='px-3 py-2.5'>Estado</th><th class='px-3 py-2.5'></th></tr></thead><tbody class='divide-y divide-border'>" +
           "<tr><td class='px-3 py-2.5'>Salario</td><td class='px-3 py-2.5'>General · trabajo</td><td class='px-3 py-2.5 font-mono'>$ 72.000.000</td><td class='px-3 py-2.5 text-xs'>—</td><td class='px-3 py-2.5'><span class='rounded-full bg-success-subtle px-2 py-0.5 text-xs font-semibold text-success-foreground'>OK</span></td><td class='px-3 py-2.5'>" +
           traceBtn("43", "$ 72.000.000", "Certificado 220", "Rentas de trabajo", "Art. 103 ET") + "</td></tr>" +
@@ -134,7 +134,7 @@
         html.body =
           '<div class="mb-3 text-xs text-muted-foreground">Demo multi-cédula: <a class="font-semibold text-secondary underline" href="./expediente.html?etapa=4&perfil=multi">abrir perfil varias cédulas</a></div>' +
           '<div class="overflow-x-auto rounded-xl border border-border">' +
-          '<table class="tvx-table w-full min-w-[640px] text-left text-sm"><thead class="bg-muted/80 text-[11px] uppercase text-muted-foreground"><tr>' +
+          '<table class="tvx-table w-full min-w-[640px] text-left text-sm"><thead class="bg-muted text-[11px] uppercase text-muted-foreground"><tr>' +
           "<th class='px-3 py-2.5'>Casilla</th><th class='px-3 py-2.5'>Concepto</th><th class='px-3 py-2.5'>Cédula</th><th class='px-3 py-2.5'>Valor</th><th class='px-3 py-2.5'>Tope</th><th class='px-3 py-2.5'>Estado</th><th class='px-3 py-2.5'></th></tr></thead><tbody class='divide-y divide-border'>" +
           "<tr><td class='px-3 py-2.5 font-mono text-xs'>43</td><td class='px-3 py-2.5'>Ingresos brutos trabajo</td><td class='px-3 py-2.5'>General</td><td class='px-3 py-2.5 font-mono'>$ 86.400.000</td><td class='px-3 py-2.5'>—</td>" +
           "<td class='px-3 py-2.5'><span class='rounded-full bg-success-subtle px-2 py-0.5 text-xs font-semibold text-success-foreground'>OK</span></td><td class='px-3 py-2.5'>" +
@@ -165,7 +165,7 @@
         '<div class="rounded-xl border border-border bg-card p-3 shadow-sm"><dt class="text-[11px] font-semibold uppercase text-muted-foreground">Saldo a pagar</dt><dd class="mt-1 font-mono text-lg font-semibold text-primary">$ 1.180.000</dd></div>' +
         "</dl>" +
         '<div class="overflow-hidden rounded-xl border border-border">' +
-        '<table class="tvx-table w-full text-left text-sm"><thead class="bg-muted/80 text-[11px] uppercase text-muted-foreground"><tr>' +
+        '<table class="tvx-table w-full text-left text-sm"><thead class="bg-muted text-[11px] uppercase text-muted-foreground"><tr>' +
         "<th class='px-3 py-2.5'>Concepto</th><th class='px-3 py-2.5'>Valor</th><th class='px-3 py-2.5'></th></tr></thead><tbody class='divide-y divide-border'>" +
         "<tr><td class='px-3 py-2.5'>Renta líquida gravable</td><td class='px-3 py-2.5 font-mono'>$ 48.200.000</td><td class='px-3 py-2.5'>" +
         traceBtn("RLG", "$ 48.200.000", "Motor", "Depuración cédula general", "Art. 336 ET") +
@@ -200,7 +200,7 @@
         '<span class="rounded-full bg-muted px-2.5 py-0.5 text-xs font-semibold text-muted-foreground">Borrador 210</span></div>' +
         '<p class="mb-3 font-mono text-2xl font-bold tracking-tight">Saldo a pagar: $ 1.180.000</p>' +
         '<div class="overflow-hidden rounded-xl border border-border">' +
-        '<table class="tvx-table w-full text-left text-sm"><thead class="bg-muted/80 text-[11px] uppercase text-muted-foreground"><tr>' +
+        '<table class="tvx-table w-full text-left text-sm"><thead class="bg-muted text-[11px] uppercase text-muted-foreground"><tr>' +
         "<th class='px-3 py-2.5'>Casilla</th><th class='px-3 py-2.5'>Concepto</th><th class='px-3 py-2.5'>Valor</th><th class='px-3 py-2.5'></th></tr></thead><tbody class='divide-y divide-border'>" +
         "<tr><td class='px-3 py-2.5 font-mono text-xs'>43</td><td class='px-3 py-2.5'>Ingresos brutos</td><td class='px-3 py-2.5 font-mono'>$ 86.400.000</td><td class='px-3 py-2.5'>" +
         traceBtn("43", "$ 86.400.000", "Certificado 220", "Rentas de trabajo", "Art. 103 ET") +

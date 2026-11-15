@@ -39,7 +39,7 @@
     '<p class="mt-0.5 text-xs text-muted-foreground">Obligatorio si eliges Rechazar. Queda en la bitácora.</p>' +
     '<textarea id="reject-reason" class="mt-2 w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20" rows="3"></textarea>' +
     '<p id="reject-error" class="mt-1.5 hidden text-xs font-medium text-destructive">Indica el motivo del rechazo.</p></div>' +
-    '<p class="mt-5 rounded-lg border border-border bg-muted/80 p-3.5 text-xs leading-relaxed text-muted-foreground">Tribuvex asiste en la preparación de la declaración. La responsabilidad profesional es del contador. El sistema no presenta, firma ni paga en MUISCA.</p>' +
+    '<p class="mt-5 rounded-lg border border-border bg-muted p-3.5 text-xs leading-relaxed text-muted-foreground">Tribuvex asiste en la preparación de la declaración. La responsabilidad profesional es del contador. El sistema no presenta, firma ni paga en MUISCA.</p>' +
     "</div>" +
     '<div class="tvx-pc-footer flex flex-wrap items-center justify-end gap-2 border-t border-border bg-card px-6 py-4">' +
     '<a href="' +

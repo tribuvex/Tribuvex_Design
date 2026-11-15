@@ -106,19 +106,21 @@
   --on-secondary: var(--tvx-white);
   --secondary-hover: var(--tvx-blue-500);
 
-  --accent: var(--tvx-green-600);
+  /* CTA fill: green-700 + white (≥5:1). green-600 + white fails; mid green + dark ink looks muddy */
+  --accent: var(--tvx-green-700);
   --on-accent: var(--tvx-white);
-  --accent-hover: var(--tvx-green-700);
+  --accent-hover: #166534;
 
   --warning: var(--tvx-amber-600);
-  --on-warning: var(--tvx-white);
+  --on-warning: #1c1917;
   --warning-subtle: var(--tvx-amber-100);
-  --warning-foreground: var(--tvx-amber-700);
+  --warning-foreground: #92400e;
 
   --destructive: var(--tvx-red-600);
   --on-destructive: var(--tvx-white);
   --destructive-hover: var(--tvx-red-700);
   --destructive-subtle: var(--tvx-red-100);
+  --destructive-foreground: #991b1b;
 
   --success-subtle: var(--tvx-green-100);
   --success-foreground: var(--tvx-green-700);
@@ -189,26 +191,27 @@
 
   --warning: var(--tvx-amber-500);
   --on-warning: var(--tvx-navy-950);
-  --warning-subtle: rgb(217 119 6 / 0.2);
-  --warning-foreground: var(--tvx-amber-400);
+  --warning-subtle: #78350f;
+  --warning-foreground: #fde68a;
 
   --destructive: var(--tvx-red-400);
   --on-destructive: var(--tvx-navy-950);
   --destructive-hover: var(--tvx-red-600);
-  --destructive-subtle: rgb(220 38 38 / 0.2);
+  --destructive-subtle: #7f1d1d;
+  --destructive-foreground: #fecaca;
 
-  --success-subtle: rgb(22 163 74 / 0.2);
-  --success-foreground: #4ade80;
-  --info-subtle: rgb(37 99 235 / 0.25);
-  --info-foreground: var(--tvx-blue-400);
+  --success-subtle: #14532d;
+  --success-foreground: #bbf7d0;
+  --info-subtle: #1e3a8a;
+  --info-foreground: #bfdbfe;
 
   --background: #0b1220;
   --foreground: #e2e8f0;
   --card: #121a2b;
   --card-foreground: #e2e8f0;
   --muted: #1a2438;
-  --muted-foreground: #94a3b8;
-  --border: #2a3548;
+  --muted-foreground: #cbd5e1;
+  --border: #3d4f6a;
   --input: #2a3548;
   --ring: var(--tvx-navy-400);
   --overlay: rgb(0 0 0 / 0.65);
@@ -320,6 +323,7 @@
   --color-on-destructive: var(--on-destructive);
   --color-destructive-hover: var(--destructive-hover);
   --color-destructive-subtle: var(--destructive-subtle);
+  --color-destructive-foreground: var(--destructive-foreground);
 
   --color-success-subtle: var(--success-subtle);
   --color-success-foreground: var(--success-foreground);
