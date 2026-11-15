@@ -46,7 +46,7 @@ PC2/PC4 y portal están en el hub para cobertura F2/F3.
 | `operador.html` | OP | Como operador, quiero alta/suspender entidades sin ver datos tributarios. |
 | `lotes.html` | LOT | Como preparador en temporada, quiero encolar lotes por entidad sin saltar puntos de control. |
 | `expediente.html?etapa=4&perfil=multi` | F2 | Como preparador, quiero clasificar varias cédulas con límites cruzados visibles. |
-| `simulador.html` | SIM | Como preparador, quiero comparar 25 % vs costos antes de fijar en PC3. |
+| `simulador.html` | SIM | Como preparador, quiero comparar costos (A) vs 25 % (B) antes de fijar en PC3. |
 | `calendario.html` | CAL | Como preparador, quiero ver vencimientos por últimos dígitos del NIT. |
 | `importacion.html` | IMP | Como preparador, quiero importar desde contabilidad y exportar el paquete sin MUISCA. |
 | `memoria.html` | MEM | Como preparador, quiero ver anticipo y patrimonio del año anterior del cliente. |

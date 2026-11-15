@@ -262,7 +262,7 @@ Mapa de **qué se dice** en la UI. Fuente: PRD, `SITEMAP.md`, `flows/*`, `pages/
 |----------|------|
 | Título | Simulador de escenarios |
 | Summary | Compara opciones excluyentes antes de fijarlas en PC3. El motor recalcula; no inventa cifras. |
-| Opciones | A · Exención 25 % · B · Costos y gastos |
+| Opciones | A · Costos y gastos · B · Exención 25 % |
 | CTA | Calcular ambos · Aplicar escenario elegido en PC3 |
 
 ### CAL Calendario NIT
@@ -388,7 +388,7 @@ Mapa de **qué se dice** en la UI. Fuente: PRD, `SITEMAP.md`, `flows/*`, `pages/
 | Pantalla | Elemento | Copy |
 |----------|----------|------|
 | Home | Headline | Sube tus documentos para tu declaración |
-| Home | Support | Tu contador prepara el borrador. Tú solo cargas lo que piden. |
+| Home | Support | Tu contador prepara el borrador. Tú solo cargas lo que piden. Tribuvex no envía nada a la DIAN por ti. |
 | Home | CTA | Subir documentos |
 | Faltantes | Título | Qué falta |
 | Faltantes | Ítem hecho | (nombre documento) — recibido |
@@ -397,8 +397,9 @@ Mapa de **qué se dice** en la UI. Fuente: PRD, `SITEMAP.md`, `flows/*`, `pages/
 | Borrador | CTA disabled hint | Cuando estén todos los documentos, podrás aceptar el borrador. |
 | Borrador | CTA | Aceptar borrador |
 | Confirm | | Al aceptar, tu contador recibe la confirmación. La presentación a la DIAN la hace tu contador. |
+| Legal portal | | Tu contador revisa y presenta la declaración. Tribuvex no envía nada a la DIAN por ti. |
 | Help | | ¿Dudas? Escribe a tu contador o firma. |
-| Nunca | | Campos de usuario/contraseña MUISCA o firma electrónica DIAN |
+| Nunca | | Campos de usuario/contraseña MUISCA · jerga MUISCA/UVT/cédula/PC · firma electrónica DIAN |
 
 ---
 
@@ -426,7 +427,7 @@ Mapa de **qué se dice** en la UI. Fuente: PRD, `SITEMAP.md`, `flows/*`, `pages/
 | Portal tono | Writer | Contador (validar claridad) |
 | Keys i18n | Front-end | Writer |
 
-Cambios a labels de PC o disclaimer → entrada en `DESIGN_DECISIONS.md` (cuando exista).
+Cambios a labels de PC o disclaimer → entrada en [`DESIGN_DECISIONS.md`](./DESIGN_DECISIONS.md).
 
 ---
 

@@ -35,7 +35,7 @@ Leyenda de prioridad:
 | OP | Operador de plataforma | §3 · sitemap post | **P2** | ✅ `operador.html` · cero datos tributarios |
 | RN | Parámetros año gravable (responsable normativo) | RNF-16 · §3 | **P1** | ✅ `parametros.html` · gate firma+regresión |
 | LOT | Lotes / cola de procesamiento | D3 · RNF-12 · caso uso 7 | **P2** | ✅ `lotes.html` · turnos · no salta PC |
-| SIM | Simulador de escenarios | D2 · fase 4 | **P2** | ✅ `simulador.html` · 25 % vs costos |
+| SIM | Simulador de escenarios | D2 · fase 4 | **P2** | ✅ `simulador.html` · A costos · B 25 % |
 | CAL | Alertas calendario por NIT | D5 | **P2** | ✅ `calendario.html` · últimos dígitos |
 | IMP | Importación contable / export paquete | D4 | **P2** | ✅ `importacion.html` · sin MUISCA |
 | MEM | Memoria cliente entre años | D6 | **P2** | ✅ `memoria.html` · anticipo / AG-1 |

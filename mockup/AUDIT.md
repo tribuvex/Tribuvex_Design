@@ -57,9 +57,24 @@ Fecha: 2026-11-14 · Fuente: ui-ux-pro-max (`ux`, `html-tailwind`) + MASTER Trib
 - [x] Stepper del expediente: estados completed / current / upcoming más explícitos
 - [x] Unificar tokens mockup (`theme.js`) ↔ `tokens.css` (evitar drift)
 
+## Oleada copy audit (2026-11-15)
+
+Fuente: ui-ux-pro-max (`ux` / `html-tailwind`) + `CONTENT_MODEL.md`.
+
+| Sev | Hallazgo | Fix |
+|-----|----------|-----|
+| Alta | MUISCA en portal | `portal/index.html` · `portal/borrador.html` → variante DIAN |
+| Alta | A/B PC3 ≠ SIM | Unificado **A costos · B 25 %** |
+| Media | Hint aceptar borrador | Canónico + CTA disabled hasta docs listos |
+| Media | “Copiloto” en login | → “Asistente” |
+| Baja | Hub A9 label | “Paquete de presentación” |
+
+Ver `ux/DESIGN_DECISIONS.md`.
+
 ## Anti-patrones evitados (MASTER)
 
 - Sin emoji como iconos estructurales
 - Sin “presentar / firmar / pagar” en MUISCA
-- Disclaimer RNF-17 visible en PC
+- Portal sin jerga MUISCA/UVT/cédula/PC
+- Disclaimer RNF-17 visible en PC; variante portal en P1–P3
 - Color semántico: warning = decisión humana; destructive = rechazo / riesgo alto

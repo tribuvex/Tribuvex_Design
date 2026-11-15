@@ -104,7 +104,7 @@
         html.body =
           '<div class="mb-3 flex flex-wrap items-center gap-2">' +
           '<span class="rounded-full bg-info-subtle px-2.5 py-0.5 text-xs font-semibold text-info-foreground">Perfil · varias cédulas</span>' +
-          '<a class="text-xs font-semibold text-secondary hover:underline" href="./simulador.html">Abrir simulador (25 % vs costos)</a></div>' +
+          '<a class="text-xs font-semibold text-secondary hover:underline" href="./simulador.html">Abrir simulador (costos vs 25 %)</a></div>' +
           '<div class="mb-3 flex flex-wrap gap-2 text-xs">' +
           '<span class="rounded-full bg-muted px-2.5 py-1 font-semibold">General</span>' +
           '<span class="rounded-full bg-muted px-2.5 py-1 font-semibold">Pensiones</span>' +

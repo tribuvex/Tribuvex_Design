@@ -17,7 +17,7 @@
 | Hero | One headline + one supporting line + one CTA (**Subir documentos**) |
 | Status | “Qué falta” checklist — success items with text + icon, not color alone |
 | Draft | Summary: estimated tax / saldo in `font-mono`; CTA **Aceptar borrador** (secondary until complete) |
-| Help | Contact firm / contador — no MUISCA credentials fields ever |
+| Help | Contact firm / contador — no MUISCA credentials; no MUISCA/UVT/cédula/PC jargon in UI copy (say “la DIAN”) |
 
 Do **not** reuse the dense sidebar shell of the accountant app. Single-column on mobile; max content width ~640–720px for forms.
 
@@ -60,6 +60,7 @@ Icons: `UploadSimple`, `FileText`, `CheckCircle`, `Warning` (Phosphor).
 ## Anti-patterns (page)
 
 - ❌ Accountant table density or 7-stage pipeline jargon  
-- ❌ Asking for MUISCA password or e-sign secrets  
+- ❌ Asking for MUISCA password or e-sign secrets
+- ❌ Showing the word “MUISCA” (or UVT / cédula / PC) to the taxpayer — use “la DIAN” / plain money language  
 - ❌ Placeholder-only inputs  
 - ❌ Card spam / promo badges over the hero  

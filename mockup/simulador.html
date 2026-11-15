@@ -31,11 +31,11 @@
         <legend class="sr-only">Escenario</legend>
         <label class="flex cursor-pointer items-start gap-3 rounded-lg border border-border p-3 has-[:checked]:border-primary has-[:checked]:bg-muted/40">
           <input type="radio" name="esc" value="a" class="mt-1" checked />
-          <span><span class="font-semibold text-sm">A · Exención 25 %</span><span class="mt-0.5 block text-xs text-muted-foreground">Sin costos deducibles de honorarios</span></span>
+          <span><span class="font-semibold text-sm">A · Costos y gastos</span><span class="mt-0.5 block text-xs text-muted-foreground">Sin exención 25 % sobre estos honorarios</span></span>
         </label>
         <label class="flex cursor-pointer items-start gap-3 rounded-lg border border-border p-3 has-[:checked]:border-primary has-[:checked]:bg-muted/40">
           <input type="radio" name="esc" value="b" class="mt-1" />
-          <span><span class="font-semibold text-sm">B · Costos y gastos</span><span class="mt-0.5 block text-xs text-muted-foreground">Sin exención 25 % sobre estos honorarios</span></span>
+          <span><span class="font-semibold text-sm">B · Exención 25 %</span><span class="mt-0.5 block text-xs text-muted-foreground">Sin costos deducibles de honorarios</span></span>
         </label>
       </fieldset>
       <button type="button" id="btn-sim" class="mt-4 rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-white hover:bg-accent-hover">Calcular ambos</button>
@@ -44,20 +44,20 @@
     <div id="cmp" class="mt-6 hidden grid gap-4 sm:grid-cols-2">
       <div class="rounded-xl border border-border bg-card p-5 shadow-tribuvex" id="card-a">
         <p class="text-[11px] font-semibold uppercase text-muted-foreground">Escenario A</p>
-        <p class="mt-1 text-sm font-semibold">Exención 25 %</p>
+        <p class="mt-1 text-sm font-semibold">Costos $ 9.800.000</p>
         <dl class="mt-4 space-y-2 text-sm">
-          <div class="flex justify-between"><dt class="text-muted-foreground">Renta líquida</dt><dd class="font-mono font-semibold" id="a-rl">$ 61.200.000</dd></div>
-          <div class="flex justify-between"><dt class="text-muted-foreground">Impuesto</dt><dd class="font-mono font-semibold" id="a-imp">$ 5.410.000</dd></div>
-          <div class="flex justify-between border-t border-border pt-2"><dt class="font-semibold">Saldo</dt><dd class="font-mono text-lg font-bold text-primary" id="a-sal">$ 1.890.000</dd></div>
+          <div class="flex justify-between"><dt class="text-muted-foreground">Renta líquida</dt><dd class="font-mono font-semibold" id="a-rl">$ 58.400.000</dd></div>
+          <div class="flex justify-between"><dt class="text-muted-foreground">Impuesto</dt><dd class="font-mono font-semibold" id="a-imp">$ 4.980.000</dd></div>
+          <div class="flex justify-between border-t border-border pt-2"><dt class="font-semibold">Saldo</dt><dd class="font-mono text-lg font-bold text-primary" id="a-sal">$ 1.460.000</dd></div>
         </dl>
       </div>
       <div class="rounded-xl border border-border bg-card p-5 shadow-tribuvex" id="card-b">
         <p class="text-[11px] font-semibold uppercase text-muted-foreground">Escenario B</p>
-        <p class="mt-1 text-sm font-semibold">Costos $ 9.800.000</p>
+        <p class="mt-1 text-sm font-semibold">Exención 25 %</p>
         <dl class="mt-4 space-y-2 text-sm">
-          <div class="flex justify-between"><dt class="text-muted-foreground">Renta líquida</dt><dd class="font-mono font-semibold" id="b-rl">$ 58.400.000</dd></div>
-          <div class="flex justify-between"><dt class="text-muted-foreground">Impuesto</dt><dd class="font-mono font-semibold" id="b-imp">$ 4.980.000</dd></div>
-          <div class="flex justify-between border-t border-border pt-2"><dt class="font-semibold">Saldo</dt><dd class="font-mono text-lg font-bold text-primary" id="b-sal">$ 1.460.000</dd></div>
+          <div class="flex justify-between"><dt class="text-muted-foreground">Renta líquida</dt><dd class="font-mono font-semibold" id="b-rl">$ 61.200.000</dd></div>
+          <div class="flex justify-between"><dt class="text-muted-foreground">Impuesto</dt><dd class="font-mono font-semibold" id="b-imp">$ 5.410.000</dd></div>
+          <div class="flex justify-between border-t border-border pt-2"><dt class="font-semibold">Saldo</dt><dd class="font-mono text-lg font-bold text-primary" id="b-sal">$ 1.890.000</dd></div>
         </dl>
       </div>
     </div>
@@ -77,7 +77,7 @@
       document.getElementById("btn-apply").classList.remove("hidden");
       var w = document.getElementById("winner");
       w.classList.remove("hidden");
-      w.innerHTML = "<strong>Menor saldo:</strong> escenario B (costos) · diferencia $ 430.000. Decisión humana en PC3.";
+      w.innerHTML = "<strong>Menor saldo:</strong> escenario A (costos) · diferencia $ 430.000. Decisión humana en PC3.";
       TribuvexPc.toast("Simulación lista", "Ambos escenarios calculados por el motor.");
     });
     document.getElementById("btn-apply").addEventListener("click", function () {
