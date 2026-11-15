@@ -1,0 +1,411 @@
+/* Tribuvex mockup polish — pairs with Tailwind CDN + theme.js */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Focus visible — WCAG-friendly ring (ui-ux-pro-max) */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid #1E3A5F;
+  outline-offset: 2px;
+}
+.dark :focus-visible {
+  outline-color: #7A9CC0;
+}
+
+/* Interactive defaults */
+a, button, [role="button"], summary {
+  cursor: pointer;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, box-shadow 160ms ease;
+}
+
+/* Native select → product control (hide OS chrome) */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  line-height: 1.4;
+  padding-right: 2.5rem;
+  background-color: #ffffff;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #64748b 50%),
+    linear-gradient(135deg, #64748b 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) calc(50% - 2px),
+    calc(100% - 12px) calc(50% - 2px);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+}
+select::-ms-expand { display: none; }
+.dark select {
+  background-color: #121a2b;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #94a3b8 50%),
+    linear-gradient(135deg, #94a3b8 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) calc(50% - 2px),
+    calc(100% - 12px) calc(50% - 2px);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  color: #e2e8f0;
+}
+
+/* Tables */
+.tvx-table th {
+  letter-spacing: 0.04em;
+}
+.tvx-table tbody tr {
+  transition: background-color 120ms ease;
+}
+.tvx-table tbody tr:hover {
+  background-color: rgba(233, 238, 245, 0.55);
+}
+
+/*
+ * Dark mode — mirrors tokens.css .dark semantic pairs.
+ * CDN Tailwind bakes light hex; these !important overrides keep contrast ≥ WCAG AA
+ * for body text, muted, borders, and status chips.
+ */
+.dark body,
+.dark .bg-background {
+  background-color: #0b1220 !important;
+  color: #e2e8f0 !important;
+}
+.dark .bg-card,
+.dark .bg-white {
+  background-color: #121a2b !important;
+  color: #e2e8f0 !important;
+}
+.dark .bg-muted,
+.dark .bg-slate-100 {
+  background-color: #1a2438 !important;
+}
+.dark .text-foreground { color: #e2e8f0 !important; }
+.dark .text-muted-foreground,
+.dark .text-slate-500 {
+  color: #94a3b8 !important;
+}
+.dark .text-primary { color: #7a9cc0 !important; }
+.dark .text-secondary { color: #60a5fa !important; }
+.dark .text-accent { color: #22c55e !important; }
+.dark .border-border,
+.dark .border-slate-200,
+.dark .border-primary,
+.dark .divide-border > :not([hidden]) ~ :not([hidden]) {
+  border-color: #2a3548 !important;
+}
+.dark .border-primary { border-color: #7a9cc0 !important; }
+.dark .shadow-tribuvex,
+.dark .shadow-tribuvex-lg {
+  box-shadow: 0 10px 15px rgb(0 0 0 / 0.45) !important;
+}
+.dark .tvx-table tbody tr:hover {
+  background-color: rgba(26, 36, 56, 0.9);
+}
+
+/* Status chips — tokens.css dark subtle/foreground */
+.dark .bg-warning-subtle { background-color: rgb(217 119 6 / 0.2) !important; }
+.dark .text-warning-foreground { color: #fbbf24 !important; }
+.dark .bg-destructive-subtle { background-color: rgb(220 38 38 / 0.2) !important; }
+.dark .text-destructive { color: #f87171 !important; }
+.dark .bg-success-subtle { background-color: rgb(22 163 74 / 0.2) !important; }
+.dark .text-success-foreground { color: #4ade80 !important; }
+.dark .bg-info-subtle { background-color: rgb(37 99 235 / 0.25) !important; }
+.dark .text-info-foreground { color: #60a5fa !important; }
+.dark .bg-accent { background-color: #22c55e !important; color: #0b1220 !important; }
+.dark .hover\:bg-accent-hover:hover { background-color: #16a34a !important; }
+.dark .bg-secondary { background-color: #60a5fa !important; color: #0b1220 !important; }
+.dark .bg-accent.text-white,
+.dark .bg-secondary.text-white,
+.dark .hover\:bg-accent-hover:hover.text-white {
+  color: #0b1220 !important;
+}
+
+/* Stepper — completed / current / upcoming */
+.tvx-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid transparent;
+  padding: 0.5rem 0.35rem;
+  text-align: center;
+  text-decoration: none;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1.25;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+.tvx-step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 9999px;
+  font-size: 0.625rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.tvx-step--done {
+  border-color: rgb(21 128 61 / 0.2);
+  background: #dcfce7;
+  color: #15803d;
+}
+.tvx-step--done .tvx-step-num {
+  background: #15803d;
+  color: #fff;
+}
+.tvx-step--current {
+  border-color: #d97706;
+  background: #ffedd5;
+  color: #b45309;
+  box-shadow: 0 0 0 2px rgb(217 119 6 / 0.15);
+}
+.tvx-step--current .tvx-step-num {
+  background: #d97706;
+  color: #fff;
+}
+.tvx-step--todo {
+  border-color: transparent;
+  background: #e9eef5;
+  color: #64748b;
+}
+.tvx-step--todo .tvx-step-num {
+  background: #cbd5e1;
+  color: #475569;
+}
+.dark .tvx-step--done {
+  background: rgb(22 163 74 / 0.2);
+  border-color: rgb(74 222 128 / 0.35);
+  color: #4ade80;
+}
+.dark .tvx-step--done .tvx-step-num { background: #16a34a; color: #0b1220; }
+.dark .tvx-step--current {
+  background: rgb(217 119 6 / 0.2);
+  border-color: #fbbf24;
+  color: #fbbf24;
+}
+.dark .tvx-step--current .tvx-step-num { background: #f59e0b; color: #0b1220; }
+.dark .tvx-step--todo {
+  background: #1a2438;
+  color: #94a3b8;
+}
+.dark .tvx-step--todo .tvx-step-num { background: #2a3548; color: #94a3b8; }
+
+/* Page density — shared list/detail chrome */
+.tvx-page-eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #475569;
+}
+.tvx-page-title {
+  margin-top: 0.25rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+.tvx-page-lead {
+  margin-top: 0.25rem;
+  max-width: 42rem;
+  font-size: 0.875rem;
+  color: #475569;
+}
+.dark .tvx-page-eyebrow,
+.dark .tvx-page-lead { color: #94a3b8; }
+
+/* Phosphor icon system */
+.tvx-icon {
+  display: inline-block;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+.tvx-icon--sm { width: 14px; height: 14px; }
+.tvx-icon--md { width: 20px; height: 20px; }
+.tvx-icon--lg { width: 24px; height: 24px; }
+.tvx-nav-icon .tvx-icon {
+  opacity: 0.95;
+}
+.tvx-banner-icon.tvx-icon,
+.tvx-banner .tvx-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.1rem;
+}
+.tvx-empty-icon.tvx-icon,
+.tvx-empty .tvx-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-bottom: 1rem;
+  color: #64748b;
+}
+.dark .tvx-empty .tvx-icon { color: #94a3b8; }
+
+/* Portal upload dropzone */
+.tvx-dropzone {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  border: 1px dashed #cbd5e1;
+  border-radius: 0.75rem;
+  background: #fff;
+  padding: 1.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.dark .tvx-dropzone {
+  background: #121a2b;
+  border-color: #2a3548;
+}
+
+/* Sticky PC footer: keep focus unobscured */
+.tvx-pc-footer {
+  scroll-margin-bottom: 1rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Hub / marketing surfaces */
+.tvx-panel {
+  border-radius: 0.75rem;
+  border: 1px solid #E2E8F0;
+  background: #fff;
+  box-shadow: 0 1px 2px rgb(15 23 42 / 0.04), 0 8px 24px rgb(15 23 42 / 0.06);
+}
+
+/* ——— System states (CONTENT_MODEL §7 / §10) ——— */
+.tvx-banner {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding: 0.875rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid transparent;
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+.tvx-banner strong { font-weight: 600; }
+.tvx-banner-icon {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.1rem;
+}
+.tvx-banner--info {
+  background: #dbeafe;
+  border-color: #93c5fd;
+  color: #1e40af;
+}
+.tvx-banner--warning {
+  background: #ffedd5;
+  border-color: #fdba74;
+  color: #9a3412;
+}
+.tvx-banner--danger {
+  background: #fee2e2;
+  border-color: #fca5a5;
+  color: #991b1b;
+}
+.tvx-banner--success {
+  background: #dcfce7;
+  border-color: #86efac;
+  color: #166534;
+}
+.tvx-banner--muted {
+  background: #e9eef5;
+  border-color: #cbd5e1;
+  color: #334155;
+}
+
+.tvx-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px dashed #cbd5e1;
+  background: #fff;
+}
+.tvx-empty-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-bottom: 1rem;
+  color: #64748b;
+}
+.tvx-empty h2,
+.tvx-empty .tvx-empty-title {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+.tvx-empty p {
+  margin: 0 0 1.25rem;
+  max-width: 28rem;
+  font-size: 0.875rem;
+  color: #475569;
+}
+
+.dark .tvx-empty {
+  background: #121a2b;
+  border-color: #2a3548;
+}
+.dark .tvx-empty h2,
+.dark .tvx-empty .tvx-empty-title { color: #e2e8f0; }
+.dark .tvx-empty p,
+.dark .tvx-empty-icon { color: #94a3b8; }
+.dark .tvx-banner--muted {
+  background: #1a2438;
+  border-color: #2a3548;
+  color: #cbd5e1;
+}
+.dark .tvx-banner--info {
+  background: rgb(37 99 235 / 0.25);
+  border-color: #60a5fa;
+  color: #60a5fa;
+}
+.dark .tvx-banner--warning {
+  background: rgb(217 119 6 / 0.2);
+  border-color: #fbbf24;
+  color: #fbbf24;
+}
+.dark .tvx-banner--danger {
+  background: rgb(220 38 38 / 0.2);
+  border-color: #f87171;
+  color: #f87171;
+}
+.dark .tvx-banner--success {
+  background: rgb(22 163 74 / 0.2);
+  border-color: #4ade80;
+  color: #4ade80;
+}

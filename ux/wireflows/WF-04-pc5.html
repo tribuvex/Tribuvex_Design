@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WF-04 · PC5 Borrador final — Wireflow Tribuvex</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/wireflow-board.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>WF-04 · PC5 Borrador final</h1>
+      <p>Preparador · opcional revisor · paquete o devolver etapa.</p>
+    </div>
+    <nav>
+      <a href="../flows/04-pc5-borrador.md">Task flow</a>
+      <a href="./index.html">Índice</a>
+      <a href="../../mockup/index.html">Hub mockup</a>
+      <a class="primary" href="../../mockup/login.html">Entrar</a>
+    </nav>
+  </header>
+  <div class="legend">
+    <span><i class="swatch"></i> Camino feliz</span>
+    <span><i class="swatch dash"></i> Rama / decisión</span>
+    <span><i class="swatch pc"></i> Punto de control</span>
+  </div>
+  <div class="board-wrap">
+    <div class="board" id="board" aria-label="WF-04"></div>
+  </div>
+  <p class="hint">Miniaturas = mockup real. Si el navegador bloquea iframes locales, verás silueta wire. Spec enlazada arriba.</p>
+  <script src="./assets/wireflow-board.js"></script>
+  <script>
+    TribuvexWireflow.mount({
+  "width": 1400,
+  "height": 780,
+  "mockBase": "../../mockup/",
+  "sections": [
+    {
+      "label": "Borrador",
+      "x": 24,
+      "y": 18
+    },
+    {
+      "label": "PC5",
+      "x": 24,
+      "y": 280
+    },
+    {
+      "label": "Salidas",
+      "x": 24,
+      "y": 540
+    }
+  ],
+  "screens": [
+    {
+      "id": "e7",
+      "num": "1",
+      "name": "E7 Borrador",
+      "href": "expediente.html?etapa=7",
+      "x": 80,
+      "y": 48,
+      "hub": true
+    },
+    {
+      "id": "pc5",
+      "num": "2",
+      "name": "PC5 Preparador",
+      "href": "pc/pc5.html",
+      "x": 360,
+      "y": 48,
+      "pc": true
+    },
+    {
+      "id": "risk",
+      "num": "2a",
+      "name": "Cola de riesgo",
+      "href": "cola-riesgo.html",
+      "x": 640,
+      "y": 48
+    },
+    {
+      "id": "rev",
+      "num": "3",
+      "name": "PC5 Revisor",
+      "href": "pc/pc5.html?revisor=1",
+      "x": 640,
+      "y": 310,
+      "pc": true
+    },
+    {
+      "id": "pkg",
+      "num": "4",
+      "name": "A9 Paquete",
+      "href": "paquete.html",
+      "x": 360,
+      "y": 570
+    },
+    {
+      "id": "blocked",
+      "num": "4a",
+      "name": "Paquete bloqueado",
+      "href": "paquete.html?blocked=1",
+      "x": 80,
+      "y": 570
+    },
+    {
+      "id": "back",
+      "num": "2b",
+      "name": "Devolver a etapa",
+      "href": "expediente.html?etapa=3",
+      "x": 920,
+      "y": 310
+    },
+    {
+      "id": "rf19",
+      "num": "5",
+      "name": "Acuse RF-19",
+      "href": "paquete.html",
+      "x": 640,
+      "y": 570
+    }
+  ],
+  "happy": [
+    [
+      "e7",
+      "pc5"
+    ],
+    [
+      "pc5",
+      "pkg"
+    ],
+    [
+      "pkg",
+      "rf19"
+    ]
+  ],
+  "branches": [
+    [
+      "pc5",
+      "risk"
+    ],
+    [
+      "risk",
+      "rev"
+    ],
+    [
+      "rev",
+      "pkg"
+    ],
+    [
+      "pc5",
+      "back"
+    ],
+    [
+      "pc5",
+      "blocked"
+    ]
+  ]
+});
+  </script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>A10 · Administración — Tribuvex</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./assets/theme.js"></script>
+  <link rel="stylesheet" href="./assets/app.css" />
+</head>
+<body data-shell="app" data-nav="admin" data-base=".">
+  <main id="app-main">
+    <div class="mb-8">
+      <p class="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Entidad · aislamiento multitenant</p>
+      <h1 class="mt-1 text-2xl font-bold tracking-tight">Administración</h1>
+      <p class="mt-1 text-sm text-muted-foreground">Gestión de la firma. Sin datos de otras entidades.</p>
+    </div>
+    <div class="grid gap-4 md:grid-cols-3">
+      <a href="#usuarios" class="rounded-xl border border-border bg-card p-5 shadow-tribuvex transition hover:border-primary">
+        <h2 class="font-semibold">Usuarios y roles</h2>
+        <p class="mt-1 text-sm text-muted-foreground">Preparador, revisor, administrador</p>
+      </a>
+      <a href="#clientes" class="rounded-xl border border-border bg-card p-5 shadow-tribuvex transition hover:border-primary">
+        <h2 class="font-semibold">Clientes y permisos</h2>
+        <p class="mt-1 text-sm text-muted-foreground">Acceso por cliente</p>
+      </a>
+      <a href="#retencion" class="rounded-xl border border-border bg-card p-5 shadow-tribuvex transition hover:border-primary">
+        <h2 class="font-semibold">Retención y exportación</h2>
+        <p class="mt-1 text-sm text-muted-foreground">Política de conservación</p>
+      </a>
+    </div>
+
+    <section id="usuarios" class="mt-8 rounded-xl border border-border bg-card p-5 shadow-tribuvex">
+      <div class="mb-3 flex flex-wrap items-center justify-between gap-2">
+        <h2 class="font-semibold">Usuarios</h2>
+        <button type="button" class="rounded-lg bg-accent px-3 py-1.5 text-xs font-semibold text-white hover:bg-accent-hover">Invitar usuario</button>
+      </div>
+      <ul class="space-y-2 text-sm">
+        <li class="flex flex-wrap justify-between gap-2 border-b border-border py-2.5"><span class="font-medium">tu@firma.co</span><span class="text-muted-foreground">Admin + Preparador</span></li>
+        <li class="flex flex-wrap justify-between gap-2 border-b border-border py-2.5"><span class="font-medium">revisor@firma.co</span><span class="text-muted-foreground">Revisor</span></li>
+        <li class="flex flex-wrap justify-between gap-2 border-b border-border py-2.5"><span class="font-medium">junior@firma.co</span><span class="text-muted-foreground">Preparador</span></li>
+      </ul>
+    </section>
+
+    <section id="clientes" class="mt-6 rounded-xl border border-border bg-card p-5 shadow-tribuvex">
+      <h2 class="mb-1 font-semibold">Clientes y permisos</h2>
+      <p class="mb-4 text-sm text-muted-foreground">Quién puede ver u operar cada cliente de la entidad.</p>
+      <div class="overflow-x-auto">
+        <table class="tvx-table w-full min-w-[520px] text-left text-sm">
+          <thead class="border-b border-border bg-muted/80 text-[11px] uppercase text-muted-foreground">
+            <tr>
+              <th class="px-3 py-2.5 font-semibold">Cliente</th>
+              <th class="px-3 py-2.5 font-semibold">Preparador</th>
+              <th class="px-3 py-2.5 font-semibold">Revisor</th>
+              <th class="px-3 py-2.5 font-semibold">Acceso</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-border">
+            <tr>
+              <td class="px-3 py-3 font-medium">Juan Pérez</td>
+              <td class="px-3 py-3 text-muted-foreground">tu@firma.co</td>
+              <td class="px-3 py-3 text-muted-foreground">revisor@firma.co</td>
+              <td class="px-3 py-3"><span class="rounded-full bg-success-subtle px-2 py-0.5 text-xs font-semibold text-success-foreground">Completo</span></td>
+            </tr>
+            <tr>
+              <td class="px-3 py-3 font-medium">Ana Gómez</td>
+              <td class="px-3 py-3 text-muted-foreground">junior@firma.co</td>
+              <td class="px-3 py-3 text-muted-foreground">revisor@firma.co</td>
+              <td class="px-3 py-3"><span class="rounded-full bg-info-subtle px-2 py-0.5 text-xs font-semibold text-info-foreground">Limitado</span></td>
+            </tr>
+            <tr>
+              <td class="px-3 py-3 font-medium">Pedro Díaz</td>
+              <td class="px-3 py-3 text-muted-foreground">tu@firma.co</td>
+              <td class="px-3 py-3 text-muted-foreground">revisor@firma.co</td>
+              <td class="px-3 py-3"><a class="text-xs font-semibold text-secondary hover:underline" href="./sin-permiso.html">Probar 403</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="retencion" class="mt-6 rounded-xl border border-border bg-card p-5 shadow-tribuvex">
+      <h2 class="mb-1 font-semibold">Retención y exportación</h2>
+      <p class="mt-1 text-sm text-muted-foreground">Conservación por término de firmeza (3 años por defecto, 6 cuando aplique). Exportación solo de datos de esta entidad.</p>
+      <dl class="mt-4 grid gap-3 text-sm sm:grid-cols-2">
+        <div class="rounded-lg bg-muted/50 p-3"><dt class="text-xs text-muted-foreground">Política activa</dt><dd class="font-semibold">Firmeza ordinaria · 3 años</dd></div>
+        <div class="rounded-lg bg-muted/50 p-3"><dt class="text-xs text-muted-foreground">Última exportación</dt><dd class="font-semibold">—</dd></div>
+      </dl>
+      <button type="button" class="mt-4 rounded-lg border border-primary px-4 py-2 text-sm font-semibold text-primary hover:bg-muted">Solicitar exportación</button>
+    </section>
+  </main>
+  <script src="./assets/icons.js"></script>
+  <script src="./assets/shell.js"></script>
+</body>
+</html>

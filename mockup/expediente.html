@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>A6 · Expediente — Tribuvex</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./assets/theme.js"></script>
+  <link rel="stylesheet" href="./assets/app.css" />
+</head>
+<body data-shell="app" data-nav="expedientes" data-base=".">
+  <main id="app-main">
+    <nav class="mb-3 text-xs text-muted-foreground" aria-label="Miga de pan">
+      <a class="font-semibold text-secondary hover:underline" href="./expedientes.html">Expedientes</a>
+      <span class="mx-1.5" aria-hidden="true">/</span>
+      <span id="crumb-extra">Juan Pérez / AG 2026</span>
+    </nav>
+    <div class="mb-6 flex flex-wrap items-start justify-between gap-4">
+      <div>
+        <h1 class="text-2xl font-bold tracking-tight text-foreground">Juan Pérez · AG 2026</h1>
+        <p class="mt-1 text-sm text-muted-foreground">Perfil asalariado · Formulario 210</p>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <button type="button" id="btn-pause" class="rounded-lg border border-border bg-card px-3.5 py-2 text-sm font-semibold hover:bg-muted">Pausar expediente</button>
+        <a href="./bitacora.html" class="rounded-lg border border-primary px-3.5 py-2 text-sm font-semibold text-primary hover:bg-muted">Ver bitácora</a>
+        <a href="./paquete.html" class="rounded-lg bg-muted px-3.5 py-2 text-sm font-semibold hover:bg-border">Paquete</a>
+      </div>
+    </div>
+
+    <div id="degrade-banner" class="tvx-banner tvx-banner--muted mb-5 hidden" role="status">
+      <span class="tvx-banner-icon" data-icon="info" data-icon-size="20"></span>
+      <div><strong>El asistente no está disponible.</strong> Puedes seguir con el motor y los datos del expediente.</div>
+    </div>
+
+    <div id="pause-banner" class="tvx-banner tvx-banner--info mb-5 hidden" role="status">
+      <span class="tvx-banner-icon" data-icon="pause" data-icon-size="20"></span>
+      <div class="flex flex-1 flex-wrap items-center justify-between gap-3">
+        <span><strong>Expediente pausado.</strong> Reanuda cuando quieras; no se pierde el avance.</span>
+        <button type="button" id="btn-resume" class="rounded-lg bg-secondary px-3 py-1.5 text-xs font-semibold text-white hover:opacity-90">Reanudar</button>
+      </div>
+    </div>
+
+    <div id="pc-banner" class="mb-5 hidden rounded-xl border border-warning/30 bg-warning-subtle px-4 py-3.5 text-sm font-medium text-warning-foreground"></div>
+
+    <nav id="stepper" class="mb-5 grid grid-cols-2 gap-2 md:grid-cols-7" aria-label="Etapas del expediente"></nav>
+    <p id="stepper-legend" class="mb-5 flex flex-wrap gap-3 text-[11px] text-muted-foreground">
+      <span class="inline-flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-success-foreground" aria-hidden="true"></span> Completada</span>
+      <span class="inline-flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-warning" aria-hidden="true"></span> Actual</span>
+      <span class="inline-flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-border" aria-hidden="true"></span> Pendiente</span>
+    </p>
+
+    <div class="mb-5 flex flex-wrap gap-1 border-b border-border" id="tabs"></div>
+
+    <div class="grid gap-5 lg:grid-cols-[1.4fr_1fr]">
+      <section class="rounded-xl border border-border bg-card p-5 shadow-tribuvex" id="stage-panel">
+        <h2 class="mb-1 text-sm font-semibold text-foreground" id="stage-title">Etapa</h2>
+        <p class="mb-4 text-sm leading-relaxed text-muted-foreground" id="stage-help"></p>
+        <div id="stage-body"></div>
+        <div class="mt-5 flex flex-wrap gap-2" id="stage-actions"></div>
+      </section>
+      <aside class="rounded-xl border border-border bg-card p-5 shadow-tribuvex">
+        <h2 class="mb-1 text-sm font-semibold text-foreground">Traza de la casilla <span id="t-casilla">—</span></h2>
+        <p class="mb-4 text-xs text-muted-foreground">Soporte · regla · artículo · versión UVT</p>
+        <dl class="space-y-3 text-sm">
+          <div><dt class="text-[11px] font-semibold uppercase text-muted-foreground">Valor</dt><dd class="font-mono" id="t-valor">—</dd></div>
+          <div><dt class="text-[11px] font-semibold uppercase text-muted-foreground">Soporte</dt><dd id="t-soporte">Selecciona Ver traza</dd></div>
+          <div><dt class="text-[11px] font-semibold uppercase text-muted-foreground">Regla</dt><dd id="t-regla">—</dd></div>
+          <div><dt class="text-[11px] font-semibold uppercase text-muted-foreground">Artículo</dt><dd id="t-art">—</dd></div>
+          <div><dt class="text-[11px] font-semibold uppercase text-muted-foreground">Motor</dt><dd class="font-mono text-xs" id="t-motor">AG2026.1</dd></div>
+        </dl>
+        <p class="mt-5 text-xs leading-relaxed text-muted-foreground">Las cifras las calcula el motor. El asistente solo explica con datos del expediente.</p>
+      </aside>
+    </div>
+  </main>
+  <script src="./assets/icons.js"></script>
+  <script src="./assets/shell.js"></script>
+  <script src="./assets/pc.js"></script>
+  <script src="./assets/stages.js"></script>
+  <script>
+    (function () {
+      var params = new URLSearchParams(location.search);
+      var etapa = Math.min(7, Math.max(1, parseInt(params.get("etapa") || "1", 10)));
+      var pc = params.get("pc");
+      var voluntario = params.get("voluntario") === "1";
+      var multi = params.get("perfil") === "multi";
+      var degrade = params.get("degrade") === "1";
+      var pausado = params.get("pausado") === "1";
+
+      if (degrade) document.getElementById("degrade-banner").classList.remove("hidden");
+      if (pausado) {
+        document.getElementById("pause-banner").classList.remove("hidden");
+        document.getElementById("btn-pause").textContent = "Pausado";
+        document.getElementById("btn-pause").disabled = true;
+      }
+      document.getElementById("btn-resume")?.addEventListener("click", function () {
+        var u = new URL(location.href);
+        u.searchParams.delete("pausado");
+        location.href = u.toString();
+      });
+
+      var labels = [
+        ["Residencia", "Residencia y ruta", "Indica días de permanencia y demás criterios del Art. 10 ET."],
+        ["Obligación", "Obligación de declarar", "Evaluamos patrimonio, ingresos, consumos, consignaciones e IVA en UVT del año."],
+        ["Soportes", "Soportes e información", "Sube los documentos de la lista. Marcamos lo que falta."],
+        ["Cédulas", "Clasificación y depuración", "Cada ingreso debe tener cédula. Los dudosos te los marcamos."],
+        ["Liquidación", "Liquidación y saldo", "Impuesto, descuentos, anticipo y saldo los calcula el motor de reglas."],
+        ["Patrimonio", "Coherencia patrimonial", "Comparamos el patrimonio líquido con el año anterior."],
+        ["Paquete", "Borrador y paquete", "Vista previa del 210 antes del punto de control final."]
+      ];
+
+      var pcMeta = {
+        "1": { name: "PC1 · Ruta y alcance", href: "./pc/pc1.html" },
+        "2": { name: "PC2 · Cruce con exógena", href: "./pc/pc2.html" },
+        "3": { name: "PC3 · Depuración", href: "./pc/pc3.html" },
+        "4": { name: "PC4 · Patrimonio", href: "./pc/pc4.html" },
+        "5": { name: "PC5 · Borrador final", href: "./pc/pc5.html" }
+      };
+
+      var stepper = document.getElementById("stepper");
+      var qExtra = "";
+      if (multi) qExtra += "&perfil=multi";
+      if (voluntario) qExtra += "&voluntario=1";
+      labels.forEach(function (L, i) {
+        var n = i + 1;
+        var state = n < etapa ? "done" : n === etapa ? "current" : "todo";
+        var a = document.createElement("a");
+        a.href = "./expediente.html?etapa=" + n + qExtra;
+        a.className = "tvx-step tvx-step--" + state;
+        a.setAttribute("aria-label", "Etapa " + n + ": " + L[0] + " (" + (state === "done" ? "completada" : state === "current" ? "actual" : "pendiente") + ")");
+        if (state === "current") a.setAttribute("aria-current", "step");
+        var numHtml =
+          state === "done" && window.TribuvexIcon
+            ? window.TribuvexIcon.svg("check", { size: 12, decorative: true })
+            : state === "done"
+              ? "✓"
+              : String(n);
+        a.innerHTML =
+          '<span class="tvx-step-num" aria-hidden="true">' + numHtml + "</span>" +
+          "<span>" + L[0] + "</span>";
+        stepper.appendChild(a);
+      });
+
+      var tabNames = ["Resumen", "Soportes", "Cédulas", "Liquidación", "Bitácora", "Paquete"];
+      var tabs = document.getElementById("tabs");
+      tabNames.forEach(function (name, i) {
+        var map = { 0: 1, 1: 3, 2: 4, 3: 5, 4: "bit", 5: "pkg" };
+        var b = document.createElement(map[i] === "bit" || map[i] === "pkg" ? "a" : "a");
+        b.className =
+          "border-b-2 px-3 py-2 text-sm font-semibold " +
+          ((map[i] === etapa) || (name === "Soportes" && etapa === 3) || (name === "Cédulas" && etapa === 4) || (name === "Liquidación" && etapa === 5) || (name === "Resumen" && etapa <= 2)
+            ? "border-primary text-primary"
+            : "border-transparent text-muted-foreground hover:text-foreground");
+        if (map[i] === "bit") b.href = "./bitacora.html";
+        else if (map[i] === "pkg") b.href = "./paquete.html";
+        else b.href = "./expediente.html?etapa=" + map[i];
+        b.textContent = name;
+        tabs.appendChild(b);
+      });
+
+      document.getElementById("stage-title").textContent = labels[etapa - 1][1];
+      document.getElementById("stage-help").textContent = labels[etapa - 1][2];
+
+      var body = document.getElementById("stage-body");
+      var actions = document.getElementById("stage-actions");
+      var stage = TribuvexStages.render(etapa, { voluntario: voluntario, multi: multi });
+      body.innerHTML = stage.body;
+      actions.innerHTML = stage.actions;
+
+      var pkgLink = document.querySelector('a[href="./paquete.html"]');
+      if (pkgLink && etapa < 7) pkgLink.href = "./paquete.html?blocked=1";
+
+      if (pc && pcMeta[pc]) {
+        var ban = document.getElementById("pc-banner");
+        ban.classList.remove("hidden");
+        ban.innerHTML =
+          'El grafo está interrumpido en <strong>' +
+          pcMeta[pc].name +
+          '</strong>. <a class="underline font-semibold" href="' +
+          pcMeta[pc].href +
+          '">Abrir punto de control</a>';
+        document.getElementById("crumb-extra").textContent =
+          "Juan Pérez / AG 2026 / " + labels[etapa - 1][0] + " / " + pcMeta[pc].name;
+      }
+
+      document.getElementById("stage-body").addEventListener("click", function (e) {
+        var t = e.target.closest(".trace");
+        if (!t) return;
+        document.getElementById("t-casilla").textContent = t.dataset.c;
+        document.getElementById("t-valor").textContent = t.dataset.v;
+        document.getElementById("t-soporte").textContent = t.dataset.s;
+        document.getElementById("t-regla").textContent = t.dataset.r;
+        document.getElementById("t-art").textContent = t.dataset.a;
+      });
+
+      document.getElementById("btn-pause").addEventListener("click", function () {
+        var u = new URL(location.href);
+        u.searchParams.set("pausado", "1");
+        location.href = u.toString();
+      });
+
+      document.getElementById("btn-voluntario")?.addEventListener("click", function () {
+        TribuvexPc.toast("Declaración voluntaria", "Continúas el grafo aunque no estés obligado.");
+        setTimeout(function () {
+          location.href = "./expediente.html?etapa=3";
+        }, 600);
+      });
+    })();
+  </script>
+</body>
+</html>

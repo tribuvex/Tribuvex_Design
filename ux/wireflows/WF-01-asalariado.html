@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WF-01 · Asalariado E2E — Wireflow Tribuvex</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --wf-ink: #1e3a5f;
+      --wf-line: #5b8fb8;
+      --wf-line-soft: #9bb8d0;
+      --wf-pc: #d97706;
+      --wf-bg: #eef2f6;
+      --wf-card: #ffffff;
+      --wf-muted: #64748b;
+      --wf-border: #c5d4e8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      background: var(--wf-bg);
+      color: #0f172a;
+    }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.85rem 1.25rem;
+      background: rgba(255, 255, 255, 0.92);
+      border-bottom: 1px solid var(--wf-border);
+      backdrop-filter: blur(8px);
+    }
+    .topbar h1 {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--wf-ink);
+    }
+    .topbar p {
+      margin: 0.15rem 0 0;
+      font-size: 0.75rem;
+      color: var(--wf-muted);
+    }
+    .topbar nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .topbar a {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--wf-ink);
+      border: 1px solid var(--wf-border);
+      border-radius: 0.5rem;
+      padding: 0.4rem 0.7rem;
+      background: #fff;
+    }
+    .topbar a.primary {
+      background: #16a34a;
+      border-color: #16a34a;
+      color: #fff;
+    }
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 0.75rem 1.25rem;
+      font-size: 0.7rem;
+      color: var(--wf-muted);
+    }
+    .legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
+    .swatch {
+      width: 1.1rem;
+      height: 2px;
+      background: var(--wf-line);
+    }
+    .swatch.dash {
+      background: repeating-linear-gradient(90deg, var(--wf-pc) 0 4px, transparent 4px 7px);
+      height: 2px;
+    }
+    .swatch.pc {
+      width: 0.65rem;
+      height: 0.65rem;
+      border-radius: 2px;
+      border: 2px solid var(--wf-pc);
+      background: #fff7ed;
+    }
+
+    /* Board */
+    .board-wrap {
+      overflow: auto;
+      padding: 0.5rem 1rem 2.5rem;
+    }
+    .board {
+      position: relative;
+      width: 1680px;
+      min-height: 1180px;
+      margin: 0 auto;
+      background:
+        linear-gradient(#fff 0 0) padding-box,
+        radial-gradient(ellipse at top, #f8fafc, #e8eef5) border-box;
+      border: 1px solid var(--wf-border);
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgb(15 23 42 / 0.06);
+    }
+    #wires {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: visible;
+    }
+    #wires path {
+      fill: none;
+      stroke: var(--wf-line);
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    #wires path.branch {
+      stroke: var(--wf-pc);
+      stroke-dasharray: 5 4;
+      stroke-width: 1.5;
+    }
+    #wires marker path { fill: var(--wf-line); stroke: none; }
+    #wires marker.m-branch path { fill: var(--wf-pc); }
+
+    .screen {
+      position: absolute;
+      z-index: 2;
+      width: 200px;
+    }
+    .screen-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.35rem;
+      margin-bottom: 0.35rem;
+      padding: 0 0.15rem;
+    }
+    .screen-label .name {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--wf-ink);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .screen-label .id {
+      flex-shrink: 0;
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 0.65rem;
+      font-weight: 500;
+      color: #fff;
+      background: var(--wf-ink);
+      border-radius: 0.3rem;
+      padding: 0.12rem 0.35rem;
+    }
+    .screen.is-pc .screen-label .id { background: var(--wf-pc); }
+    .screen.is-hub .device {
+      background: #f1f5f9;
+      box-shadow: inset 0 0 0 2px var(--wf-line-soft);
+    }
+
+    .device {
+      position: relative;
+      display: block;
+      height: 148px;
+      border-radius: 0.65rem;
+      border: 1.5px solid var(--wf-ink);
+      background: var(--wf-card);
+      overflow: hidden;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgb(30 58 95 / 0.12);
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+    .device:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgb(30 58 95 / 0.18);
+    }
+    .device:focus-visible {
+      outline: 2px solid var(--wf-ink);
+      outline-offset: 3px;
+    }
+    .device-chrome {
+      height: 14px;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      padding: 0 6px;
+      background: #e9eef5;
+      border-bottom: 1px solid var(--wf-border);
+    }
+    .device-chrome i {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #94a3b8;
+    }
+    .viewport {
+      position: relative;
+      height: calc(100% - 14px);
+      overflow: hidden;
+      background: #f8fafc;
+    }
+    .viewport iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1120px;
+      height: 720px;
+      border: 0;
+      transform: scale(0.178);
+      transform-origin: top left;
+      pointer-events: none;
+      background: #fff;
+    }
+    .viewport .fallback {
+      position: absolute;
+      inset: 0;
+      padding: 0.55rem;
+      display: none;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .viewport.wire-only .fallback { display: flex; }
+    .viewport.wire-only iframe { display: none; }
+    .sk-title { height: 8px; width: 55%; border-radius: 2px; background: #cbd5e1; }
+    .sk-line { height: 5px; border-radius: 2px; background: #e2e8f0; }
+    .sk-block { flex: 1; border-radius: 4px; background: #e9eef5; margin-top: 0.2rem; }
+    .sk-cta {
+      height: 10px;
+      width: 40%;
+      margin-left: auto;
+      border-radius: 3px;
+      background: #16a34a;
+    }
+    .screen.is-pc .sk-cta { background: var(--wf-pc); }
+    .hint {
+      max-width: 1680px;
+      margin: 0 auto;
+      padding: 0 1rem 1.5rem;
+      font-size: 0.75rem;
+      color: var(--wf-muted);
+    }
+    .section-tag {
+      position: absolute;
+      z-index: 3;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--wf-muted);
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>WF-01 · Wireflow asalariado E2E</h1>
+      <p>Pantallas reales del mockup · estilo board (numeración + flechas). Clic abre el HTML completo.</p>
+    </div>
+    <nav>
+      <a href="./index.html">Índice</a>
+      <a href="../flows/01-asalariado-e2e.md">Task flow F-01</a>
+      <a href="../../mockup/index.html">Hub mockup</a>
+      <a class="primary" href="../../mockup/login.html">Entrar al producto</a>
+    </nav>
+  </header>
+
+  <div class="legend">
+    <span><i class="swatch"></i> Camino feliz</span>
+    <span><i class="swatch dash"></i> Rama / decisión</span>
+    <span><i class="swatch pc"></i> Punto de control</span>
+    <span>Miniatura = iframe del mockup (si el navegador lo bloquea, usa silueta wire)</span>
+  </div>
+
+  <div class="board-wrap">
+    <div class="board" id="board" aria-label="Wireflow asalariado">
+      <svg id="wires" aria-hidden="true">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 z" />
+          </marker>
+          <marker id="arrow-branch" class="m-branch" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 z" />
+          </marker>
+        </defs>
+      </svg>
+
+      <div class="section-tag" style="left:24px;top:18px">Auth · alta</div>
+      <div class="section-tag" style="left:24px;top:248px">Expediente · controles</div>
+      <div class="section-tag" style="left:24px;top:498px">Liquidación · paquete</div>
+      <div class="section-tag" style="left:24px;top:760px">Ramas alternativas</div>
+
+      <!-- Row 1 -->
+      <article class="screen" id="s1" style="left:40px;top:48px" data-out="right">
+        <div class="screen-label"><span class="name">Login OAuth</span><span class="id">1</span></div>
+        <a class="device" href="../../mockup/login.html" target="_blank" rel="noopener">
+          <div class="device-chrome" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="viewport"><iframe title="Login" loading="lazy" src="../../mockup/login.html"></iframe><div class="fallback" aria-hidden="true"><div class="sk-title"></div><div class="sk-line"></div><div class="sk-line" style="width:70%"></div><div class="sk-block"></div><div class="sk-cta"></div></div></div>
+        </a>
+      </article>
+      <article class="screen" id="s2" style="left:280px;top:48px" data-out="right">
+        <div class="screen-label"><span class="name">Expedientes</span><span class="id">2</span></div>
+        <a class="device" href="../../mockup/expedientes.html" target="_blank" rel="noopener">
+          <div class="device-chrome" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="viewport"><iframe title="Expedientes" loading="lazy" src="../../mockup/expedientes.html"></iframe><div class="fallback" aria-hidden="true"><div class="sk-title"></div><div class="sk-line"></div><div class="sk-block"></div><div class="sk-cta"></div></div></div>
+        </a>
+      </article>
+      <article class="screen" id="s3" style="left:520px;top:48px" data-out="right">
+        <div class="screen-label"><span class="name">Nuevo expediente</span><span class="id">3</span></div>
+        <a class="device" href="../../mockup/expedientes-nuevo.html" target="_blank" rel="noopener">
+          <div class="device-chrome" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="viewport"><iframe title="Nuevo" loading="lazy" src="../../mockup/expedientes-nuevo.html"></iframe><div class="fallback" aria-hidden="true"><div class="sk-title"></div><div class="sk-line"></div><div class="sk-line" style="width:80%"></div><div class="sk-cta"></div></div></div>
+        </a>
+      </article>
+      <article class="screen is-hub" id="s4" style="left:760px;top:48px" data-out="right">
+        <div class="screen-label"><span class="name">E1 Residencia</span><span class="id">4</span></div>
+        <a class="device" href="../../mockup/expediente.html?etapa=1&amp;pc=1" target="_blank" rel="noopener">
+          <div class="device-chrome" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="viewport"><iframe title="E1" loading="lazy" src="../../mockup/expediente.html?etapa=1&amp;pc=1"></iframe><div class="fallback" aria-hidden="true"><div class="sk-title"></div><div class="sk-line"></div><div class="sk-block"></div><div class="sk-cta"></div></div></div>
+        </a>
+      </article>
+      <article class="screen is-pc" id="s5" style="left:1000px;top:48px" data-out="bottom">
+        <div class="screen-label"><span class="name">PC1 Ruta</span><span class="id">5</span></div>
+        <a class="device" href="../../mockup/pc/pc1.html" target="_blank" rel="noopener">
+          <div class="device-chrome" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="viewport"><iframe title="PC1" loading="lazy" src="../../mockup/pc/pc1.html"></iframe><div class="fallback" aria-hidden="true"><div class="sk-title"></div><div class="sk-block"></div><div class="sk-cta"></div></div></div>
+        </a>
+      </article>
+
+      <!-- Row 2 -->
+      <article class="screen" id="s6" style="left:1000px;top:280px" data-out="left">
+        <div class="screen-label"><span class="name">E2 Obligación</span><span class="id">6</span></div>
+        <a class="device" href="../../mockup/expediente.html?etapa=2" target="_blank" rel="noopener">
+          <div class="device-chrome" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="viewport"><iframe title="E2" loading="lazy" src="../../mockup/expediente.html?etapa=2"></iframe><div class="fallback" aria-hidden="true"><div class="sk-title"></div><div class="sk-block"></div></div></div>
+        </a>
+      </article>
+      <article class="screen" id="s7" style="left:760px;top:280px" data-out="left">
+        <div class="screen-label"><span class="name">E3 Soportes</span><span class="id">7</span></div>
+        <a class="device" href="../../mockup/expediente.html?etapa=3" target="_blank" rel="noopener">
+          <div class="device-chrome" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="viewport"><iframe title="E3" loading="lazy" src="../../mockup/expediente.html?etapa=3"></iframe><div class="fallback" aria-hidden="true"><div class="sk-title"></div><div class="sk-block"></div><div class="sk-cta"></div></div></div>
+        </a>
+      </article>
+      <article class="screen" id="s8" style="left:520px;top:280px" data-out="left">
+        <div class="screen-label"><span class="name">PC2 omitido</span><span class="id">8</span></div>
+        <a class="device" href="../../mockup/bitacora.html" target="_blank" rel="noopener">
+          <div class="device-chrome" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="viewport"><iframe title="Bitácora" loading="lazy" src="../../mockup/bitacora.html"></iframe><div class="fallback" aria-hidden="true"><div class="sk-title"></div><div class="sk-line"></div><div class="sk-line"></div><div class="sk-line"></div></div></div>
+        </a>
+      </article>
+      <article class="screen" id="s9" style="left:280px;top:280px" data-out="left">
+        <div class="screen-label"><span class="name">E4 Cédulas</span><span class="id">9</span></div>
+        <a class="device" href="../../mockup/expediente.html?etapa=4" target="_blank" rel="noopener">
+          <div class="device-chrome" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="viewport"><iframe title="E4" loading="lazy" src="../../mockup/expediente.html?etapa=4"></iframe><div class="fallback" aria-hidden="true"><div class="sk-title"></div><div class="sk-block"></div></div></div>
+        </a>
+      </article>
+      <article class="screen is-pc" id="s10" style="left:40px;top:280px" data-out="bottom">
+        <div class="screen-label"><span class="name">PC3 Depuración</span><span class="id">10</span></div>
+        <a class="device" href="../../mockup/pc/pc3.html" target="_blank" rel="noopener">
+          <div class="device-chrome" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="viewport"><iframe title="PC3" loading="lazy" src="../../mockup/pc/pc3.html"></iframe><div class="fallback" aria-hidden="true"><div class="sk-title"></div><div class="sk-block"></div><div class="sk-cta"></div></div></div>
+        </a>
+      </article>
+
+      <!-- Row 3 -->
+      <article class="screen" id="s11" style="left:40px;top:530px" data-out="right">
+        <div class="screen-label"><span class="name">E5 Liquidación</span><span class="id">11</span></div>
+        <a class="device" href="../../mockup/expediente.html?etapa=5" target="_blank" rel="noopener">
+          <div class="device-chrome" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="viewport"><iframe title="E5" loading="lazy" src="../../mockup/expediente.html?etapa=5"></iframe><div class="fallback" aria-hidden="true"><div class="sk-title"></div><div class="sk-block"></div></div></div>
+        </a>
+      </article>
+      <article class="screen" id="s12" style="left:280px;top:530px" data-out="right">
+        <div class="screen-label"><span class="name">E6 Patrimonio</span><span class="id">12</span></div>
+        <a class="device" href="../../mockup/expediente.html?etapa=6" target="_blank" rel="noopener">
+          <div class="device-chrome" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="viewport"><iframe title="E6" loading="lazy" src="../../mockup/expediente.html?etapa=6"></iframe><div class="fallback" aria-hidden="true"><div class="sk-title"></div><div class="sk-block"></div></div></div>
+        </a>
+      </article>
+      <article class="screen" id="s13" style="left:520px;top:530px" data-out="right">
+        <div class="screen-label"><span class="name">E7 Borrador</span><span class="id">13</span></div>
+        <a class="device" href="../../mockup/expediente.html?etapa=7" target="_blank" rel="noopener">
+          <div class="device-chrome" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="viewport"><iframe title="E7" loading="lazy" src="../../mockup/expediente.html?etapa=7"></iframe><div class="fallback" aria-hidden="true"><div class="sk-title"></div><div class="sk-block"></div><div class="sk-cta"></div></div></div>
+        </a>
+      </article>
+      <article class="screen is-pc" id="s14" style="left:760px;top:530px" data-out="right">
+        <div class="screen-label"><span class="name">PC5 Borrador final</span><span class="id">14</span></div>
+        <a class="device" href="../../mockup/pc/pc5.html" target="_blank" rel="noopener">
+          <div class="device-chrome" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="viewport"><iframe title="PC5" loading="lazy" src="../../mockup/pc/pc5.html"></iframe><div class="fallback" aria-hidden="true"><div class="sk-title"></div><div class="sk-block"></div><div class="sk-cta"></div></div></div>
+        </a>
+      </article>
+      <article class="screen" id="s15" style="left:1000px;top:530px" data-out="bottom">
+        <div class="screen-label"><span class="name">A9 Paquete</span><span class="id">15</span></div>
+        <a class="device" href="../../mockup/paquete.html" target="_blank" rel="noopener">
+          <div class="device-chrome" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="viewport"><iframe title="Paquete" loading="lazy" src="../../mockup/paquete.html"></iframe><div class="fallback" aria-hidden="true"><div class="sk-title"></div><div class="sk-line"></div><div class="sk-line"></div><div class="sk-cta"></div></div></div>
+        </a>
+      </article>
+
+      <!-- Branches row -->
+      <article class="screen" id="b1" style="left:1240px;top:48px">
+        <div class="screen-label"><span class="name">Derivado manual</span><span class="id">5a</span></div>
+        <a class="device" href="../../mockup/derivado.html" target="_blank" rel="noopener">
+          <div class="device-chrome" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="viewport"><iframe title="Derivado" loading="lazy" src="../../mockup/derivado.html"></iframe><div class="fallback" aria-hidden="true"><div class="sk-title"></div><div class="sk-block"></div></div></div>
+        </a>
+      </article>
+      <article class="screen" id="b2" style="left:1240px;top:280px">
+        <div class="screen-label"><span class="name">Voluntaria</span><span class="id">6a</span></div>
+        <a class="device" href="../../mockup/expediente.html?etapa=2&amp;voluntario=1" target="_blank" rel="noopener">
+          <div class="device-chrome" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="viewport"><iframe title="Voluntaria" loading="lazy" src="../../mockup/expediente.html?etapa=2&amp;voluntario=1"></iframe><div class="fallback" aria-hidden="true"><div class="sk-title"></div><div class="sk-block"></div></div></div>
+        </a>
+      </article>
+      <article class="screen" id="b3" style="left:280px;top:790px">
+        <div class="screen-label"><span class="name">Pausado</span><span class="id">7a</span></div>
+        <a class="device" href="../../mockup/expediente.html?etapa=3&amp;pausado=1" target="_blank" rel="noopener">
+          <div class="device-chrome" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="viewport"><iframe title="Pausado" loading="lazy" src="../../mockup/expediente.html?etapa=3&amp;pausado=1"></iframe><div class="fallback" aria-hidden="true"><div class="sk-title"></div><div class="sk-block"></div></div></div>
+        </a>
+      </article>
+      <article class="screen" id="b4" style="left:520px;top:790px">
+        <div class="screen-label"><span class="name">Paquete bloqueado</span><span class="id">15a</span></div>
+        <a class="device" href="../../mockup/paquete.html?blocked=1" target="_blank" rel="noopener">
+          <div class="device-chrome" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="viewport"><iframe title="Bloqueado" loading="lazy" src="../../mockup/paquete.html?blocked=1"></iframe><div class="fallback" aria-hidden="true"><div class="sk-title"></div><div class="sk-block"></div></div></div>
+        </a>
+      </article>
+      <article class="screen" id="b5" style="left:760px;top:790px">
+        <div class="screen-label"><span class="name">PC5 revisor</span><span class="id">14a</span></div>
+        <a class="device" href="../../mockup/pc/pc5.html?revisor=1" target="_blank" rel="noopener">
+          <div class="device-chrome" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="viewport"><iframe title="PC5 revisor" loading="lazy" src="../../mockup/pc/pc5.html?revisor=1"></iframe><div class="fallback" aria-hidden="true"><div class="sk-title"></div><div class="sk-block"></div><div class="sk-cta"></div></div></div>
+        </a>
+      </article>
+      <article class="screen" id="b6" style="left:1000px;top:790px">
+        <div class="screen-label"><span class="name">Degradación</span><span class="id">7b</span></div>
+        <a class="device" href="../../mockup/expediente.html?etapa=3&amp;degrade=1" target="_blank" rel="noopener">
+          <div class="device-chrome" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="viewport"><iframe title="Degradación" loading="lazy" src="../../mockup/expediente.html?etapa=3&amp;degrade=1"></iframe><div class="fallback" aria-hidden="true"><div class="sk-title"></div><div class="sk-block"></div></div></div>
+        </a>
+      </article>
+    </div>
+  </div>
+
+  <p class="hint">
+    Spec: <code>ux/flows/01-asalariado-e2e.md</code> ·
+    Si las miniaturas no cargan (restricción local del navegador), aparecen siluetas wire automáticamente.
+    Sirve el repo con un servidor local estático para ver iframes con más fiabilidad.
+  </p>
+
+  <script>
+    (function () {
+      var board = document.getElementById("board");
+      var svg = document.getElementById("wires");
+
+      var happy = [
+        ["s1", "s2"],
+        ["s2", "s3"],
+        ["s3", "s4"],
+        ["s4", "s5"],
+        ["s5", "s6"],
+        ["s6", "s7"],
+        ["s7", "s8"],
+        ["s8", "s9"],
+        ["s9", "s10"],
+        ["s10", "s11"],
+        ["s11", "s12"],
+        ["s12", "s13"],
+        ["s13", "s14"],
+        ["s14", "s15"]
+      ];
+      var branches = [
+        ["s5", "b1"],
+        ["s6", "b2"],
+        ["s7", "b3"],
+        ["s7", "b6"],
+        ["s14", "b5"],
+        ["s15", "b4"]
+      ];
+
+      function anchor(el, side) {
+        var x = el.offsetLeft;
+        var y = el.offsetTop;
+        var w = el.offsetWidth;
+        var h = el.offsetHeight;
+        var midY = y + h * 0.55;
+        var midX = x + w / 2;
+        if (side === "right") return { x: x + w, y: midY };
+        if (side === "left") return { x: x, y: midY };
+        if (side === "top") return { x: midX, y: y + 22 };
+        return { x: midX, y: y + h };
+      }
+
+      function sideToward(a, b) {
+        var dx = (b.offsetLeft + b.offsetWidth / 2) - (a.offsetLeft + a.offsetWidth / 2);
+        var dy = (b.offsetTop + b.offsetHeight / 2) - (a.offsetTop + a.offsetHeight / 2);
+        if (Math.abs(dx) > Math.abs(dy)) return dx > 0 ? ["right", "left"] : ["left", "right"];
+        return dy > 0 ? ["bottom", "top"] : ["top", "bottom"];
+      }
+
+      function curve(p1, p2) {
+        var dx = Math.max(40, Math.abs(p2.x - p1.x) * 0.45);
+        var dy = Math.max(40, Math.abs(p2.y - p1.y) * 0.45);
+        var c1 = { x: p1.x, y: p1.y };
+        var c2 = { x: p2.x, y: p2.y };
+        if (Math.abs(p2.x - p1.x) >= Math.abs(p2.y - p1.y)) {
+          c1.x = p1.x + (p2.x > p1.x ? dx : -dx);
+          c2.x = p2.x + (p2.x > p1.x ? -dx : dx);
+        } else {
+          c1.y = p1.y + (p2.y > p1.y ? dy : -dy);
+          c2.y = p2.y + (p2.y > p1.y ? -dy : dy);
+        }
+        return "M " + p1.x + " " + p1.y + " C " + c1.x + " " + c1.y + ", " + c2.x + " " + c2.y + ", " + p2.x + " " + p2.y;
+      }
+
+      function draw() {
+        while (svg.lastChild && svg.lastChild.tagName !== "defs") {
+          svg.removeChild(svg.lastChild);
+        }
+        function add(pairs, branch) {
+          pairs.forEach(function (pair) {
+            var a = document.getElementById(pair[0]);
+            var b = document.getElementById(pair[1]);
+            if (!a || !b) return;
+            var sides = sideToward(a, b);
+            var p1 = anchor(a, sides[0]);
+            var p2 = anchor(b, sides[1]);
+            var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("d", curve(p1, p2));
+            path.setAttribute("marker-end", branch ? "url(#arrow-branch)" : "url(#arrow)");
+            if (branch) path.setAttribute("class", "branch");
+            svg.appendChild(path);
+          });
+        }
+        add(happy, false);
+        add(branches, true);
+      }
+
+      draw();
+      window.addEventListener("resize", draw);
+
+      /* Fallback wire if iframe blocked / fails */
+      document.querySelectorAll(".viewport iframe").forEach(function (frame) {
+        var vp = frame.parentElement;
+        var timer = setTimeout(function () {
+          try {
+            var doc = frame.contentDocument;
+            if (!doc || !doc.body || doc.body.childElementCount === 0) {
+              vp.classList.add("wire-only");
+            }
+          } catch (e) {
+            vp.classList.add("wire-only");
+          }
+        }, 1800);
+        frame.addEventListener("load", function () {
+          clearTimeout(timer);
+          try {
+            frame.contentDocument;
+          } catch (e) {
+            vp.classList.add("wire-only");
+          }
+        });
+        frame.addEventListener("error", function () {
+          clearTimeout(timer);
+          vp.classList.add("wire-only");
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hub — Tribuvex Mockup</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./assets/theme.js"></script>
+  <link rel="stylesheet" href="./assets/app.css" />
+</head>
+<body class="min-h-screen bg-background font-sans text-foreground antialiased">
+  <header class="border-b border-border bg-card">
+    <div class="mx-auto flex max-w-4xl items-center justify-between gap-4 px-6 py-5">
+      <div>
+        <div class="text-xl font-bold tracking-tight text-primary">Tribuvex</div>
+        <p class="text-xs text-muted-foreground">Mockup HTML + Tailwind · flujos para historias de usuario</p>
+      </div>
+      <a href="./login.html" class="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-accent-hover">Entrar al producto</a>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-4xl px-6 py-10">
+    <section class="mb-10">
+      <h1 class="text-2xl font-bold tracking-tight">Mapa de pantallas</h1>
+      <p class="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+        Navega el camino feliz asalariado o salta a pantallas de riesgo, administración y portal.
+        Sin React: este mockup es la base para derivar historias.
+      </p>
+    </section>
+
+    <section class="mb-10 overflow-hidden rounded-xl border border-border bg-card shadow-tribuvex">
+      <div class="border-b border-border bg-muted/50 px-5 py-4">
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-muted-foreground">Camino feliz · F-01 Asalariado</h2>
+      </div>
+      <ol class="divide-y divide-border">
+        <li><a class="flex items-center justify-between gap-4 px-5 py-3.5 text-sm hover:bg-muted/40" href="./login.html"><span><span class="font-mono text-xs text-muted-foreground">A1</span> <span class="ml-2 font-semibold">Login</span></span><span class="text-xs text-muted-foreground">Auth</span></a></li>
+        <li><a class="flex items-center justify-between gap-4 px-5 py-3.5 text-sm hover:bg-muted/40" href="./expedientes.html"><span><span class="font-mono text-xs text-muted-foreground">A2</span> <span class="ml-2 font-semibold">Expedientes</span></span><span class="text-xs text-muted-foreground">Cola</span></a></li>
+        <li><a class="flex items-center justify-between gap-4 px-5 py-3.5 text-sm hover:bg-muted/40" href="./expedientes-nuevo.html"><span><span class="font-mono text-xs text-muted-foreground">A5</span> <span class="ml-2 font-semibold">Nuevo expediente</span></span><span class="text-xs text-muted-foreground">Alta</span></a></li>
+        <li><a class="flex items-center justify-between gap-4 px-5 py-3.5 text-sm hover:bg-muted/40" href="./expediente.html?etapa=1&pc=1"><span><span class="font-mono text-xs text-muted-foreground">E1</span> <span class="ml-2 font-semibold">Expediente + PC1</span></span><span class="text-xs text-muted-foreground">Residencia</span></a></li>
+        <li><a class="flex items-center justify-between gap-4 px-5 py-3.5 text-sm hover:bg-muted/40" href="./expediente.html?etapa=3"><span><span class="font-mono text-xs text-muted-foreground">E3</span> <span class="ml-2 font-semibold">Soportes</span></span><span class="text-xs text-muted-foreground">Ingesta</span></a></li>
+        <li><a class="flex items-center justify-between gap-4 px-5 py-3.5 text-sm hover:bg-muted/40" href="./pc/pc3.html"><span><span class="font-mono text-xs text-muted-foreground">PC3</span> <span class="ml-2 font-semibold">Depuración de cédulas</span></span><span class="text-xs text-muted-foreground">Control</span></a></li>
+        <li><a class="flex items-center justify-between gap-4 px-5 py-3.5 text-sm hover:bg-muted/40" href="./pc/pc5.html"><span><span class="font-mono text-xs text-muted-foreground">PC5</span> <span class="ml-2 font-semibold">Borrador final</span></span><span class="text-xs text-muted-foreground">Revisor</span></a></li>
+        <li><a class="flex items-center justify-between gap-4 px-5 py-3.5 text-sm hover:bg-muted/40" href="./paquete.html"><span><span class="font-mono text-xs text-muted-foreground">A9</span> <span class="ml-2 font-semibold">Paquete para MUISCA</span></span><span class="text-xs text-muted-foreground">Entrega</span></a></li>
+      </ol>
+    </section>
+
+    <section>
+      <h2 class="mb-4 text-sm font-semibold uppercase tracking-wide text-muted-foreground">Otras pantallas</h2>
+      <div class="grid gap-3 sm:grid-cols-2">
+        <a class="rounded-xl border border-border bg-card p-4 shadow-sm transition hover:border-primary hover:shadow-tribuvex" href="./clientes.html">
+          <div class="text-sm font-semibold">A3 · Clientes</div>
+          <p class="mt-1 text-xs text-muted-foreground">Directorio de contribuyentes</p>
+        </a>
+        <a class="rounded-xl border border-border bg-card p-4 shadow-sm transition hover:border-primary hover:shadow-tribuvex" href="./admin.html">
+          <div class="text-sm font-semibold">A10 · Administración</div>
+          <p class="mt-1 text-xs text-muted-foreground">Usuarios, roles, motor</p>
+        </a>
+        <a class="rounded-xl border border-border bg-card p-4 shadow-sm transition hover:border-primary hover:shadow-tribuvex" href="./cola-riesgo.html">
+          <div class="text-sm font-semibold">A11 · Cola de riesgo</div>
+          <p class="mt-1 text-xs text-muted-foreground">Casos alto / medio</p>
+        </a>
+        <a class="rounded-xl border border-border bg-card p-4 shadow-sm transition hover:border-primary hover:shadow-tribuvex" href="./bitacora.html">
+          <div class="text-sm font-semibold">A7 · Bitácora</div>
+          <p class="mt-1 text-xs text-muted-foreground">Trazabilidad de decisiones</p>
+        </a>
+        <a class="rounded-xl border border-border bg-card p-4 shadow-sm transition hover:border-primary hover:shadow-tribuvex" href="./pc/pc2.html">
+          <div class="text-sm font-semibold">PC2 · Exógena</div>
+          <p class="mt-1 text-xs text-muted-foreground">Diferencias vs DIAN</p>
+        </a>
+        <a class="rounded-xl border border-border bg-card p-4 shadow-sm transition hover:border-primary hover:shadow-tribuvex" href="./pc/pc4.html">
+          <div class="text-sm font-semibold">PC4 · Patrimonio</div>
+          <p class="mt-1 text-xs text-muted-foreground">Conciliación patrimonial</p>
+        </a>
+        <a class="rounded-xl border border-border bg-card p-4 shadow-sm transition hover:border-primary hover:shadow-tribuvex" href="./portal/index.html">
+          <div class="text-sm font-semibold">Portal contribuyente</div>
+          <p class="mt-1 text-xs text-muted-foreground">Carga de soportes</p>
+        </a>
+        <a class="rounded-xl border border-border bg-card p-4 shadow-sm transition hover:border-primary hover:shadow-tribuvex" href="./AUDIT.md">
+          <div class="text-sm font-semibold">Auditoría UX</div>
+          <p class="mt-1 text-xs text-muted-foreground">Hallazgos y mejoras aplicadas</p>
+        </a>
+        <a class="rounded-xl border border-border bg-card p-4 shadow-sm transition hover:border-primary hover:shadow-tribuvex" href="./extemporanea.html">
+          <div class="text-sm font-semibold">A12 · Extemporánea / corrección</div>
+          <p class="mt-1 text-xs text-muted-foreground">Sanciones 641 / 639 / 634 / 644</p>
+        </a>
+        <a class="rounded-xl border border-border bg-card p-4 shadow-sm transition hover:border-primary hover:shadow-tribuvex" href="./onboarding.html">
+          <div class="text-sm font-semibold">A13 · Alta independiente</div>
+          <p class="mt-1 text-xs text-muted-foreground">Entidad unipersonal · 3 roles</p>
+        </a>
+        <a class="rounded-xl border border-border bg-card p-4 shadow-sm transition hover:border-primary hover:shadow-tribuvex" href="./parametros.html">
+          <div class="text-sm font-semibold">RN · Parámetros AG</div>
+          <p class="mt-1 text-xs text-muted-foreground">Firma + regresión (RNF-16)</p>
+        </a>
+        <a class="rounded-xl border border-border bg-card p-4 shadow-sm transition hover:border-primary hover:shadow-tribuvex" href="./operador.html">
+          <div class="text-sm font-semibold">OP · Operador plataforma</div>
+          <p class="mt-1 text-xs text-muted-foreground">Alta / suspende entidades</p>
+        </a>
+        <a class="rounded-xl border border-border bg-card p-4 shadow-sm transition hover:border-primary hover:shadow-tribuvex" href="./lotes.html">
+          <div class="text-sm font-semibold">LOT · Lotes temporada</div>
+          <p class="mt-1 text-xs text-muted-foreground">Cola por entidad · presupuesto</p>
+        </a>
+        <a class="rounded-xl border border-border bg-card p-4 shadow-sm transition hover:border-primary hover:shadow-tribuvex" href="./expediente.html?etapa=4&perfil=multi">
+          <div class="text-sm font-semibold">F2 · Multi-cédula</div>
+          <p class="mt-1 text-xs text-muted-foreground">E4 varias cédulas · límites cruzados</p>
+        </a>
+        <a class="rounded-xl border border-border bg-card p-4 shadow-sm transition hover:border-primary hover:shadow-tribuvex" href="./simulador.html">
+          <div class="text-sm font-semibold">SIM · Simulador</div>
+          <p class="mt-1 text-xs text-muted-foreground">25 % vs costos honorarios</p>
+        </a>
+        <a class="rounded-xl border border-border bg-card p-4 shadow-sm transition hover:border-primary hover:shadow-tribuvex" href="./calendario.html">
+          <div class="text-sm font-semibold">CAL · Calendario NIT</div>
+          <p class="mt-1 text-xs text-muted-foreground">Vencimientos por últimos dígitos</p>
+        </a>
+        <a class="rounded-xl border border-border bg-card p-4 shadow-sm transition hover:border-primary hover:shadow-tribuvex" href="./importacion.html">
+          <div class="text-sm font-semibold">IMP · Import / export</div>
+          <p class="mt-1 text-xs text-muted-foreground">Contabilidad → expediente · paquete</p>
+        </a>
+        <a class="rounded-xl border border-border bg-card p-4 shadow-sm transition hover:border-primary hover:shadow-tribuvex" href="./memoria.html">
+          <div class="text-sm font-semibold">MEM · Memoria años</div>
+          <p class="mt-1 text-xs text-muted-foreground">Anticipo · patrimonio AG-1</p>
+        </a>
+        <a class="rounded-xl border border-border bg-card p-4 shadow-sm transition hover:border-primary hover:shadow-tribuvex" href="../ux/wireflows/index.html">
+          <div class="text-sm font-semibold">Wireflows (índice)</div>
+          <p class="mt-1 text-xs text-muted-foreground">WF-01…16 · índice ordenado</p>
+        </a>
+        <a class="rounded-xl border border-border bg-card p-4 shadow-sm transition hover:border-primary hover:shadow-tribuvex" href="../ux/wireflows/WF-01-asalariado.html">
+          <div class="text-sm font-semibold">WF-01 · Asalariado E2E</div>
+          <p class="mt-1 text-xs text-muted-foreground">Camino feliz + ramas</p>
+        </a>
+        <a class="rounded-xl border border-border bg-card p-4 shadow-sm transition hover:border-primary hover:shadow-tribuvex" href="../ux/wireflows/WF-02-pc1.html">
+          <div class="text-sm font-semibold">WF-02 · PC1</div>
+          <p class="mt-1 text-xs text-muted-foreground">Aprobar · derivar · rechazar</p>
+        </a>
+        <a class="rounded-xl border border-border bg-card p-4 shadow-sm transition hover:border-primary hover:shadow-tribuvex" href="../ux/wireflows/WF-09-portal.html">
+          <div class="text-sm font-semibold">WF-09 · Portal</div>
+          <p class="mt-1 text-xs text-muted-foreground">P1 → P2 → P3</p>
+        </a>
+        <a class="rounded-xl border border-border bg-card p-4 shadow-sm transition hover:border-primary hover:shadow-tribuvex" href="../ux/wireflows/WF-10-temporada.html">
+          <div class="text-sm font-semibold">WF-10 · Temporada</div>
+          <p class="mt-1 text-xs text-muted-foreground">Cola · LOT · PC5 revisor</p>
+        </a>
+        <a class="rounded-xl border border-border bg-card p-4 shadow-sm transition hover:border-primary hover:shadow-tribuvex" href="./estados.html">
+          <div class="text-sm font-semibold">Estados de sistema</div>
+          <p class="mt-1 text-xs text-muted-foreground">Empty, error, degradación, PC5 dual…</p>
+        </a>
+        <a class="rounded-xl border border-border bg-card p-4 shadow-sm transition hover:border-primary hover:shadow-tribuvex" href="./PENDIENTES_UI.md">
+          <div class="text-sm font-semibold">Pendientes UI vs PRD</div>
+          <p class="mt-1 text-xs text-muted-foreground">Huecos de pantallas y estados</p>
+        </a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

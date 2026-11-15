@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>A5 · Nuevo expediente — Tribuvex</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./assets/theme.js"></script>
+  <link rel="stylesheet" href="./assets/app.css" />
+</head>
+<body data-shell="app" data-nav="expedientes" data-base=".">
+  <main id="app-main">
+    <p class="mb-2 text-xs text-muted-foreground"><a class="text-secondary" href="./expedientes.html">Expedientes</a> / Nuevo</p>
+    <h1 class="mb-2 text-2xl font-bold tracking-tight">Nuevo expediente</h1>
+    <p class="mb-6 max-w-xl text-sm text-muted-foreground">Oportuna, extemporánea o corrección sobre un expediente ya presentado.</p>
+
+    <form id="form-nuevo" class="max-w-lg space-y-4 rounded-xl border border-border bg-card p-6 shadow-tribuvex" action="./expediente.html" method="get">
+      <input type="hidden" name="etapa" value="1" />
+      <input type="hidden" name="pc" value="1" />
+      <label class="block text-sm font-semibold">Tipo de trámite
+        <select id="tipo" name="tipo" class="mt-1.5 w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm font-normal shadow-sm">
+          <option value="oportuna" selected>Oportuna (en plazo)</option>
+          <option value="extemporanea">Extemporánea (fuera de plazo)</option>
+          <option value="correccion">Corrección (Art. 644)</option>
+        </select>
+      </label>
+      <label class="block text-sm font-semibold">Cliente
+        <select class="mt-1.5 w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm font-normal shadow-sm">
+          <option>Juan Pérez — 1.234.567</option>
+          <option>Ana Gómez — 9.876.543</option>
+        </select>
+      </label>
+      <label class="block text-sm font-semibold">Año gravable
+        <select class="mt-1.5 w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm font-normal shadow-sm">
+          <option>2025 (regresión / extemporánea)</option>
+          <option selected>2026</option>
+        </select>
+      </label>
+      <label class="block text-sm font-semibold">Perfil
+        <select id="perfil" name="perfil" class="mt-1.5 w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm font-normal shadow-sm">
+          <option value="" selected>Asalariado típico</option>
+          <option value="multi">Varias cédulas</option>
+        </select>
+      </label>
+      <p id="hint-a12" class="hidden rounded-lg border border-info/30 bg-info-subtle px-3 py-2 text-xs text-info-foreground">
+        Tras crear el expediente irás al cálculo de sanciones e intereses (A12).
+      </p>
+      <div class="flex gap-3 pt-2">
+        <button type="submit" class="rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-white hover:bg-accent-hover">Crear expediente</button>
+        <a href="./expedientes.html" class="rounded-lg bg-muted px-4 py-2.5 text-sm font-semibold hover:bg-border">Cancelar</a>
+      </div>
+    </form>
+    <p class="mt-4 text-xs text-muted-foreground">
+      ¿Ya tienes un expediente presentado?
+      <a class="font-semibold text-secondary hover:underline" href="./extemporanea.html?tipo=correccion">Abrir corrección (A12)</a>
+    </p>
+  </main>
+  <script src="./assets/icons.js"></script>
+  <script src="./assets/shell.js"></script>
+  <script>
+    (function () {
+      var tipo = document.getElementById("tipo");
+      var perfil = document.getElementById("perfil");
+      var form = document.getElementById("form-nuevo");
+      var hint = document.getElementById("hint-a12");
+      function sync() {
+        var v = tipo.value;
+        hint.classList.toggle("hidden", v === "oportuna");
+        if (v === "extemporanea") form.action = "./extemporanea.html";
+        else if (v === "correccion") form.action = "./extemporanea.html?tipo=correccion";
+        else {
+          var q = perfil.value === "multi" ? "?etapa=4&perfil=multi" : "?etapa=1";
+          form.action = "./expediente.html" + q;
+          form.querySelector('input[name="etapa"]').value = perfil.value === "multi" ? "4" : "1";
+        }
+      }
+      tipo.addEventListener("change", sync);
+      perfil.addEventListener("change", sync);
+      form.addEventListener("submit", function (e) {
+        if (tipo.value !== "oportuna") return;
+        e.preventDefault();
+        location.href = form.action;
+      });
+      sync();
+    })();
+  </script>
+</body>
+</html>

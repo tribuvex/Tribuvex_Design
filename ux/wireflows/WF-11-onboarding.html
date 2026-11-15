@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WF-11 · Onboarding A13 — Wireflow Tribuvex</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/wireflow-board.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>WF-11 · Onboarding A13</h1>
+      <p>Alta contador independiente · 3 roles en un usuario.</p>
+    </div>
+    <nav>
+      <a href="./index.html">Índice</a>
+      <a href="../CONTENT_MODEL.md">Spec</a>
+      <a href="../../mockup/index.html">Hub mockup</a>
+      <a class="primary" href="../../mockup/login.html">Entrar</a>
+    </nav>
+  </header>
+  <div class="legend">
+    <span><i class="swatch"></i> Camino feliz</span>
+    <span><i class="swatch dash"></i> Rama / decisión</span>
+    <span><i class="swatch pc"></i> Punto de control</span>
+  </div>
+  <div class="board-wrap">
+    <div class="board" id="board" aria-label="WF-11"></div>
+  </div>
+  <p class="hint">Miniaturas = mockup. Spec: ../CONTENT_MODEL.md</p>
+  <script src="./assets/wireflow-board.js"></script>
+  <script>
+    TribuvexWireflow.mount({
+  "width": 1100,
+  "height": 520,
+  "mockBase": "../../mockup/",
+  "sections": [
+    {
+      "label": "Alta independiente",
+      "x": 24,
+      "y": 18
+    }
+  ],
+  "screens": [
+    {
+      "id": "login",
+      "num": "1",
+      "name": "Login / alta",
+      "href": "login.html",
+      "x": 80,
+      "y": 60,
+      "hub": true
+    },
+    {
+      "id": "onb",
+      "num": "2",
+      "name": "A13 Onboarding",
+      "href": "onboarding.html",
+      "x": 360,
+      "y": 60
+    },
+    {
+      "id": "exp",
+      "num": "3",
+      "name": "Expedientes",
+      "href": "expedientes.html",
+      "x": 640,
+      "y": 60
+    },
+    {
+      "id": "admin",
+      "num": "3a",
+      "name": "Admin entidad",
+      "href": "admin.html",
+      "x": 360,
+      "y": 320
+    },
+    {
+      "id": "op",
+      "num": "1a",
+      "name": "¿Firma? → OP",
+      "href": "operador.html",
+      "x": 80,
+      "y": 320
+    }
+  ],
+  "happy": [
+    [
+      "login",
+      "onb"
+    ],
+    [
+      "onb",
+      "exp"
+    ]
+  ],
+  "branches": [
+    [
+      "login",
+      "op"
+    ],
+    [
+      "onb",
+      "admin"
+    ]
+  ]
+});
+  </script>
+</body>
+</html>

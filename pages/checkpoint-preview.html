@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tribuvex — Checkpoint PC2 Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../tokens.css" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--font-family-sans);
+      font-size: var(--tvx-text-body);
+      line-height: 1.5;
+      background: var(--background);
+      color: var(--foreground);
+    }
+    button:focus-visible, a:focus-visible, textarea:focus-visible, summary:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring-color);
+      outline-offset: var(--focus-ring-offset);
+    }
+
+    .app-chrome {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      padding: var(--space-3) var(--space-6);
+      background: var(--sidebar);
+      color: var(--sidebar-foreground);
+    }
+    .app-chrome strong { font-size: 15px; }
+    .app-chrome span { font-size: 12px; opacity: 0.8; }
+    .theme-toggle {
+      background: rgba(255,255,255,0.12);
+      color: inherit;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: var(--radius-control);
+      padding: 6px 12px;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .workspace {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: var(--space-6);
+      padding-bottom: 120px;
+    }
+    .crumb {
+      font-size: 12px;
+      color: var(--muted-foreground);
+      margin-bottom: var(--space-4);
+    }
+    .crumb a { color: var(--secondary); }
+
+    .pipeline {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: var(--space-2);
+      margin-bottom: var(--space-6);
+    }
+    .stage {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 600;
+      padding: var(--space-2);
+      border-radius: var(--radius-control);
+      background: var(--muted);
+      color: var(--muted-foreground);
+      border: 1px solid transparent;
+    }
+    .stage.done { background: var(--success-subtle); color: var(--success-foreground); }
+    .stage.current { background: var(--warning-subtle); color: var(--warning-foreground); border-color: var(--warning); }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--overlay);
+      z-index: var(--z-overlay);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: var(--space-4);
+    }
+    @media (min-width: 768px) {
+      .overlay {
+        align-items: center;
+        padding: var(--space-8);
+      }
+    }
+
+    .checkpoint {
+      width: min(720px, 100%);
+      max-height: min(90vh, 820px);
+      display: flex;
+      flex-direction: column;
+      background: var(--modal-bg);
+      color: var(--card-foreground);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--warning);
+      border-radius: var(--modal-radius);
+      box-shadow: var(--modal-shadow);
+      z-index: var(--z-modal);
+      overflow: hidden;
+    }
+    .checkpoint.blocked { border-left-color: var(--destructive); }
+
+    .cp-header {
+      padding: var(--space-6);
+      padding-bottom: var(--space-4);
+      border-bottom: 1px solid var(--border);
+    }
+    .cp-header .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      align-items: center;
+      margin-bottom: var(--space-3);
+    }
+    .cp-header h1 {
+      margin: 0 0 var(--space-2);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .cp-header p {
+      margin: 0;
+      color: var(--muted-foreground);
+      max-width: 65ch;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+    }
+    .badge-warning { background: var(--warning-subtle); color: var(--warning-foreground); }
+    .badge-info { background: var(--info-subtle); color: var(--info-foreground); }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--warning); }
+
+    .cp-body {
+      padding: var(--space-6);
+      overflow: auto;
+      flex: 1;
+    }
+
+    .error-summary {
+      display: none;
+      margin-bottom: var(--space-4);
+      padding: var(--space-4);
+      border: 1px solid var(--destructive);
+      border-radius: var(--radius-panel);
+      background: var(--destructive-subtle);
+    }
+    .error-summary.is-visible { display: block; }
+    .error-summary h2 {
+      margin: 0 0 var(--space-2);
+      font-size: 14px;
+      color: var(--destructive);
+    }
+    .error-summary a { color: var(--destructive); font-weight: 600; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-bottom: var(--space-6);
+    }
+    th, td {
+      text-align: left;
+      padding: var(--table-cell-padding-y) var(--table-cell-padding-x);
+      border-bottom: 1px solid var(--table-border);
+      vertical-align: top;
+    }
+    th {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--table-header-fg);
+      background: var(--table-header-bg);
+    }
+    .num { font-family: var(--font-family-mono); font-variant-numeric: tabular-nums; }
+    .diff { color: var(--warning-foreground); font-weight: 600; }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: var(--space-4);
+    }
+    .field label { font-weight: 600; font-size: 13px; }
+    .field .hint { font-weight: 400; font-size: 12px; color: var(--muted-foreground); }
+    textarea {
+      font: inherit;
+      padding: var(--field-padding-y) var(--field-padding-x);
+      border: 1px solid var(--field-border);
+      border-radius: var(--field-radius);
+      background: var(--field-bg);
+      color: var(--field-fg);
+      resize: vertical;
+      min-height: 72px;
+    }
+    textarea:focus {
+      border-color: var(--ring);
+      box-shadow: var(--field-focus-ring);
+      outline: none;
+    }
+    .field.is-error textarea { border-color: var(--destructive); }
+    .field .error {
+      display: none;
+      color: var(--destructive);
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .field.is-error .error { display: block; }
+
+    .disclaimer {
+      font-size: 12px;
+      color: var(--muted-foreground);
+      padding: var(--space-3) var(--space-4);
+      background: var(--muted);
+      border-radius: var(--radius-control);
+      margin-bottom: var(--space-2);
+    }
+
+    .cp-footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      justify-content: flex-end;
+      padding: var(--space-4) var(--space-6);
+      border-top: 1px solid var(--border);
+      background: var(--card);
+      position: sticky;
+      bottom: 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: var(--button-radius);
+      padding: 10px 16px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: var(--button-transition);
+    }
+    .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+    .btn-primary { background: var(--button-primary-bg); color: var(--button-primary-fg); }
+    .btn-primary:hover:not(:disabled) { background: var(--button-primary-bg-hover); }
+    .btn-secondary {
+      background: var(--button-secondary-bg);
+      color: var(--button-secondary-fg);
+      border-color: var(--button-secondary-border);
+    }
+    .btn-secondary:hover:not(:disabled) { background: var(--muted); }
+    .btn-destructive { background: var(--button-destructive-bg); color: var(--button-destructive-fg); }
+    .btn-destructive:hover:not(:disabled) { background: var(--destructive-hover); }
+    .btn-ghost { background: var(--button-ghost-bg); color: var(--button-ghost-fg); }
+
+    .toast {
+      position: fixed;
+      right: var(--space-4);
+      bottom: var(--space-4);
+      z-index: var(--z-toast);
+      max-width: 320px;
+      padding: var(--space-4);
+      border-radius: var(--radius-panel);
+      background: var(--card);
+      border: 1px solid var(--border);
+      box-shadow: var(--elevation-lg);
+      display: none;
+    }
+    .toast.is-visible { display: block; }
+    .toast strong { display: block; margin-bottom: 4px; }
+
+    .icon { width: 16px; height: 16px; }
+
+    @media (max-width: 700px) {
+      .pipeline { grid-template-columns: repeat(2, 1fr); }
+      .cp-footer { justify-content: stretch; }
+      .cp-footer .btn { flex: 1 1 100%; justify-content: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="app-chrome">
+    <div>
+      <strong>Tribuvex</strong>
+      <span> · Expediente AG 2026 · Juan Pérez</span>
+    </div>
+    <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Modo oscuro</button>
+  </header>
+
+  <div class="workspace" aria-hidden="true">
+    <div class="crumb">Expedientes / Juan Pérez / Etapa 3 · Soportes</div>
+    <div class="pipeline" role="list" aria-label="Etapas">
+      <div class="stage done" role="listitem">1 Residencia</div>
+      <div class="stage done" role="listitem">2 Obligación</div>
+      <div class="stage current" role="listitem">3 Soportes</div>
+      <div class="stage" role="listitem">4 Cédulas</div>
+      <div class="stage" role="listitem">5 Liquidación</div>
+      <div class="stage" role="listitem">6 Patrimonio</div>
+      <div class="stage" role="listitem">7 Paquete</div>
+    </div>
+    <p style="color:var(--muted-foreground)">El grafo está interrumpido en PC2. Resuelve el punto de control para continuar.</p>
+  </div>
+
+  <div class="overlay" role="presentation">
+    <div
+      class="checkpoint"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="cp-title"
+      aria-describedby="cp-summary"
+    >
+      <div class="cp-header">
+        <div class="meta">
+          <span class="badge badge-warning"><span class="dot" aria-hidden="true"></span>PC2 · Cruce con exógena</span>
+          <span class="badge badge-info">1 diferencia</span>
+        </div>
+        <h1 id="cp-title">Conciliación con información exógena</h1>
+        <p id="cp-summary">
+          El agente encontró una diferencia en honorarios entre el soporte del cliente y la exógena de MUISCA.
+          Revisa la acción propuesta. Ningún dato se fija hasta tu decisión.
+        </p>
+      </div>
+
+      <div class="cp-body">
+        <div class="error-summary" id="error-summary" role="alert" tabindex="-1" aria-labelledby="error-title">
+          <h2 id="error-title">Hay un problema</h2>
+          <a href="#reject-reason">Indica el motivo del rechazo</a>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Concepto</th>
+              <th>Soporte</th>
+              <th>Exógena</th>
+              <th>Diferencia</th>
+              <th>Acción propuesta</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Honorarios</td>
+              <td class="num">$ 12.200.000</td>
+              <td class="num">$ 13.000.000</td>
+              <td class="num diff">− $ 800.000</td>
+              <td>Documentar discrepancia con factura</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="field" id="reject-field">
+          <label for="reject-reason">
+            Motivo de rechazo
+            <span class="hint">Obligatorio solo si eliges Rechazar. Queda en la bitácora.</span>
+          </label>
+          <textarea id="reject-reason" name="reject-reason" aria-describedby="reject-error"></textarea>
+          <span class="error" id="reject-error">Indica el motivo del rechazo.</span>
+        </div>
+
+        <p class="disclaimer">
+          Tribuvex asiste en la preparación. La responsabilidad profesional de la declaración es del contador.
+          El sistema no presenta, firma ni paga en MUISCA.
+        </p>
+      </div>
+
+      <div class="cp-footer">
+        <button type="button" class="btn btn-ghost" id="btn-omit-demo" title="Solo demo">Ver estado «Omitido»</button>
+        <button type="button" class="btn btn-primary" id="btn-approve">
+          <svg class="icon" viewBox="0 0 256 256" aria-hidden="true"><path fill="currentColor" d="M229.66 77.66l-128 128a8 8 0 0 1-11.32 0l-56-56a8 8 0 0 1 11.32-11.32L96 188.69 218.34 66.34a8 8 0 0 1 11.32 11.32Z"/></svg>
+          Aprobar
+        </button>
+        <button type="button" class="btn btn-secondary" id="btn-edit">Editar</button>
+        <button type="button" class="btn btn-destructive" id="btn-reject">Rechazar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <strong id="toast-title">Listo</strong>
+    <span id="toast-body"></span>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var themeBtn = document.getElementById("theme-toggle");
+      var summary = document.getElementById("error-summary");
+      var field = document.getElementById("reject-field");
+      var reason = document.getElementById("reject-reason");
+      var toast = document.getElementById("toast");
+      var toastTitle = document.getElementById("toast-title");
+      var toastBody = document.getElementById("toast-body");
+
+      function showToast(title, body) {
+        toastTitle.textContent = title;
+        toastBody.textContent = body;
+        toast.classList.add("is-visible");
+        window.setTimeout(function () {
+          toast.classList.remove("is-visible");
+        }, 3200);
+      }
+
+      function clearError() {
+        summary.classList.remove("is-visible");
+        field.classList.remove("is-error");
+      }
+
+      themeBtn.addEventListener("click", function () {
+        var dark = root.classList.toggle("dark");
+        themeBtn.setAttribute("aria-pressed", dark ? "true" : "false");
+        themeBtn.textContent = dark ? "Modo claro" : "Modo oscuro";
+      });
+
+      document.getElementById("btn-approve").addEventListener("click", function () {
+        clearError();
+        showToast("Aprobación registrada", "PC2 cerrado. El grafo puede reanudarse.");
+      });
+
+      document.getElementById("btn-edit").addEventListener("click", function () {
+        clearError();
+        showToast("Modo edición", "El interrupt permanece. Puedes corregir el dato o la acción.");
+      });
+
+      document.getElementById("btn-reject").addEventListener("click", function () {
+        if (!reason.value.trim()) {
+          field.classList.add("is-error");
+          summary.classList.add("is-visible");
+          summary.focus();
+          return;
+        }
+        clearError();
+        showToast("Rechazo registrado", "Motivo guardado en bitácora. Etapa no cerrada.");
+      });
+
+      reason.addEventListener("input", function () {
+        if (reason.value.trim()) clearError();
+      });
+
+      document.getElementById("btn-omit-demo").addEventListener("click", function () {
+        showToast("Omitido — sin diferencias", "En producción PC2/PC4 se saltan con constancia en bitácora, sin este diálogo.");
+      });
+
+      window.setTimeout(function () {
+        document.getElementById("btn-approve").focus();
+      }, 0);
+    })();
+  </script>
+</body>
+</html>

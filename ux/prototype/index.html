@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tribuvex Prototype — Expedientes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../tokens.css" />
+  <link rel="stylesheet" href="./proto.css" />
+</head>
+<body>
+  <div class="proto-bar">
+    Prototipo v0.1 · Escenario: contador preparador ·
+    <a href="./PROTOTYPE.md">Brief</a> ·
+    <a href="./expediente.html">Ir al expediente demo</a>
+  </div>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">Tribuvex</div>
+      <div class="brand-sub">App contador · prototipo</div>
+      <a class="active" href="./index.html">Expedientes</a>
+      <a href="#" aria-disabled="true" title="Fuera de alcance del proto">Clientes</a>
+      <a href="#" aria-disabled="true" title="Fuera de alcance del proto">Administración</a>
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Modo oscuro</button>
+    </aside>
+    <div class="content">
+      <div class="page-head">
+        <div>
+          <h1>Expedientes</h1>
+          <p class="lede">Temporada AG 2026 · datos ficticios</p>
+        </div>
+        <button type="button" class="btn btn-primary" id="btn-new" title="Simulado">Nuevo expediente</button>
+      </div>
+
+      <div class="filters">
+        <label>Año gravable
+          <select aria-label="Año gravable">
+            <option>2025 (regresión)</option>
+            <option selected>2026</option>
+          </select>
+        </label>
+        <label>Estado
+          <select aria-label="Estado">
+            <option selected>Todos</option>
+            <option>En proceso</option>
+            <option>Esperando aprobación</option>
+          </select>
+        </label>
+        <label>Riesgo
+          <select aria-label="Riesgo">
+            <option selected>Todos</option>
+            <option>Alto</option>
+          </select>
+        </label>
+        <label style="flex:1">Buscar
+          <input type="search" placeholder="" aria-label="Buscar expediente" />
+        </label>
+      </div>
+
+      <div class="card">
+        <table>
+          <thead>
+            <tr>
+              <th>Cliente</th>
+              <th>Documento</th>
+              <th>AG</th>
+              <th>Etapa</th>
+              <th>Estado</th>
+              <th>Riesgo</th>
+              <th>Pendiente de</th>
+              <th>Actualizado</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Juan Pérez</td>
+              <td class="num">1.234.567</td>
+              <td>2026</td>
+              <td>4 · Cédulas</td>
+              <td><span class="badge badge-warning"><span class="dot" aria-hidden="true"></span>Esperando aprobación</span></td>
+              <td><span class="badge badge-neutral">—</span></td>
+              <td>PC3</td>
+              <td>hoy 10:14</td>
+              <td><a class="btn btn-ghost btn-sm" href="./expediente.html">Ver</a></td>
+            </tr>
+            <tr>
+              <td>Ana Gómez</td>
+              <td class="num">9.876.543</td>
+              <td>2026</td>
+              <td>3 · Soportes</td>
+              <td><span class="badge badge-info">En proceso</span></td>
+              <td><span class="badge badge-neutral">—</span></td>
+              <td>—</td>
+              <td>ayer</td>
+              <td><button type="button" class="btn btn-ghost btn-sm" disabled title="Solo demo: Juan Pérez">Ver</button></td>
+            </tr>
+            <tr>
+              <td>Carlos Ruiz</td>
+              <td class="num">5.555.000</td>
+              <td>2026</td>
+              <td>7 · Paquete</td>
+              <td><span class="badge badge-success">Paquete listo</span></td>
+              <td><span class="badge badge-neutral">—</span></td>
+              <td>—</td>
+              <td>lun</td>
+              <td><button type="button" class="btn btn-ghost btn-sm" disabled>Ver</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <strong id="toast-title"></strong>
+    <span id="toast-body"></span>
+  </div>
+
+  <script src="./proto.js"></script>
+  <script>
+    document.getElementById("btn-new").addEventListener("click", function () {
+      Proto.toast("Simulado", "En el prototipo usa el expediente de Juan Pérez.");
+    });
+  </script>
+</body>
+</html>

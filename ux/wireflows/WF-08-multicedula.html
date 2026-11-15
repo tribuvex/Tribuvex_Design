@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WF-08 · Multi-cédula + simulador — Wireflow Tribuvex</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/wireflow-board.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>WF-08 · Multi-cédula + simulador</h1>
+      <p>Perfil varias cédulas · límites cruzados · 25% vs costos → PC3.</p>
+    </div>
+    <nav>
+      <a href="./index.html">Índice</a>
+      <a href="../flows/03-pc3-depuracion.md">Spec</a>
+      <a href="../../mockup/index.html">Hub mockup</a>
+      <a class="primary" href="../../mockup/login.html">Entrar</a>
+    </nav>
+  </header>
+  <div class="legend">
+    <span><i class="swatch"></i> Camino feliz</span>
+    <span><i class="swatch dash"></i> Rama / decisión</span>
+    <span><i class="swatch pc"></i> Punto de control</span>
+  </div>
+  <div class="board-wrap">
+    <div class="board" id="board" aria-label="WF-08"></div>
+  </div>
+  <p class="hint">Miniaturas = mockup. Spec: ../flows/03-pc3-depuracion.md</p>
+  <script src="./assets/wireflow-board.js"></script>
+  <script>
+    TribuvexWireflow.mount({
+  "width": 1280,
+  "height": 620,
+  "mockBase": "../../mockup/",
+  "sections": [
+    {
+      "label": "Perfil multi",
+      "x": 24,
+      "y": 18
+    },
+    {
+      "label": "Decisión",
+      "x": 24,
+      "y": 300
+    }
+  ],
+  "screens": [
+    {
+      "id": "nuevo",
+      "num": "1",
+      "name": "Nuevo · varias cédulas",
+      "href": "expedientes-nuevo.html",
+      "x": 80,
+      "y": 48,
+      "hub": true
+    },
+    {
+      "id": "e4",
+      "num": "2",
+      "name": "E4 Multi-cédula",
+      "href": "expediente.html?etapa=4&perfil=multi",
+      "x": 360,
+      "y": 48
+    },
+    {
+      "id": "sim",
+      "num": "3",
+      "name": "SIM Simulador",
+      "href": "simulador.html",
+      "x": 640,
+      "y": 48
+    },
+    {
+      "id": "pc3",
+      "num": "4",
+      "name": "PC3",
+      "href": "pc/pc3.html",
+      "x": 640,
+      "y": 330,
+      "pc": true
+    },
+    {
+      "id": "e5",
+      "num": "5",
+      "name": "E5 Liquidación",
+      "href": "expediente.html?etapa=5",
+      "x": 920,
+      "y": 330
+    },
+    {
+      "id": "asal",
+      "num": "2a",
+      "name": "E4 asalariado",
+      "href": "expediente.html?etapa=4",
+      "x": 360,
+      "y": 330
+    }
+  ],
+  "happy": [
+    [
+      "nuevo",
+      "e4"
+    ],
+    [
+      "e4",
+      "sim"
+    ],
+    [
+      "sim",
+      "pc3"
+    ],
+    [
+      "pc3",
+      "e5"
+    ]
+  ],
+  "branches": [
+    [
+      "e4",
+      "asal"
+    ],
+    [
+      "asal",
+      "pc3"
+    ],
+    [
+      "e4",
+      "pc3"
+    ]
+  ]
+});
+  </script>
+</body>
+</html>

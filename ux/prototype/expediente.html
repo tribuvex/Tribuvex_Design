@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tribuvex Prototype — Expediente Juan Pérez</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../tokens.css" />
+  <link rel="stylesheet" href="./proto.css" />
+</head>
+<body>
+  <div class="proto-bar">
+    Prototipo v0.1 · F-01 / F-03 · PC3 abierto al cargar ·
+    <a href="./index.html">← Expedientes</a>
+  </div>
+  <div class="shell" id="app-shell">
+    <aside class="sidebar">
+      <div class="brand">Tribuvex</div>
+      <div class="brand-sub">App contador · prototipo</div>
+      <a href="./index.html">Expedientes</a>
+      <a href="#" aria-disabled="true">Clientes</a>
+      <a href="#" aria-disabled="true">Administración</a>
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Modo oscuro</button>
+    </aside>
+    <div class="content">
+      <div class="crumb">
+        <a href="./index.html">Expedientes</a> / Juan Pérez / AG 2026 / Cédulas / PC3
+      </div>
+      <div class="page-head">
+        <div>
+          <h1>Juan Pérez · AG 2026</h1>
+          <p class="lede">Perfil asalariado · motor de reglas AG 2026</p>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button type="button" class="btn btn-ghost" id="btn-pause">Pausar expediente</button>
+          <button type="button" class="btn btn-secondary" id="btn-log">Ver bitácora</button>
+        </div>
+      </div>
+
+      <div class="banner" id="pc-banner" role="status">
+        El grafo está interrumpido en <strong>PC3 · Depuración</strong>. Resuelve el punto de control para continuar a liquidación.
+      </div>
+
+      <div class="stepper" role="list" aria-label="Etapas">
+        <div class="stage done" role="listitem">1 Residencia</div>
+        <div class="stage done" role="listitem">2 Obligación</div>
+        <div class="stage done" role="listitem">3 Soportes</div>
+        <div class="stage current" role="listitem">4 Cédulas</div>
+        <div class="stage" role="listitem">5 Liquidación</div>
+        <div class="stage" role="listitem">6 Patrimonio</div>
+        <div class="stage" role="listitem">7 Paquete</div>
+      </div>
+
+      <div class="tabs" role="tablist">
+        <button type="button" role="tab" aria-selected="false">Resumen</button>
+        <button type="button" role="tab" aria-selected="false">Soportes</button>
+        <button type="button" role="tab" aria-selected="true">Cédulas</button>
+        <button type="button" role="tab" aria-selected="false">Liquidación</button>
+        <button type="button" role="tab" aria-selected="false">Bitácora</button>
+        <button type="button" role="tab" aria-selected="false">Paquete</button>
+      </div>
+
+      <div class="workspace">
+        <section class="panel">
+          <h2>Clasificación y depuración</h2>
+          <p class="hint">Cada ingreso debe tener cédula. Los topes los aplica el motor de reglas.</p>
+          <div class="card" style="border:none;box-shadow:none">
+            <table>
+              <thead>
+                <tr>
+                  <th>Concepto</th>
+                  <th>Valor</th>
+                  <th>Tope aplicado</th>
+                  <th>Nota</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Ingresos brutos rentas de trabajo</td>
+                  <td class="num">$ 86.400.000</td>
+                  <td>—</td>
+                  <td><span class="badge badge-success">Conciliado</span></td>
+                  <td><button type="button" class="btn btn-ghost btn-sm trace-btn" data-casilla="43" data-valor="$ 86.400.000" data-soporte="Certificado 220" data-regla="Clasificación rentas de trabajo" data-art="Art. 103 y ss. ET">Ver traza</button></td>
+                </tr>
+                <tr>
+                  <td>Exención laboral 25 %</td>
+                  <td class="num">$ 21.600.000</td>
+                  <td class="num">790 UVT</td>
+                  <td><span class="badge badge-info">Aplicado</span></td>
+                  <td><button type="button" class="btn btn-ghost btn-sm trace-btn" data-casilla="—" data-valor="$ 21.600.000" data-soporte="Motor de reglas" data-regla="Exenta laboral 25 % con tope 790 UVT" data-art="Art. 206 ET">Ver traza</button></td>
+                </tr>
+                <tr>
+                  <td>Límite cédula general</td>
+                  <td class="num">1.340 UVT</td>
+                  <td class="num">40 % / 1.340 UVT</td>
+                  <td><span class="badge badge-warning">Tope</span></td>
+                  <td><button type="button" class="btn btn-ghost btn-sm trace-btn" data-casilla="—" data-valor="1.340 UVT" data-soporte="Motor de reglas" data-regla="Límite 40 % y 1.340 UVT" data-art="Art. 336 ET">Ver traza</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="margin-top:var(--space-4)">
+            <button type="button" class="btn btn-primary" id="btn-open-pc">Abrir PC3</button>
+          </p>
+        </section>
+        <aside class="panel" id="trace-panel">
+          <h2>Traza de la casilla <span id="trace-casilla">—</span></h2>
+          <p class="hint">Soporte, regla y artículo detrás de la cifra.</p>
+          <div class="label" style="font-size:11px;font-weight:600;color:var(--muted-foreground);text-transform:uppercase">Valor</div>
+          <p class="num" id="trace-valor" style="margin:4px 0 12px">—</p>
+          <div style="font-size:11px;font-weight:600;color:var(--muted-foreground);text-transform:uppercase">Soporte</div>
+          <p id="trace-soporte" style="margin:4px 0 12px">Selecciona Ver traza en una fila.</p>
+          <div style="font-size:11px;font-weight:600;color:var(--muted-foreground);text-transform:uppercase">Regla</div>
+          <p id="trace-regla" style="margin:4px 0 12px">—</p>
+          <div style="font-size:11px;font-weight:600;color:var(--muted-foreground);text-transform:uppercase">Artículo</div>
+          <p id="trace-art" style="margin:4px 0">—</p>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="pc-overlay" role="presentation">
+    <div
+      class="checkpoint"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="pc-title"
+      aria-describedby="pc-summary"
+    >
+      <div class="cp-header">
+        <div class="cp-meta">
+          <span class="badge badge-warning"><span class="dot" aria-hidden="true"></span>PC3 · Depuración</span>
+          <span class="badge badge-info">Rentas de trabajo</span>
+        </div>
+        <h2 id="pc-title">Clasificación y límites de cédula</h2>
+        <p id="pc-summary">
+          Revisa rentas, deducciones y topes aplicados (incluidos límites en UVT).
+          Ningún dato se fija hasta tu decisión.
+        </p>
+      </div>
+      <div class="cp-body">
+        <div class="error-summary" id="error-summary" role="alert" tabindex="-1" aria-labelledby="error-title">
+          <h3 id="error-title">Hay un problema</h3>
+          <a href="#reject-reason">Indica el motivo del rechazo</a>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Concepto</th>
+              <th>Valor</th>
+              <th>Tope aplicado</th>
+              <th>Nota</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Ingresos brutos</td>
+              <td class="num">$ 86.400.000</td>
+              <td>—</td>
+              <td>Conciliado</td>
+            </tr>
+            <tr>
+              <td>Exención laboral 25 %</td>
+              <td class="num">$ 21.600.000</td>
+              <td class="num">790 UVT</td>
+              <td>Dentro de tope</td>
+            </tr>
+            <tr>
+              <td>Límite Art. 336</td>
+              <td class="num">1.340 UVT</td>
+              <td>40 % / 1.340 UVT</td>
+              <td>Aplicado por motor</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="field" id="reject-field">
+          <label for="reject-reason">
+            Motivo de rechazo
+            <span class="hint">Obligatorio si eliges Rechazar. Queda en la bitácora.</span>
+          </label>
+          <textarea id="reject-reason" name="reject-reason" aria-describedby="reject-error"></textarea>
+          <span class="error" id="reject-error">Indica el motivo del rechazo.</span>
+        </div>
+        <p class="disclaimer">
+          Tribuvex asiste en la preparación de la declaración. La responsabilidad profesional es del contador.
+          El sistema no presenta, firma ni paga en MUISCA.
+        </p>
+      </div>
+      <div class="cp-footer">
+        <button type="button" class="btn btn-primary" id="btn-approve">Aprobar</button>
+        <button type="button" class="btn btn-secondary" id="btn-edit">Editar</button>
+        <button type="button" class="btn btn-destructive" id="btn-reject">Rechazar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <strong id="toast-title"></strong>
+    <span id="toast-body"></span>
+  </div>
+
+  <script src="./proto.js"></script>
+  <script>
+    (function () {
+      var overlay = document.getElementById("pc-overlay");
+      var banner = document.getElementById("pc-banner");
+      var summary = document.getElementById("error-summary");
+      var field = document.getElementById("reject-field");
+      var reason = document.getElementById("reject-reason");
+      var shell = document.getElementById("app-shell");
+
+      function openPc() {
+        overlay.hidden = false;
+        shell.setAttribute("aria-hidden", "true");
+        document.getElementById("btn-approve").focus();
+      }
+      function closePc() {
+        overlay.hidden = true;
+        shell.removeAttribute("aria-hidden");
+      }
+      function clearError() {
+        summary.classList.remove("is-visible");
+        field.classList.remove("is-error");
+      }
+
+      openPc();
+
+      document.getElementById("btn-open-pc").addEventListener("click", openPc);
+
+      document.getElementById("btn-approve").addEventListener("click", function () {
+        clearError();
+        closePc();
+        banner.hidden = true;
+        document.querySelectorAll(".stepper .stage")[3].classList.remove("current");
+        document.querySelectorAll(".stepper .stage")[3].classList.add("done");
+        var e5 = document.querySelectorAll(".stepper .stage")[4];
+        e5.classList.add("current");
+        Proto.toast("Aprobación registrada", "PC3 cerrado. El flujo puede continuar a liquidación.");
+        document.getElementById("btn-open-pc").focus();
+      });
+
+      document.getElementById("btn-edit").addEventListener("click", function () {
+        clearError();
+        Proto.toast("Modo edición", "El punto de control sigue abierto. Corrige y vuelve a decidir.");
+      });
+
+      document.getElementById("btn-reject").addEventListener("click", function () {
+        if (!reason.value.trim()) {
+          field.classList.add("is-error");
+          summary.classList.add("is-visible");
+          summary.focus();
+          return;
+        }
+        clearError();
+        closePc();
+        Proto.toast("Rechazo registrado", "Motivo en bitácora. La etapa no se cerró.");
+      });
+
+      reason.addEventListener("input", function () {
+        if (reason.value.trim()) clearError();
+      });
+
+      document.getElementById("btn-pause").addEventListener("click", function () {
+        Proto.toast("Expediente pausado", "Puedes reanudar después; no se pierde el avance.");
+      });
+      document.getElementById("btn-log").addEventListener("click", function () {
+        Proto.toast("Bitácora", "PC1 aprobado · PC2 omitido · PC3 pendiente (simulado).");
+      });
+
+      document.querySelectorAll(".trace-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          document.getElementById("trace-casilla").textContent = btn.dataset.casilla;
+          document.getElementById("trace-valor").textContent = btn.dataset.valor;
+          document.getElementById("trace-soporte").textContent = btn.dataset.soporte;
+          document.getElementById("trace-regla").textContent = btn.dataset.regla;
+          document.getElementById("trace-art").textContent = btn.dataset.art;
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

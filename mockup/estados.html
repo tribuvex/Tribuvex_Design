@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Estados de sistema — Tribuvex</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./assets/theme.js"></script>
+  <link rel="stylesheet" href="./assets/app.css" />
+</head>
+<body class="min-h-screen bg-background font-sans text-foreground antialiased">
+  <header class="border-b border-border bg-card">
+    <div class="mx-auto flex max-w-3xl items-center justify-between gap-4 px-6 py-5">
+      <div>
+        <div class="text-lg font-bold text-primary">Tribuvex</div>
+        <p class="text-xs text-muted-foreground">Catálogo de estados de sistema (P0)</p>
+      </div>
+      <a href="./index.html" class="text-sm font-semibold text-secondary hover:underline">Hub</a>
+    </div>
+  </header>
+  <main class="mx-auto max-w-3xl px-6 py-10">
+    <h1 class="text-2xl font-bold tracking-tight">Estados de sistema</h1>
+    <p class="mt-2 max-w-2xl text-sm text-muted-foreground">
+      Copy de <code>CONTENT_MODEL.md</code>. También documentados en el
+      <a class="font-semibold text-secondary" href="../ui-kit-preview.html#estados-sistema">UI kit</a>.
+    </p>
+
+    <section class="mt-8 overflow-hidden rounded-xl border border-border bg-card shadow-tribuvex">
+      <div class="border-b border-border bg-muted/50 px-5 py-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Empty / error / permiso</div>
+      <ul class="divide-y divide-border text-sm">
+        <li><a class="flex justify-between gap-3 px-5 py-3.5 hover:bg-muted/40" href="./login.html"><span>Login OAuth (IdP)</span><span class="font-mono text-xs text-muted-foreground">login</span></a></li>
+        <li><a class="flex justify-between gap-3 px-5 py-3.5 hover:bg-muted/40" href="./login.html?oauth=error"><span>Error proveedor OAuth</span><span class="font-mono text-xs text-muted-foreground">oauth=error</span></a></li>
+        <li><a class="flex justify-between gap-3 px-5 py-3.5 hover:bg-muted/40" href="./login.html?error=1"><span>Error de autenticación</span><span class="font-mono text-xs text-muted-foreground">login?error=1</span></a></li>
+        <li><a class="flex justify-between gap-3 px-5 py-3.5 hover:bg-muted/40" href="./login.html?expired=1&returnUrl=./expediente.html%3Fetapa%3D3"><span>Sesión expirada + returnUrl</span><span class="font-mono text-xs text-muted-foreground">expired + returnUrl</span></a></li>
+        <li><a class="flex justify-between gap-3 px-5 py-3.5 hover:bg-muted/40" href="./expedientes.html?empty=1"><span>Expedientes vacíos</span><span class="font-mono text-xs text-muted-foreground">empty=1</span></a></li>
+        <li><a class="flex justify-between gap-3 px-5 py-3.5 hover:bg-muted/40" href="./expedientes.html?filtro=vacio"><span>Filtro sin resultados</span><span class="font-mono text-xs text-muted-foreground">filtro=vacio</span></a></li>
+        <li><a class="flex justify-between gap-3 px-5 py-3.5 hover:bg-muted/40" href="./clientes.html?empty=1"><span>Clientes vacíos</span><span class="font-mono text-xs text-muted-foreground">empty=1</span></a></li>
+        <li><a class="flex justify-between gap-3 px-5 py-3.5 hover:bg-muted/40" href="./bitacora.html?empty=1"><span>Bitácora vacía</span><span class="font-mono text-xs text-muted-foreground">empty=1</span></a></li>
+        <li><a class="flex justify-between gap-3 px-5 py-3.5 hover:bg-muted/40" href="./sin-permiso.html"><span>403 sin permiso</span><span class="font-mono text-xs text-muted-foreground">sin-permiso</span></a></li>
+        <li><a class="flex justify-between gap-3 px-5 py-3.5 hover:bg-muted/40" href="./404.html"><span>404 expediente</span><span class="font-mono text-xs text-muted-foreground">404</span></a></li>
+      </ul>
+    </section>
+
+    <section class="mt-6 overflow-hidden rounded-xl border border-border bg-card shadow-tribuvex">
+      <div class="border-b border-border bg-muted/50 px-5 py-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Expediente / paquete / PC</div>
+      <ul class="divide-y divide-border text-sm">
+        <li><a class="flex justify-between gap-3 px-5 py-3.5 hover:bg-muted/40" href="./expediente.html?etapa=3&degrade=1"><span>Banner degradación modelo (RNF-10)</span><span class="font-mono text-xs text-muted-foreground">degrade=1</span></a></li>
+        <li><a class="flex justify-between gap-3 px-5 py-3.5 hover:bg-muted/40" href="./expediente.html?etapa=3&pausado=1"><span>Expediente pausado + Reanudar</span><span class="font-mono text-xs text-muted-foreground">pausado=1</span></a></li>
+        <li><a class="flex justify-between gap-3 px-5 py-3.5 hover:bg-muted/40" href="./expediente.html?etapa=2&voluntario=1"><span>No obligado · declaración voluntaria</span><span class="font-mono text-xs text-muted-foreground">voluntario=1</span></a></li>
+        <li><a class="flex justify-between gap-3 px-5 py-3.5 hover:bg-muted/40" href="./derivado.html"><span>Derivado a análisis manual</span><span class="font-mono text-xs text-muted-foreground">derivado</span></a></li>
+        <li><a class="flex justify-between gap-3 px-5 py-3.5 hover:bg-muted/40" href="./paquete.html?blocked=1"><span>Paquete bloqueado (sin PC5)</span><span class="font-mono text-xs text-muted-foreground">blocked=1</span></a></li>
+        <li><a class="flex justify-between gap-3 px-5 py-3.5 hover:bg-muted/40" href="./pc/pc5.html?revisor=1"><span>PC5 doble aprobación (revisor)</span><span class="font-mono text-xs text-muted-foreground">revisor=1</span></a></li>
+        <li><a class="flex justify-between gap-3 px-5 py-3.5 hover:bg-muted/40" href="./bitacora.html"><span>PC2 omitido (fila en bitácora)</span><span class="font-mono text-xs text-muted-foreground">bitácora</span></a></li>
+      </ul>
+    </section>
+  </main>
+<script src="./assets/icons.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PC3</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/theme.js"></script>
+  <script src="../assets/pc.js"></script>
+</head>
+<body>
+<script>
+window.PC_PAGE = {
+  badge: "PC3 · Depuración",
+  title: "Clasificación y límites de cédula",
+  summary: "Revisa rentas, deducciones y topes aplicados (incluidos límites en UVT).",
+  next: "../expediente.html?etapa=5",
+  back: "../expediente.html?etapa=4&pc=3",
+  bodyHtml: '<div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead class="bg-slate-100 text-[11px] uppercase text-muted-foreground"><tr><th class="p-2">Concepto</th><th class="p-2">Valor</th><th class="p-2">Tope aplicado</th><th class="p-2">Nota</th></tr></thead><tbody class="divide-y divide-border"><tr><td class="p-2">Ingresos brutos</td><td class="p-2 font-mono">$ 86.400.000</td><td class="p-2">—</td><td class="p-2">Conciliado</td></tr><tr><td class="p-2">Exención laboral 25 %</td><td class="p-2 font-mono">$ 21.600.000</td><td class="p-2 font-mono">790 UVT</td><td class="p-2">Dentro de tope</td></tr><tr><td class="p-2">Límite Art. 336</td><td class="p-2 font-mono">1.340 UVT</td><td class="p-2">40 % / 1.340 UVT</td><td class="p-2">Aplicado por motor</td></tr></tbody></table></div><fieldset class="mt-4 rounded-md border border-border p-3 text-sm"><legend class="px-1 text-xs font-semibold">Opción excluyente (honorarios)</legend><p class="mb-2 text-xs text-muted-foreground">No puedes combinar costos/gastos de honorarios con la exención del 25 %. Elige una opción.</p><label class="flex items-center gap-2"><input type="radio" name="excl" checked /> Aplicar exención del 25 %</label><label class="mt-1 flex items-center gap-2"><input type="radio" name="excl" /> Aplicar costos y gastos</label></fieldset>'
+};
+</script>
+<script src="../assets/pc-shell.js"></script>
+</body>
+</html>

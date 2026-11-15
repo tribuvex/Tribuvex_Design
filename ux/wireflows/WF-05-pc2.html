@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WF-05 · PC2 Exógena — Wireflow Tribuvex</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/wireflow-board.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>WF-05 · PC2 Exógena</h1>
+      <p>Diferencias vs DIAN · pedir soporte · aprobar / omitido.</p>
+    </div>
+    <nav>
+      <a href="../flows/PUNTOS_DE_CONTROL.md">Task flow</a>
+      <a href="./index.html">Índice</a>
+      <a href="../../mockup/index.html">Hub mockup</a>
+      <a class="primary" href="../../mockup/login.html">Entrar</a>
+    </nav>
+  </header>
+  <div class="legend">
+    <span><i class="swatch"></i> Camino feliz</span>
+    <span><i class="swatch dash"></i> Rama / decisión</span>
+    <span><i class="swatch pc"></i> Punto de control</span>
+  </div>
+  <div class="board-wrap">
+    <div class="board" id="board" aria-label="WF-05"></div>
+  </div>
+  <p class="hint">Miniaturas = mockup real. Si el navegador bloquea iframes locales, verás silueta wire. Spec enlazada arriba.</p>
+  <script src="./assets/wireflow-board.js"></script>
+  <script>
+    TribuvexWireflow.mount({
+  "width": 1280,
+  "height": 720,
+  "mockBase": "../../mockup/",
+  "sections": [
+    {
+      "label": "Soportes · cruce",
+      "x": 24,
+      "y": 18
+    },
+    {
+      "label": "PC2",
+      "x": 24,
+      "y": 300
+    },
+    {
+      "label": "Salidas",
+      "x": 24,
+      "y": 540
+    }
+  ],
+  "screens": [
+    {
+      "id": "e3",
+      "num": "1",
+      "name": "E3 Soportes",
+      "href": "expediente.html?etapa=3",
+      "x": 80,
+      "y": 48,
+      "hub": true
+    },
+    {
+      "id": "pc2",
+      "num": "2",
+      "name": "PC2 Exógena",
+      "href": "pc/pc2.html",
+      "x": 360,
+      "y": 48,
+      "pc": true
+    },
+    {
+      "id": "portal",
+      "num": "2a",
+      "name": "Pedir soporte (portal)",
+      "href": "portal/upload.html",
+      "x": 640,
+      "y": 48
+    },
+    {
+      "id": "omit",
+      "num": "3a",
+      "name": "PC2 omitido",
+      "href": "bitacora.html",
+      "x": 920,
+      "y": 48
+    },
+    {
+      "id": "e4",
+      "num": "3",
+      "name": "E4 Cédulas",
+      "href": "expediente.html?etapa=4",
+      "x": 360,
+      "y": 330
+    },
+    {
+      "id": "stop",
+      "num": "2b",
+      "name": "Rechazo / pendiente",
+      "href": "expediente.html?etapa=3&pausado=1",
+      "x": 640,
+      "y": 330
+    }
+  ],
+  "happy": [
+    [
+      "e3",
+      "pc2"
+    ],
+    [
+      "pc2",
+      "e4"
+    ]
+  ],
+  "branches": [
+    [
+      "e3",
+      "omit"
+    ],
+    [
+      "omit",
+      "e4"
+    ],
+    [
+      "pc2",
+      "portal"
+    ],
+    [
+      "portal",
+      "pc2"
+    ],
+    [
+      "pc2",
+      "stop"
+    ]
+  ]
+});
+  </script>
+</body>
+</html>

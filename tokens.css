@@ -1,0 +1,377 @@
+/**
+ * Tribuvex design tokens
+ * Layers: primitive (--tvx-*) → semantic (--primary, --background, …) → component (--button-*)
+ * Tailwind CSS v4: @import "./tokens.css"; then use bg-primary, text-muted-foreground, gap-4, …
+ * Dark mode: class "dark" on <html> or <body>
+ */
+
+/* -------------------------------------------------------------------------- */
+/* Layer 1 — Primitive                                                        */
+/* -------------------------------------------------------------------------- */
+
+:root {
+  --tvx-navy-950: #0b1220;
+  --tvx-navy-900: #0f172a;
+  --tvx-navy-800: #1e3a5f;
+  --tvx-navy-700: #254a73;
+  --tvx-navy-600: #2f5f8f;
+  --tvx-navy-400: #7a9cc0;
+  --tvx-navy-200: #c5d4e8;
+  --tvx-navy-100: #e9eef5;
+  --tvx-navy-50: #f8fafc;
+
+  --tvx-blue-600: #2563eb;
+  --tvx-blue-500: #3b82f6;
+  --tvx-blue-400: #60a5fa;
+  --tvx-blue-100: #dbeafe;
+
+  --tvx-green-700: #15803d;
+  --tvx-green-600: #16a34a;
+  --tvx-green-500: #22c55e;
+  --tvx-green-100: #dcfce7;
+
+  --tvx-amber-700: #b45309;
+  --tvx-amber-600: #d97706;
+  --tvx-amber-500: #f59e0b;
+  --tvx-amber-400: #fbbf24;
+  --tvx-amber-100: #ffedd5;
+
+  --tvx-red-700: #b91c1c;
+  --tvx-red-600: #dc2626;
+  --tvx-red-400: #f87171;
+  --tvx-red-100: #fee2e2;
+
+  --tvx-slate-900: #0f172a;
+  --tvx-slate-700: #334155;
+  --tvx-slate-600: #475569;
+  --tvx-slate-400: #94a3b8;
+  --tvx-slate-300: #cbd5e1;
+  --tvx-slate-200: #e2e8f0;
+  --tvx-slate-100: #f1f5f9;
+  --tvx-white: #ffffff;
+  --tvx-black: #000000;
+
+  --tvx-space-1: 0.25rem;
+  --tvx-space-2: 0.5rem;
+  --tvx-space-3: 0.75rem;
+  --tvx-space-4: 1rem;
+  --tvx-space-5: 1.25rem;
+  --tvx-space-6: 1.5rem;
+  --tvx-space-8: 2rem;
+  --tvx-space-10: 2.5rem;
+  --tvx-space-12: 3rem;
+
+  --tvx-font-sans: "IBM Plex Sans", system-ui, sans-serif;
+  --tvx-font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --tvx-text-label: 0.75rem;
+  --tvx-text-body: 0.875rem;
+  --tvx-text-emphasis: 1rem;
+  --tvx-text-section: 1.125rem;
+  --tvx-text-page: 1.5rem;
+  --tvx-font-semibold: 600;
+
+  --tvx-radius-sm: 0.375rem;
+  --tvx-radius-md: 0.5rem;
+  --tvx-radius-lg: 0.75rem;
+  --tvx-radius-full: 9999px;
+
+  --tvx-shadow-sm: 0 1px 2px rgb(15 23 42 / 0.05);
+  --tvx-shadow-md: 0 4px 6px rgb(15 23 42 / 0.08);
+  --tvx-shadow-lg: 0 10px 15px rgb(15 23 42 / 0.1);
+
+  --tvx-duration-fast: 150ms;
+  --tvx-duration-base: 200ms;
+  --tvx-duration-slow: 250ms;
+  --tvx-ease-standard: ease;
+
+  --tvx-z-sticky: 30;
+  --tvx-z-dropdown: 40;
+  --tvx-z-overlay: 50;
+  --tvx-z-modal: 60;
+  --tvx-z-toast: 70;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Layer 2 — Semantic (theme-switched; do not use --color-* here)             */
+/* -------------------------------------------------------------------------- */
+
+:root {
+  color-scheme: light;
+
+  --primary: var(--tvx-navy-800);
+  --on-primary: var(--tvx-white);
+  --primary-hover: var(--tvx-navy-700);
+
+  --secondary: var(--tvx-blue-600);
+  --on-secondary: var(--tvx-white);
+  --secondary-hover: var(--tvx-blue-500);
+
+  --accent: var(--tvx-green-600);
+  --on-accent: var(--tvx-white);
+  --accent-hover: var(--tvx-green-700);
+
+  --warning: var(--tvx-amber-600);
+  --on-warning: var(--tvx-white);
+  --warning-subtle: var(--tvx-amber-100);
+  --warning-foreground: var(--tvx-amber-700);
+
+  --destructive: var(--tvx-red-600);
+  --on-destructive: var(--tvx-white);
+  --destructive-hover: var(--tvx-red-700);
+  --destructive-subtle: var(--tvx-red-100);
+
+  --success-subtle: var(--tvx-green-100);
+  --success-foreground: var(--tvx-green-700);
+  --info-subtle: var(--tvx-blue-100);
+  --info-foreground: #1e40af;
+
+  --background: var(--tvx-navy-50);
+  --foreground: var(--tvx-slate-900);
+  --card: var(--tvx-white);
+  --card-foreground: var(--tvx-slate-900);
+  --muted: var(--tvx-navy-100);
+  --muted-foreground: var(--tvx-slate-600);
+  --border: var(--tvx-slate-300);
+  --input: var(--tvx-slate-300);
+  --ring: var(--tvx-navy-800);
+  --overlay: rgb(15 23 42 / 0.5);
+  --sidebar: var(--tvx-navy-800);
+  --sidebar-foreground: var(--tvx-white);
+
+  --font-family-sans: var(--tvx-font-sans);
+  --font-family-mono: var(--tvx-font-mono);
+
+  --space-1: var(--tvx-space-1);
+  --space-2: var(--tvx-space-2);
+  --space-3: var(--tvx-space-3);
+  --space-4: var(--tvx-space-4);
+  --space-5: var(--tvx-space-5);
+  --space-6: var(--tvx-space-6);
+  --space-8: var(--tvx-space-8);
+  --space-10: var(--tvx-space-10);
+  --space-12: var(--tvx-space-12);
+
+  --radius-control: var(--tvx-radius-sm);
+  --radius-panel: var(--tvx-radius-md);
+  --radius-sheet: var(--tvx-radius-lg);
+  --radius-pill: var(--tvx-radius-full);
+
+  --elevation-sm: var(--tvx-shadow-sm);
+  --elevation-md: var(--tvx-shadow-md);
+  --elevation-lg: var(--tvx-shadow-lg);
+
+  --duration-fast: var(--tvx-duration-fast);
+  --duration-base: var(--tvx-duration-base);
+  --duration-slow: var(--tvx-duration-slow);
+  --ease-standard: var(--tvx-ease-standard);
+
+  --z-sticky: var(--tvx-z-sticky);
+  --z-dropdown: var(--tvx-z-dropdown);
+  --z-overlay: var(--tvx-z-overlay);
+  --z-modal: var(--tvx-z-modal);
+  --z-toast: var(--tvx-z-toast);
+}
+
+.dark {
+  color-scheme: dark;
+
+  --primary: var(--tvx-navy-400);
+  --on-primary: var(--tvx-navy-950);
+  --primary-hover: var(--tvx-navy-200);
+
+  --secondary: var(--tvx-blue-400);
+  --on-secondary: var(--tvx-navy-950);
+  --secondary-hover: var(--tvx-blue-500);
+
+  --accent: var(--tvx-green-500);
+  --on-accent: var(--tvx-navy-950);
+  --accent-hover: var(--tvx-green-600);
+
+  --warning: var(--tvx-amber-500);
+  --on-warning: var(--tvx-navy-950);
+  --warning-subtle: rgb(217 119 6 / 0.2);
+  --warning-foreground: var(--tvx-amber-400);
+
+  --destructive: var(--tvx-red-400);
+  --on-destructive: var(--tvx-navy-950);
+  --destructive-hover: var(--tvx-red-600);
+  --destructive-subtle: rgb(220 38 38 / 0.2);
+
+  --success-subtle: rgb(22 163 74 / 0.2);
+  --success-foreground: #4ade80;
+  --info-subtle: rgb(37 99 235 / 0.25);
+  --info-foreground: var(--tvx-blue-400);
+
+  --background: #0b1220;
+  --foreground: #e2e8f0;
+  --card: #121a2b;
+  --card-foreground: #e2e8f0;
+  --muted: #1a2438;
+  --muted-foreground: #94a3b8;
+  --border: #2a3548;
+  --input: #2a3548;
+  --ring: var(--tvx-navy-400);
+  --overlay: rgb(0 0 0 / 0.65);
+  --sidebar: #070d18;
+  --sidebar-foreground: #e2e8f0;
+
+  --elevation-sm: 0 1px 2px rgb(0 0 0 / 0.35);
+  --elevation-md: 0 4px 6px rgb(0 0 0 / 0.4);
+  --elevation-lg: 0 10px 15px rgb(0 0 0 / 0.45);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Layer 3 — Component                                                        */
+/* -------------------------------------------------------------------------- */
+
+:root {
+  --button-radius: var(--radius-control);
+  --button-padding-y: var(--space-2);
+  --button-padding-x: var(--space-4);
+  --button-padding-y-sm: 0.375rem;
+  --button-padding-x-sm: var(--space-3);
+  --button-font-weight: var(--tvx-font-semibold);
+  --button-transition: background-color var(--duration-base) var(--ease-standard),
+    border-color var(--duration-base) var(--ease-standard),
+    opacity var(--duration-fast) var(--ease-standard);
+
+  --button-primary-bg: var(--accent);
+  --button-primary-fg: var(--on-accent);
+  --button-primary-bg-hover: var(--accent-hover);
+
+  --button-secondary-bg: transparent;
+  --button-secondary-fg: var(--primary);
+  --button-secondary-border: var(--primary);
+
+  --button-info-bg: var(--secondary);
+  --button-info-fg: var(--on-secondary);
+
+  --button-destructive-bg: var(--destructive);
+  --button-destructive-fg: var(--on-destructive);
+
+  --button-ghost-bg: var(--muted);
+  --button-ghost-fg: var(--foreground);
+
+  --badge-radius: var(--radius-pill);
+  --badge-padding-y: var(--space-1);
+  --badge-padding-x: 0.625rem;
+  --badge-font-size: var(--tvx-text-label);
+
+  --field-padding-y: 0.625rem;
+  --field-padding-x: var(--space-3);
+  --field-radius: var(--radius-control);
+  --field-border: var(--input);
+  --field-bg: var(--card);
+  --field-fg: var(--foreground);
+  --field-focus-ring: 0 0 0 3px color-mix(in srgb, var(--ring) 20%, transparent);
+
+  --card-bg: var(--card);
+  --card-fg: var(--card-foreground);
+  --card-border: var(--border);
+  --card-radius: var(--radius-panel);
+  --card-padding: var(--space-6);
+  --card-shadow: var(--elevation-sm);
+
+  --table-header-bg: var(--tvx-slate-100);
+  --table-header-fg: var(--muted-foreground);
+  --table-cell-padding-y: 0.625rem;
+  --table-cell-padding-x: var(--space-3);
+  --table-border: var(--border);
+
+  --modal-overlay: var(--overlay);
+  --modal-bg: var(--card);
+  --modal-radius: var(--radius-sheet);
+  --modal-padding: var(--space-8);
+  --modal-shadow: var(--elevation-lg);
+  --modal-z: var(--z-modal);
+
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+  --focus-ring-color: var(--ring);
+}
+
+.dark {
+  --table-header-bg: #1a2438;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Tailwind v4 @theme → utilities: bg-primary, text-muted-foreground, …       */
+/* -------------------------------------------------------------------------- */
+
+@theme inline {
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+  --color-primary-hover: var(--primary-hover);
+
+  --color-secondary: var(--secondary);
+  --color-on-secondary: var(--on-secondary);
+  --color-secondary-hover: var(--secondary-hover);
+
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --color-accent-hover: var(--accent-hover);
+
+  --color-warning: var(--warning);
+  --color-on-warning: var(--on-warning);
+  --color-warning-subtle: var(--warning-subtle);
+  --color-warning-foreground: var(--warning-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-on-destructive: var(--on-destructive);
+  --color-destructive-hover: var(--destructive-hover);
+  --color-destructive-subtle: var(--destructive-subtle);
+
+  --color-success-subtle: var(--success-subtle);
+  --color-success-foreground: var(--success-foreground);
+  --color-info-subtle: var(--info-subtle);
+  --color-info-foreground: var(--info-foreground);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-overlay: var(--overlay);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+
+  --font-sans: var(--font-family-sans);
+  --font-mono: var(--font-family-mono);
+
+  --spacing-1: var(--space-1);
+  --spacing-2: var(--space-2);
+  --spacing-3: var(--space-3);
+  --spacing-4: var(--space-4);
+  --spacing-5: var(--space-5);
+  --spacing-6: var(--space-6);
+  --spacing-8: var(--space-8);
+  --spacing-10: var(--space-10);
+  --spacing-12: var(--space-12);
+
+  --radius-sm: var(--radius-control);
+  --radius-md: var(--radius-panel);
+  --radius-lg: var(--radius-sheet);
+  --radius-full: var(--radius-pill);
+
+  --shadow-sm: var(--elevation-sm);
+  --shadow-md: var(--elevation-md);
+  --shadow-lg: var(--elevation-lg);
+
+  --text-label: var(--tvx-text-label);
+  --text-body: var(--tvx-text-body);
+  --text-emphasis: var(--tvx-text-emphasis);
+  --text-section: var(--tvx-text-section);
+  --text-page: var(--tvx-text-page);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+    --duration-slow: 0ms;
+  }
+}

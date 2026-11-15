@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RN · Parámetros año gravable — Tribuvex</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./assets/theme.js"></script>
+  <link rel="stylesheet" href="./assets/app.css" />
+  <script src="./assets/pc.js"></script>
+</head>
+<body class="min-h-screen bg-background font-sans text-foreground antialiased">
+  <header class="border-b border-border bg-sidebar text-sidebar-foreground">
+    <div class="mx-auto flex max-w-4xl flex-wrap items-center justify-between gap-3 px-6 py-4">
+      <div>
+        <div class="text-lg font-bold tracking-tight">Tribuvex · Normativa</div>
+        <p class="text-[11px] text-white/55">Responsable normativo · parámetros comunes a todas las entidades</p>
+      </div>
+      <div class="flex items-center gap-3 text-sm">
+        <span class="rounded-full bg-white/10 px-2.5 py-0.5 text-[11px] font-semibold">Sin datos tributarios de clientes</span>
+        <a href="./index.html" class="text-xs text-white/70 hover:text-white">Hub</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-4xl px-6 py-10">
+    <p class="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">RN · RNF-16</p>
+    <h1 class="mt-1 text-2xl font-bold tracking-tight">Parámetros por año gravable</h1>
+    <p class="mt-2 max-w-2xl text-sm text-muted-foreground">
+      Habilitar un AG solo con parámetros firmados y regresión en verde.
+      UVT, topes, tarifas e intereses viven aquí — no en prompts.
+    </p>
+
+    <div class="mt-8 overflow-hidden rounded-xl border border-border bg-card shadow-tribuvex">
+      <table class="tvx-table w-full text-left text-sm">
+        <thead class="border-b border-border bg-muted/80 text-[11px] uppercase tracking-wide text-muted-foreground">
+          <tr>
+            <th class="px-4 py-3 font-semibold">Año</th>
+            <th class="px-4 py-3 font-semibold">UVT</th>
+            <th class="px-4 py-3 font-semibold">Regresión</th>
+            <th class="px-4 py-3 font-semibold">Firma</th>
+            <th class="px-4 py-3 font-semibold">Estado</th>
+            <th class="px-4 py-3"><span class="sr-only">Acciones</span></th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-border">
+          <tr>
+            <td class="px-4 py-3.5 font-semibold">2025</td>
+            <td class="px-4 py-3.5 font-mono text-xs">$ 47.065</td>
+            <td class="px-4 py-3.5"><span class="rounded-full bg-success-subtle px-2.5 py-0.5 text-xs font-semibold text-success-foreground">Verde · 60/60</span></td>
+            <td class="px-4 py-3.5 text-xs text-muted-foreground">normativo@tribuvex.co · 2025-12-02</td>
+            <td class="px-4 py-3.5"><span class="rounded-full bg-muted px-2.5 py-0.5 text-xs font-semibold text-muted-foreground">Regresión</span></td>
+            <td class="px-4 py-3.5 text-right"><button type="button" class="rounded-lg border border-border px-3 py-1.5 text-xs font-semibold hover:bg-muted" data-open="2025">Ver</button></td>
+          </tr>
+          <tr class="bg-warning-subtle/20">
+            <td class="px-4 py-3.5 font-semibold">2026</td>
+            <td class="px-4 py-3.5 font-mono text-xs">$ 52.374</td>
+            <td class="px-4 py-3.5"><span class="rounded-full bg-warning-subtle px-2.5 py-0.5 text-xs font-semibold text-warning-foreground">Pendiente firma</span></td>
+            <td class="px-4 py-3.5 text-xs text-muted-foreground">—</td>
+            <td class="px-4 py-3.5"><span class="rounded-full bg-warning-subtle px-2.5 py-0.5 text-xs font-semibold text-warning-foreground">Borrador</span></td>
+            <td class="px-4 py-3.5 text-right"><button type="button" class="rounded-lg bg-accent px-3 py-1.5 text-xs font-semibold text-white hover:bg-accent-hover" data-open="2026">Revisar</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <section id="detail" class="mt-6 hidden rounded-xl border border-border bg-card p-5 shadow-tribuvex">
+      <div class="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <h2 class="text-sm font-semibold">Parámetros AG <span id="d-year">2026</span></h2>
+          <p class="mt-1 text-xs text-muted-foreground">Verificados contra ET, DUR 1625 e instructivo 210 (mockup).</p>
+        </div>
+        <span id="d-badge" class="rounded-full bg-warning-subtle px-2.5 py-0.5 text-xs font-semibold text-warning-foreground">Borrador</span>
+      </div>
+
+      <dl class="mt-5 grid gap-3 sm:grid-cols-3 text-sm">
+        <div class="rounded-lg bg-muted/50 p-3"><dt class="text-[11px] uppercase text-muted-foreground">UVT</dt><dd class="mt-1 font-mono font-semibold" id="d-uvt">$ 52.374</dd></div>
+        <div class="rounded-lg bg-muted/50 p-3"><dt class="text-[11px] uppercase text-muted-foreground">Tope Art. 336</dt><dd class="mt-1 font-mono font-semibold">1.340 UVT</dd></div>
+        <div class="rounded-lg bg-muted/50 p-3"><dt class="text-[11px] uppercase text-muted-foreground">Exenta laboral</dt><dd class="mt-1 font-mono font-semibold">25 % · 790 UVT</dd></div>
+      </dl>
+
+      <div class="mt-5 overflow-hidden rounded-lg border border-border">
+        <table class="w-full text-left text-sm">
+          <thead class="bg-muted/80 text-[11px] uppercase text-muted-foreground">
+            <tr><th class="px-3 py-2">Suite</th><th class="px-3 py-2">Resultado</th></tr>
+          </thead>
+          <tbody class="divide-y divide-border" id="d-regression">
+            <tr><td class="px-3 py-2">Motor · asalariado</td><td class="px-3 py-2"><span class="text-success-foreground font-semibold">OK</span></td></tr>
+            <tr><td class="px-3 py-2">Motor · topes borde</td><td class="px-3 py-2"><span class="text-success-foreground font-semibold">OK</span></td></tr>
+            <tr><td class="px-3 py-2">Extemporánea · 641/639/634</td><td class="px-3 py-2"><span class="text-success-foreground font-semibold">OK</span></td></tr>
+            <tr><td class="px-3 py-2">Amnistías cargadas</td><td class="px-3 py-2 text-muted-foreground">Ninguna (correcto)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-5 flex flex-wrap gap-2">
+        <button type="button" id="btn-run" class="rounded-lg border border-border px-4 py-2 text-sm font-semibold hover:bg-muted">Correr regresión</button>
+        <button type="button" id="btn-sign" class="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accent-hover">Firmar y habilitar AG</button>
+        <button type="button" id="btn-block" class="rounded-lg border border-destructive px-4 py-2 text-sm font-semibold text-destructive hover:bg-destructive-subtle">Bloquear habilitación</button>
+      </div>
+      <p id="gate-msg" class="mt-3 hidden text-xs font-semibold text-warning-foreground">No se puede habilitar: la regresión debe estar en verde y la firma del responsable registrada (RNF-16).</p>
+    </section>
+
+    <p class="mt-8 text-xs text-muted-foreground">
+      Esta consola no muestra clientes ni expedientes de firmas (RNF-01).
+      Operador de plataforma: <a class="font-semibold text-secondary hover:underline" href="./operador.html">OP</a> (alta/suspende entidades).
+    </p>
+  </main>
+  <script>
+    (function () {
+      var detail = document.getElementById("detail");
+      var year = "2026";
+      var regressionGreen = false;
+
+      document.querySelectorAll("[data-open]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          year = btn.getAttribute("data-open");
+          document.getElementById("d-year").textContent = year;
+          document.getElementById("d-uvt").textContent = year === "2025" ? "$ 47.065" : "$ 52.374";
+          regressionGreen = year === "2025";
+          document.getElementById("d-badge").textContent = year === "2025" ? "Habilitado · regresión" : "Borrador";
+          document.getElementById("d-badge").className = year === "2025"
+            ? "rounded-full bg-success-subtle px-2.5 py-0.5 text-xs font-semibold text-success-foreground"
+            : "rounded-full bg-warning-subtle px-2.5 py-0.5 text-xs font-semibold text-warning-foreground";
+          document.getElementById("gate-msg").classList.add("hidden");
+          detail.classList.remove("hidden");
+          detail.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        });
+      });
+
+      document.getElementById("btn-run").addEventListener("click", function () {
+        regressionGreen = true;
+        TribuvexPc.toast("Regresión OK", "60/60 casos en verde (simulado).");
+        document.getElementById("d-badge").textContent = "Regresión verde · sin firma";
+        document.getElementById("d-badge").className = "rounded-full bg-info-subtle px-2.5 py-0.5 text-xs font-semibold text-info-foreground";
+        document.getElementById("gate-msg").classList.add("hidden");
+      });
+
+      document.getElementById("btn-sign").addEventListener("click", function () {
+        if (!regressionGreen) {
+          document.getElementById("gate-msg").classList.remove("hidden");
+          TribuvexPc.toast("Bloqueado", "Corre la regresión antes de firmar.");
+          return;
+        }
+        document.getElementById("d-badge").textContent = "Habilitado · firmado";
+        document.getElementById("d-badge").className = "rounded-full bg-success-subtle px-2.5 py-0.5 text-xs font-semibold text-success-foreground";
+        document.getElementById("gate-msg").classList.add("hidden");
+        TribuvexPc.toast("AG habilitado", "Parámetros firmados. Entidades pueden usar este año.");
+      });
+
+      document.getElementById("btn-block").addEventListener("click", function () {
+        regressionGreen = false;
+        document.getElementById("gate-msg").classList.remove("hidden");
+        TribuvexPc.toast("Habilitación bloqueada", "RNF-16: sin firma + verde no hay AG en producción.");
+      });
+    })();
+  </script>
+<script src="./assets/icons.js"></script>
+</body>
+</html>

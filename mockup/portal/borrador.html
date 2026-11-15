@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>P3 · Tu borrador — Tribuvex</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/theme.js"></script>
+  <link rel="stylesheet" href="../assets/app.css" />
+  <script src="../assets/pc.js"></script>
+</head>
+<body class="min-h-screen bg-background font-sans text-sm text-foreground antialiased">
+  <header class="border-b border-border bg-card/90 px-6 py-4 backdrop-blur">
+    <div class="mx-auto flex max-w-xl items-center justify-between">
+      <a href="./index.html" class="text-xl font-bold tracking-tight text-primary">Tribuvex</a>
+      <a href="./upload.html" class="text-sm font-semibold text-secondary hover:underline">Documentos</a>
+    </div>
+  </header>
+  <main class="mx-auto max-w-xl px-6 py-10">
+    <p class="tvx-page-eyebrow">Portal · borrador</p>
+    <h1 class="tvx-page-title">Tu borrador</h1>
+    <p class="tvx-page-lead">Estimado con lo que ya subiste. No es la presentación final a la DIAN.</p>
+
+    <div class="mt-8 rounded-xl border border-border bg-card p-5 shadow-tribuvex">
+      <p class="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Saldo estimado</p>
+      <p class="mt-1 font-mono text-3xl font-bold tracking-tight text-primary">$ 1.180.000</p>
+      <dl class="mt-4 grid gap-2 border-t border-border pt-4 text-sm">
+        <div class="flex justify-between gap-3">
+          <dt class="text-muted-foreground">Impuesto</dt>
+          <dd class="font-mono font-semibold">$ 4.250.000</dd>
+        </div>
+        <div class="flex justify-between gap-3">
+          <dt class="text-muted-foreground">Retenciones</dt>
+          <dd class="font-mono font-semibold">$ 3.070.000</dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="tvx-banner tvx-banner--info mt-5" role="status">
+      <span class="tvx-banner-icon" data-icon="info" data-icon-size="20"></span>
+      <div>Faltan 2 documentos. Puedes aceptar cuando tu contador te lo indique.</div>
+    </div>
+
+    <button type="button" id="btn-ok" class="mt-8 w-full rounded-lg border border-primary px-6 py-3 text-base font-semibold text-primary hover:bg-muted sm:w-auto">Aceptar borrador</button>
+    <p id="ok-msg" class="mt-3 hidden text-sm font-semibold text-success-foreground">Confirmación enviada a tu contador.</p>
+
+    <p class="mt-8 rounded-lg bg-muted p-3.5 text-xs leading-relaxed text-muted-foreground">
+      Al aceptar, tu contador recibe la confirmación. La presentación a la DIAN la hace tu contador. Tribuvex no presenta, firma ni paga en MUISCA.
+    </p>
+  </main>
+  <script>
+    document.getElementById("btn-ok").addEventListener("click", function () {
+      document.getElementById("ok-msg").classList.remove("hidden");
+      TribuvexPc.toast("Borrador aceptado", "Tu contador ya puede continuar.");
+    });
+  </script>
+<script src="../assets/icons.js"></script>
+</body>
+</html>

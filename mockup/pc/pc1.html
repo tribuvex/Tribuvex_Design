@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PC1</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../assets/theme.js"></script>
+  <script src="../assets/pc.js"></script>
+</head>
+<body>
+<script>
+window.PC_PAGE = {
+  badge: "PC1 · Ruta y alcance",
+  title: "Confirmación de ruta",
+  summary: "Revisa residencia, obligación preliminar y si el caso está en el alcance del Formulario 210.",
+  next: "../expediente.html?etapa=2",
+  back: "../expediente.html?etapa=1&pc=1",
+  extraFooter: '<button type="button" class="cursor-pointer rounded-lg border border-warning px-4 py-2 text-sm font-semibold text-warning-foreground hover:bg-warning-subtle" onclick="location.href=\'../derivado.html\'">Derivar a análisis manual</button>',
+  bodyHtml: '<ul class="space-y-2 text-sm"><li><strong>Residencia:</strong> Sí (Art. 10 ET)</li><li><strong>Datos usados:</strong> 320 días de permanencia</li><li><strong>Alcance:</strong> Formulario 210 · en alcance</li><li><strong>Fuera de alcance detectado:</strong> No</li></ul>'
+};
+</script>
+<script src="../assets/pc-shell.js"></script>
+</body>
+</html>

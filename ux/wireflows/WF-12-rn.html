@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WF-12 · RN Parámetros AG — Wireflow Tribuvex</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/wireflow-board.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>WF-12 · RN Parámetros AG</h1>
+      <p>Gate RNF-16: regresión verde + firma responsable.</p>
+    </div>
+    <nav>
+      <a href="./index.html">Índice</a>
+      <a href="../CONTENT_MODEL.md">Spec</a>
+      <a href="../../mockup/index.html">Hub mockup</a>
+      <a class="primary" href="../../mockup/login.html">Entrar</a>
+    </nav>
+  </header>
+  <div class="legend">
+    <span><i class="swatch"></i> Camino feliz</span>
+    <span><i class="swatch dash"></i> Rama / decisión</span>
+    <span><i class="swatch pc"></i> Punto de control</span>
+  </div>
+  <div class="board-wrap">
+    <div class="board" id="board" aria-label="WF-12"></div>
+  </div>
+  <p class="hint">Miniaturas = mockup. Spec: ../CONTENT_MODEL.md</p>
+  <script src="./assets/wireflow-board.js"></script>
+  <script>
+    TribuvexWireflow.mount({
+  "width": 1100,
+  "height": 520,
+  "mockBase": "../../mockup/",
+  "sections": [
+    {
+      "label": "Responsable normativo",
+      "x": 24,
+      "y": 18
+    }
+  ],
+  "screens": [
+    {
+      "id": "param",
+      "num": "1",
+      "name": "Parámetros AG",
+      "href": "parametros.html",
+      "x": 80,
+      "y": 60,
+      "hub": true
+    },
+    {
+      "id": "admin",
+      "num": "2",
+      "name": "Admin / motor",
+      "href": "admin.html",
+      "x": 360,
+      "y": 60
+    },
+    {
+      "id": "exp",
+      "num": "3",
+      "name": "Expedientes (AG habilitado)",
+      "href": "expedientes.html",
+      "x": 640,
+      "y": 60
+    },
+    {
+      "id": "op",
+      "num": "1a",
+      "name": "OP entidades",
+      "href": "operador.html",
+      "x": 360,
+      "y": 320
+    }
+  ],
+  "happy": [
+    [
+      "param",
+      "admin"
+    ],
+    [
+      "admin",
+      "exp"
+    ]
+  ],
+  "branches": [
+    [
+      "param",
+      "op"
+    ]
+  ]
+});
+  </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>A3 · Clientes — Tribuvex</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./assets/theme.js"></script>
+  <link rel="stylesheet" href="./assets/app.css" />
+</head>
+<body data-shell="app" data-nav="clientes" data-base=".">
+  <main id="app-main">
+    <div class="mb-8 flex flex-wrap items-start justify-between gap-4">
+      <div>
+        <p class="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Firma Contable Andes</p>
+        <h1 class="mt-1 text-2xl font-bold tracking-tight">Clientes</h1>
+        <p class="mt-1 text-sm text-muted-foreground">Directorio de contribuyentes vinculados a la entidad.</p>
+      </div>
+      <button type="button" class="rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-accent-hover">Nuevo cliente</button>
+    </div>
+    <div id="clients-empty" class="tvx-empty hidden">
+      <span class="tvx-empty-icon" data-icon="users" data-icon-size="40"></span>
+      <h2 class="tvx-empty-title">Sin clientes</h2>
+      <p>No hay clientes. Agrega un cliente para abrir expedientes.</p>
+      <button type="button" class="rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-white hover:bg-accent-hover">Nuevo cliente</button>
+    </div>
+    <div id="clients-table" class="overflow-hidden rounded-xl border border-border bg-card shadow-tribuvex">
+      <table class="tvx-table w-full text-left text-sm">
+        <thead class="border-b border-border bg-muted/80 text-[11px] uppercase tracking-wide text-muted-foreground">
+          <tr>
+            <th class="px-4 py-3 font-semibold">Nombre</th>
+            <th class="px-4 py-3 font-semibold">Documento</th>
+            <th class="px-4 py-3 font-semibold">Expedientes</th>
+            <th class="px-4 py-3"><span class="sr-only">Acciones</span></th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-border">
+          <tr>
+            <td class="px-4 py-3.5 font-medium">Juan Pérez</td>
+            <td class="px-4 py-3.5 font-mono text-xs text-muted-foreground">1.234.567</td>
+            <td class="px-4 py-3.5">1 (AG 2026)</td>
+            <td class="px-4 py-3.5 text-right">
+              <a class="inline-flex rounded-lg border border-border px-3 py-1.5 text-xs font-semibold hover:bg-muted" href="./memoria.html">Memoria</a>
+              <a class="ml-1 inline-flex rounded-lg border border-border px-3 py-1.5 text-xs font-semibold hover:bg-muted" href="./expedientes-nuevo.html">Nuevo expediente</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3.5 font-medium">Ana Gómez</td>
+            <td class="px-4 py-3.5 font-mono text-xs text-muted-foreground">9.876.543</td>
+            <td class="px-4 py-3.5">1</td>
+            <td class="px-4 py-3.5 text-right"><a class="inline-flex rounded-lg border border-border px-3 py-1.5 text-xs font-semibold hover:bg-muted" href="./expedientes-nuevo.html">Nuevo expediente</a></td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3.5 font-medium">Luis Mora</td>
+            <td class="px-4 py-3.5 font-mono text-xs text-muted-foreground">4.400.100</td>
+            <td class="px-4 py-3.5">1</td>
+            <td class="px-4 py-3.5 text-right"><a class="inline-flex rounded-lg border border-border px-3 py-1.5 text-xs font-semibold hover:bg-muted" href="./expedientes-nuevo.html">Nuevo expediente</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+  <script src="./assets/icons.js"></script>
+  <script src="./assets/shell.js"></script>
+  <script>
+    if (new URLSearchParams(location.search).get("empty") === "1") {
+      document.getElementById("clients-table").classList.add("hidden");
+      document.getElementById("clients-empty").classList.remove("hidden");
+    }
+  </script>
+</body>
+</html>

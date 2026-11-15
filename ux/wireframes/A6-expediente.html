@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wireframe W-02 — Expediente A6</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 14px/1.4 system-ui, sans-serif; color: #111; background: #e8e8e8; }
+    .label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: #666; }
+    .shell { display: grid; grid-template-columns: 160px 1fr; min-height: 100vh; }
+    .nav { background: #333; color: #eee; padding: 16px 12px; }
+    .nav a { display: block; color: #ccc; text-decoration: none; padding: 8px; }
+    main { padding: 12px 16px 24px; }
+    .crumb { font-size: 12px; color: #555; margin: 4px 0 8px; }
+    .top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; align-items: center; }
+    h1 { font-size: 18px; margin: 0; }
+    .btn { border: 2px solid #111; background: #ddd; padding: 6px 10px; font-weight: 700; font-size: 12px; }
+    .stepper { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin: 12px 0; }
+    .stage { border: 1px solid #666; padding: 8px 4px; text-align: center; font-size: 10px; font-weight: 700; background: #fff; }
+    .stage.done { background: #ccc; }
+    .stage.current { background: #111; color: #fff; }
+    .tabs { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 12px; border-bottom: 2px solid #111; padding-bottom: 4px; }
+    .tabs span { padding: 6px 10px; border: 1px solid #999; background: #eee; font-size: 12px; }
+    .tabs .on { background: #fff; border-bottom-color: #fff; font-weight: 700; }
+    .grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 12px; }
+    .panel { border: 2px solid #111; background: #fff; padding: 12px; min-height: 220px; }
+    .panel h2 { font-size: 14px; margin: 0 0 8px; }
+    ul { margin: 0; padding-left: 1.2rem; }
+    .skel { height: 10px; background: repeating-linear-gradient(90deg,#ddd,#ddd 40%,#eee 50%,#ddd 60%); margin: 8px 0; }
+    .anno { margin-top: 12px; padding: 12px; background: #fffbe6; border: 1px dashed #aa0; font-size: 12px; }
+    @media (max-width: 900px) {
+      .shell { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+      .stepper { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside class="nav">
+      <strong>Tribuvex</strong>
+      <a href="A2-dashboard.html">Expedientes</a>
+      <a href="#">Clientes</a>
+    </aside>
+    <main>
+      <div class="label">W-02 · A6 Expediente · lo-fi · etapa E3</div>
+      <div class="crumb">Expedientes / Juan Pérez / AG 2026 / Soportes</div>
+      <div class="top">
+        <h1>Juan Pérez · AG 2026</h1>
+        <div>
+          <span class="btn">Pausar expediente</span>
+          <span class="btn">Ver bitácora</span>
+        </div>
+      </div>
+
+      <div class="stepper" aria-label="Etapas">
+        <div class="stage done">1 Residencia</div>
+        <div class="stage done">2 Obligación</div>
+        <div class="stage current">3 Soportes</div>
+        <div class="stage">4 Cédulas</div>
+        <div class="stage">5 Liquidación</div>
+        <div class="stage">6 Patrimonio</div>
+        <div class="stage">7 Paquete</div>
+      </div>
+
+      <div class="tabs">
+        <span>Resumen</span>
+        <span class="on">Soportes</span>
+        <span>Cédulas</span>
+        <span>Liquidación</span>
+        <span>Bitácora</span>
+        <span>Paquete</span>
+      </div>
+
+      <div class="grid">
+        <section class="panel" aria-busy="false">
+          <h2>Soportes</h2>
+          <p style="margin:0 0 8px;color:#444;font-size:13px">Sube los documentos de la lista. Marcamos lo que falta.</p>
+          <ul>
+            <li>Certificado 220 — pendiente</li>
+            <li>Extractos — pendiente</li>
+            <li>Cédula de ciudadanía — recibido</li>
+          </ul>
+          <p style="margin-top:12px"><span class="btn" style="background:#111;color:#fff">Subir documentos</span></p>
+          <div class="label" style="margin-top:16px">Loading SSE (ejemplo)</div>
+          <div class="skel"></div>
+          <div class="skel" style="width:70%"></div>
+        </section>
+        <aside class="panel">
+          <h2>Traza de la casilla —</h2>
+          <p style="font-size:12px;color:#555">Selecciona un valor en la etapa para ver soporte, regla y artículo.</p>
+          <div class="label">Valor</div>
+          <div style="border:1px solid #999;padding:8px;margin-bottom:8px">—</div>
+          <div class="label">Soporte</div>
+          <div style="border:1px solid #999;padding:8px;margin-bottom:8px">—</div>
+          <div class="label">Regla / Artículo</div>
+          <div style="border:1px solid #999;padding:8px">—</div>
+          <p style="margin-top:12px"><span class="btn">Ver traza</span></p>
+        </aside>
+      </div>
+
+      <div class="anno">
+        PC se abre como overlay encima de este layout (ver W-03 / <code>pages/checkpoint-preview.html</code>).
+        Copy de <code>CONTENT_MODEL.md</code>. Prohibido CTA “Presentar en MUISCA”.
+      </div>
+    </main>
+  </div>
+</body>
+</html>

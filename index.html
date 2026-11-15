@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tribuvex Design System</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./mockup/assets/theme.js"></script>
+  <link rel="stylesheet" href="./mockup/assets/app.css" />
+</head>
+<body class="min-h-screen bg-background font-sans text-foreground antialiased">
+  <header class="border-b border-border bg-card">
+    <div class="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-3 px-6 py-6">
+      <div>
+        <p class="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Design system · vivo</p>
+        <h1 class="text-2xl font-bold tracking-tight text-primary">Tribuvex</h1>
+      </div>
+      <a class="rounded-lg border border-border px-3 py-1.5 text-xs font-semibold hover:bg-muted" href="./README.md">README</a>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-3xl px-6 py-10">
+    <p class="max-w-2xl text-sm leading-relaxed text-muted-foreground">
+      Tres entradas para el equipo. El resto (PRD, arquitectura, wireframes lo-fi) vive en el repo de documentación.
+    </p>
+
+    <div class="mt-8 grid gap-4 sm:grid-cols-3">
+      <a class="rounded-xl border border-border bg-card p-5 shadow-sm transition hover:border-primary hover:shadow-tribuvex" href="./ui-kit-preview.html">
+        <p class="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">1 · UI Kit</p>
+        <h2 class="mt-2 text-base font-bold">Componentes</h2>
+        <p class="mt-2 text-xs text-muted-foreground">Tokens, botones, campos, tablas, iconos Phosphor.</p>
+      </a>
+      <a class="rounded-xl border border-border bg-card p-5 shadow-sm transition hover:border-primary hover:shadow-tribuvex" href="./mockup/index.html">
+        <p class="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">2 · Mockup</p>
+        <h2 class="mt-2 text-base font-bold">Producto clickeable</h2>
+        <p class="mt-2 text-xs text-muted-foreground">Pantallas HTML + Tailwind. Fuente de verdad de UI.</p>
+      </a>
+      <a class="rounded-xl border border-border bg-card p-5 shadow-sm transition hover:border-primary hover:shadow-tribuvex" href="./ux/wireflows/index.html">
+        <p class="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">3 · Wireflows</p>
+        <h2 class="mt-2 text-base font-bold">Flujos WF-01…16</h2>
+        <p class="mt-2 text-xs text-muted-foreground">Boards con miniaturas del mockup y flechas.</p>
+      </a>
+    </div>
+
+    <h2 class="mt-12 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Referencia</h2>
+    <ul class="mt-3 space-y-2 text-sm">
+      <li><a class="font-semibold text-secondary hover:underline" href="./MASTER.md">MASTER.md</a> — reglas y tokens</li>
+      <li><a class="font-semibold text-secondary hover:underline" href="./ux/CONTENT_MODEL.md">CONTENT_MODEL</a> · <a class="font-semibold text-secondary hover:underline" href="./ux/SITEMAP.md">SITEMAP</a> · <a class="font-semibold text-secondary hover:underline" href="./ux/flows/README.md">Task flows</a></li>
+      <li><span class="text-muted-foreground">Histórico:</span> <a class="hover:underline" href="./ux/wireframes/README.md">wireframes</a> · <a class="hover:underline" href="./ux/prototype/PROTOTYPE.md">prototype 0.1</a></li>
+    </ul>
+
+    <p class="mt-10 text-xs text-muted-foreground">
+      Abrir con servidor estático (<code>npx serve .</code>). Los iframes de wireflows no funcionan bien con <code>file://</code>.
+    </p>
+  </main>
+</body>
+</html>

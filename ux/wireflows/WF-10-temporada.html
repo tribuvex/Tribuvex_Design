@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WF-10 · Temporada · riesgo y lotes — Wireflow Tribuvex</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/wireflow-board.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>WF-10 · Temporada · riesgo y lotes</h1>
+      <p>Cola de riesgo → PC5 revisor · LOT · calendario.</p>
+    </div>
+    <nav>
+      <a href="../flows/PUNTOS_DE_CONTROL.md">Task flow</a>
+      <a href="./index.html">Índice</a>
+      <a href="../../mockup/index.html">Hub mockup</a>
+      <a class="primary" href="../../mockup/login.html">Entrar</a>
+    </nav>
+  </header>
+  <div class="legend">
+    <span><i class="swatch"></i> Camino feliz</span>
+    <span><i class="swatch dash"></i> Rama / decisión</span>
+    <span><i class="swatch pc"></i> Punto de control</span>
+  </div>
+  <div class="board-wrap">
+    <div class="board" id="board" aria-label="WF-10"></div>
+  </div>
+  <p class="hint">Miniaturas = mockup real. Si el navegador bloquea iframes locales, verás silueta wire. Spec enlazada arriba.</p>
+  <script src="./assets/wireflow-board.js"></script>
+  <script>
+    TribuvexWireflow.mount({
+  "width": 1400,
+  "height": 720,
+  "mockBase": "../../mockup/",
+  "sections": [
+    {
+      "label": "Temporada",
+      "x": 24,
+      "y": 18
+    },
+    {
+      "label": "Doble control",
+      "x": 24,
+      "y": 300
+    },
+    {
+      "label": "Operación",
+      "x": 24,
+      "y": 540
+    }
+  ],
+  "screens": [
+    {
+      "id": "cola",
+      "num": "1",
+      "name": "A11 Cola riesgo",
+      "href": "cola-riesgo.html",
+      "x": 80,
+      "y": 48,
+      "hub": true
+    },
+    {
+      "id": "lot",
+      "num": "1b",
+      "name": "LOT Lotes",
+      "href": "lotes.html",
+      "x": 360,
+      "y": 48
+    },
+    {
+      "id": "cal",
+      "num": "1c",
+      "name": "CAL Calendario",
+      "href": "calendario.html",
+      "x": 640,
+      "y": 48
+    },
+    {
+      "id": "pc5",
+      "num": "2",
+      "name": "PC5 Revisor",
+      "href": "pc/pc5.html?revisor=1",
+      "x": 360,
+      "y": 320,
+      "pc": true
+    },
+    {
+      "id": "pkg",
+      "num": "3",
+      "name": "Paquete",
+      "href": "paquete.html",
+      "x": 640,
+      "y": 320
+    },
+    {
+      "id": "exp",
+      "num": "2a",
+      "name": "Expediente alto riesgo",
+      "href": "expediente.html?etapa=7",
+      "x": 80,
+      "y": 320
+    },
+    {
+      "id": "bit",
+      "num": "4",
+      "name": "Bitácora",
+      "href": "bitacora.html",
+      "x": 360,
+      "y": 560
+    }
+  ],
+  "happy": [
+    [
+      "cola",
+      "exp"
+    ],
+    [
+      "exp",
+      "pc5"
+    ],
+    [
+      "pc5",
+      "pkg"
+    ],
+    [
+      "pkg",
+      "bit"
+    ]
+  ],
+  "branches": [
+    [
+      "cola",
+      "lot"
+    ],
+    [
+      "lot",
+      "exp"
+    ],
+    [
+      "cola",
+      "cal"
+    ],
+    [
+      "cal",
+      "cola"
+    ]
+  ]
+});
+  </script>
+</body>
+</html>

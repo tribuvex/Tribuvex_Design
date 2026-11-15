@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wireframe W-01 — Dashboard expedientes</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 14px/1.4 system-ui, sans-serif; color: #111; background: #e8e8e8; }
+    .wire { outline: 1px dashed #666; background: #fff; }
+    .label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: #666; margin-bottom: 4px; }
+    .shell { display: grid; grid-template-columns: 180px 1fr; min-height: 100vh; }
+    .nav { background: #333; color: #eee; padding: 16px 12px; }
+    .nav strong { display: block; margin-bottom: 16px; }
+    .nav a { display: block; color: #ccc; text-decoration: none; padding: 8px; margin-bottom: 4px; }
+    .nav a.active { background: #555; color: #fff; }
+    main { padding: 16px; }
+    .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; }
+    h1 { font-size: 20px; margin: 0; }
+    .btn { border: 2px solid #111; background: #ddd; padding: 8px 12px; font-weight: 700; cursor: default; }
+    .btn.primary { background: #111; color: #fff; }
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    .filters .box { border: 1px solid #999; padding: 8px 10px; min-width: 100px; background: #fafafa; }
+    table { width: 100%; border-collapse: collapse; background: #fff; }
+    th, td { border: 1px solid #999; padding: 8px; text-align: left; font-size: 13px; }
+    th { background: #eee; font-size: 11px; text-transform: uppercase; }
+    .anno { margin-top: 16px; padding: 12px; background: #fffbe6; border: 1px dashed #aa0; font-size: 12px; }
+    @media (max-width: 700px) { .shell { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside class="nav">
+      <strong>Tribuvex</strong>
+      <a class="active" href="#">Expedientes</a>
+      <a href="#">Clientes</a>
+      <a href="#">Administración</a>
+    </aside>
+    <main>
+      <div class="label">W-01 · A2 Dashboard · lo-fi</div>
+      <div class="top">
+        <h1>Expedientes</h1>
+        <span class="btn primary">Nuevo expediente</span>
+      </div>
+      <div class="filters wire" style="padding:12px;border-style:solid;">
+        <div class="box"><div class="label">Año gravable</div>2026</div>
+        <div class="box"><div class="label">Estado</div>Todos</div>
+        <div class="box"><div class="label">Riesgo</div>Todos</div>
+        <div class="box" style="flex:1"><div class="label">Buscar</div>…</div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Cliente</th><th>Documento</th><th>AG</th><th>Etapa</th>
+            <th>Estado</th><th>Riesgo</th><th>Pendiente de</th><th>Actualizado</th><th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Juan Pérez</td><td>1.234.567</td><td>2026</td><td>3 · Soportes</td>
+            <td>Esperando aprobación</td><td>—</td><td>PC3</td><td>hoy</td><td class="btn">Ver</td>
+          </tr>
+          <tr>
+            <td>Ana Gómez</td><td>9.876.543</td><td>2026</td><td>1 · Residencia</td>
+            <td>En proceso</td><td>—</td><td>—</td><td>ayer</td><td class="btn">Ver</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="anno">
+        Estados a prototipar: <strong>vacío</strong> (“Aún no hay expedientes…”),
+        <strong>loading</strong> (skeleton), <strong>empty filter</strong>.
+        Copy de <code>CONTENT_MODEL.md</code>. No estilo final.
+      </div>
+    </main>
+  </div>
+</body>
+</html>

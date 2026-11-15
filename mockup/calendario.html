@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CAL · Calendario por NIT — Tribuvex</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./assets/theme.js"></script>
+  <link rel="stylesheet" href="./assets/app.css" />
+</head>
+<body data-shell="app" data-nav="expedientes" data-base=".">
+  <main id="app-main">
+    <p class="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">CAL · D5</p>
+    <h1 class="mt-1 text-2xl font-bold tracking-tight">Calendario de vencimientos</h1>
+    <p class="mt-2 max-w-2xl text-sm text-muted-foreground">
+      Plazos de presentación del Formulario 210 según últimos dígitos del NIT (temporada AG 2026 · mockup).
+    </p>
+
+    <div class="mt-6 grid gap-3 sm:grid-cols-3">
+      <div class="rounded-xl border border-warning/40 bg-warning-subtle p-4">
+        <p class="text-[11px] font-semibold uppercase text-warning-foreground">Esta semana</p>
+        <p class="mt-1 text-2xl font-bold font-mono text-warning-foreground">3</p>
+        <p class="mt-1 text-xs text-warning-foreground">Clientes por vencer</p>
+      </div>
+      <div class="rounded-xl border border-border bg-card p-4 shadow-sm">
+        <p class="text-[11px] font-semibold uppercase text-muted-foreground">Próximos 15 días</p>
+        <p class="mt-1 text-2xl font-bold font-mono">7</p>
+      </div>
+      <div class="rounded-xl border border-border bg-card p-4 shadow-sm">
+        <p class="text-[11px] font-semibold uppercase text-muted-foreground">Ya vencidos</p>
+        <p class="mt-1 text-2xl font-bold font-mono text-destructive">1</p>
+      </div>
+    </div>
+
+    <div class="mt-6 overflow-hidden rounded-xl border border-border bg-card shadow-tribuvex">
+      <table class="tvx-table w-full text-left text-sm">
+        <thead class="border-b border-border bg-muted/80 text-[11px] uppercase text-muted-foreground">
+          <tr>
+            <th class="px-4 py-3 font-semibold">Últimos dígitos</th>
+            <th class="px-4 py-3 font-semibold">Fecha límite</th>
+            <th class="px-4 py-3 font-semibold">Clientes</th>
+            <th class="px-4 py-3 font-semibold">Estado</th>
+            <th class="px-4 py-3"></th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-border">
+          <tr class="bg-destructive-subtle/30">
+            <td class="px-4 py-3.5 font-mono font-semibold">01–02</td>
+            <td class="px-4 py-3.5">2026-08-12</td>
+            <td class="px-4 py-3.5">Luis Mora</td>
+            <td class="px-4 py-3.5"><span class="rounded-full bg-destructive-subtle px-2.5 py-0.5 text-xs font-semibold text-destructive">Vencido</span></td>
+            <td class="px-4 py-3.5 text-right"><a class="text-xs font-semibold text-secondary hover:underline" href="./extemporanea.html">Extemporánea</a></td>
+          </tr>
+          <tr class="bg-warning-subtle/20">
+            <td class="px-4 py-3.5 font-mono font-semibold">67–68</td>
+            <td class="px-4 py-3.5">2026-10-14</td>
+            <td class="px-4 py-3.5">Juan Pérez · Ana Gómez</td>
+            <td class="px-4 py-3.5"><span class="rounded-full bg-warning-subtle px-2.5 py-0.5 text-xs font-semibold text-warning-foreground">Esta semana</span></td>
+            <td class="px-4 py-3.5 text-right"><a class="text-xs font-semibold text-secondary hover:underline" href="./expedientes.html">Ver cola</a></td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3.5 font-mono font-semibold">69–70</td>
+            <td class="px-4 py-3.5">2026-10-15</td>
+            <td class="px-4 py-3.5">María Soto</td>
+            <td class="px-4 py-3.5"><span class="rounded-full bg-info-subtle px-2.5 py-0.5 text-xs font-semibold text-info-foreground">Próximo</span></td>
+            <td class="px-4 py-3.5 text-right"><a class="text-xs font-semibold text-secondary hover:underline" href="./expedientes.html">Ver cola</a></td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3.5 font-mono font-semibold">99–00</td>
+            <td class="px-4 py-3.5">2026-10-20</td>
+            <td class="px-4 py-3.5">Carla Ruiz · Pedro Díaz</td>
+            <td class="px-4 py-3.5"><span class="rounded-full bg-muted px-2.5 py-0.5 text-xs font-semibold text-muted-foreground">Programado</span></td>
+            <td class="px-4 py-3.5 text-right"><a class="text-xs font-semibold text-secondary hover:underline" href="./expedientes.html">Ver cola</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="mt-6 text-xs text-muted-foreground">
+      Fechas de ejemplo para el mockup. En producción se cargan como parámetro del año (RN).
+      Alertas no reemplazan el criterio del contador.
+    </p>
+  </main>
+  <script src="./assets/icons.js"></script>
+  <script src="./assets/shell.js"></script>
+</body>
+</html>

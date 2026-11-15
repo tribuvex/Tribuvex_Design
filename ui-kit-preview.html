@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tribuvex — UI Kit Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./tokens.css" />
+  <style>
+    /* Preview chrome — colors/spacing from tokens.css */
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font-family-sans);
+      background: var(--background);
+      color: var(--foreground);
+      line-height: 1.5;
+      font-size: var(--tvx-text-body);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--secondary); }
+    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring-color);
+      outline-offset: var(--focus-ring-offset);
+    }
+    :focus:not(:focus-visible) { outline: none; }
+
+    .shell {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      min-height: 100vh;
+    }
+
+    .nav {
+      background: var(--sidebar);
+      color: var(--sidebar-foreground);
+      padding: var(--space-6) var(--space-4);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .nav-section {
+      margin: var(--space-4) 0 var(--space-2);
+      padding: 0 var(--space-3);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.4);
+    }
+    .theme-toggle {
+      width: 100%;
+      margin-top: auto;
+      background: rgba(255, 255, 255, 0.12);
+      color: var(--sidebar-foreground);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius-control);
+      padding: var(--space-2) var(--space-3);
+      font: inherit;
+      font-weight: 600;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .theme-toggle:hover { background: rgba(255, 255, 255, 0.18); }
+    .nav .brand {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+    .nav .brand-sub {
+      font-size: 12px;
+      opacity: 0.75;
+      margin-bottom: var(--space-4);
+    }
+    .nav a {
+      display: block;
+      color: rgba(255, 255, 255, 0.85);
+      text-decoration: none;
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-control);
+      margin-bottom: 2px;
+      font-size: 13px;
+      font-weight: 500;
+      transition: background var(--duration-base) var(--ease-standard);
+      cursor: pointer;
+    }
+    .nav a:hover, .nav a:focus-visible {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      outline-color: #fff;
+    }
+    .nav .hub-link {
+      display: block;
+      margin-top: var(--space-3);
+      text-align: center;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.45);
+      text-decoration: none;
+    }
+    .nav .hub-link:hover { color: rgba(255, 255, 255, 0.85); }
+
+    main { padding: var(--space-8) var(--space-8) var(--space-12); max-width: 1100px; }
+    h1 { font-size: 24px; font-weight: 700; margin: 0 0 var(--space-2); letter-spacing: -0.02em; }
+    h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin: var(--space-12) 0 var(--space-4);
+      padding-bottom: var(--space-2);
+      border-bottom: 1px solid var(--border);
+    }
+    h3 { font-size: 14px; font-weight: 600; margin: 0 0 var(--space-3); }
+    .lede { color: var(--muted-foreground); margin: 0 0 var(--space-8); max-width: 65ch; }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-panel);
+      padding: var(--space-6);
+      box-shadow: var(--elevation-sm);
+    }
+
+    .swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: var(--space-4);
+    }
+    .swatch {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-panel);
+      overflow: hidden;
+      background: var(--card);
+    }
+    .swatch .chip { height: 72px; }
+    .swatch .meta { padding: var(--space-3); font-size: 12px; }
+    .swatch .meta strong { display: block; font-size: 13px; margin-bottom: 2px; }
+    .swatch code {
+      font-family: var(--font-family-mono);
+      font-size: 11px;
+      color: var(--muted-foreground);
+    }
+
+    .type-sample { margin-bottom: var(--space-4); }
+    .type-sample .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted-foreground);
+      margin-bottom: 4px;
+    }
+    .mono { font-family: var(--font-family-mono); }
+
+    .space-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+      align-items: flex-end;
+    }
+    .space-item { text-align: center; font-size: 11px; color: var(--muted-foreground); }
+    .space-box {
+      background: var(--secondary);
+      opacity: 0.85;
+      border-radius: 4px;
+      margin-bottom: 6px;
+    }
+
+    .btn-row, .badge-row, .field-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: var(--radius-control);
+      padding: 8px 16px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background var(--duration-base) var(--ease-standard), border-color var(--duration-base) var(--ease-standard), opacity var(--duration-base) var(--ease-standard);
+    }
+    .btn:hover { opacity: 0.92; }
+    .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+    .btn-primary { background: var(--accent); color: var(--on-accent); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+    .btn-info { background: var(--secondary); color: var(--on-secondary); }
+    .btn-destructive { background: var(--destructive); color: var(--on-destructive); }
+    .btn-ghost { background: var(--muted); color: var(--foreground); }
+    .btn-outline {
+      background: var(--card);
+      border-color: var(--border);
+      color: var(--foreground);
+    }
+    .btn-sm { padding: 6px 12px; font-size: 12px; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+    }
+    .badge-success { background: var(--success-subtle, #dcfce7); color: var(--success-foreground, #166534); }
+    .badge-warning { background: var(--warning-subtle, #ffedd5); color: var(--warning-foreground, #9a3412); }
+    .badge-danger { background: var(--destructive-subtle, #fee2e2); color: var(--destructive); }
+    .badge-info { background: var(--info-subtle, #dbeafe); color: var(--info-foreground, #1e40af); }
+    .badge-neutral { background: var(--muted); color: var(--muted-foreground); }
+
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      display: inline-block;
+    }
+    .dot-success { background: var(--accent); }
+    .dot-warning { background: var(--warning); }
+    .dot-danger { background: var(--destructive); }
+    .dot-info { background: var(--secondary); }
+
+    label.field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      min-width: 200px;
+      flex: 1;
+    }
+    label.field span.hint {
+      font-weight: 400;
+      font-size: 12px;
+      color: var(--muted-foreground);
+    }
+    input, select, textarea {
+      font-family: inherit;
+      font-size: 14px;
+      line-height: 1.4;
+      min-height: 42px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-control);
+      background-color: var(--card);
+      color: var(--foreground);
+      transition: border-color var(--duration-base) var(--ease-standard), box-shadow var(--duration-base) var(--ease-standard);
+    }
+    textarea { min-height: 72px; resize: vertical; }
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      width: 100%;
+      padding-right: 2.5rem;
+      cursor: pointer;
+      background-image:
+        linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
+        linear-gradient(135deg, var(--muted-foreground) 50%, transparent 50%);
+      background-position:
+        calc(100% - 18px) calc(50% - 2px),
+        calc(100% - 12px) calc(50% - 2px);
+      background-size: 6px 6px, 6px 6px;
+      background-repeat: no-repeat;
+    }
+    select::-ms-expand { display: none; }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--primary);
+      box-shadow: var(--field-focus-ring, 0 0 0 3px rgba(30, 58, 95, 0.15));
+      outline: none;
+    }
+    .field-error input,
+    .field-error select,
+    .field.is-error textarea,
+    .field.is-error select {
+      border-color: var(--destructive);
+    }
+    .error-text {
+      color: var(--destructive);
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .error-summary {
+      margin-bottom: var(--space-4);
+      padding: var(--space-4);
+      border: 1px solid var(--destructive);
+      border-radius: var(--radius-panel);
+      background: var(--destructive-subtle, #fee2e2);
+    }
+    .error-summary h3 {
+      margin: 0 0 var(--space-2);
+      font-size: 14px;
+      color: var(--destructive);
+    }
+    .error-summary a {
+      color: var(--destructive);
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    th {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--table-header-fg, var(--muted-foreground));
+      font-weight: 600;
+      background: var(--table-header-bg, var(--muted));
+    }
+    tbody tr { transition: background-color 120ms ease; }
+    tbody tr:hover { background: color-mix(in srgb, var(--muted) 55%, transparent); }
+    td.num { font-family: var(--font-family-mono); font-variant-numeric: tabular-nums; }
+
+    .pipeline {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: var(--space-2);
+      margin-bottom: var(--space-6);
+    }
+    .stage {
+      background: var(--muted);
+      border-radius: var(--radius-control);
+      padding: var(--space-3);
+      font-size: 11px;
+      font-weight: 600;
+      text-align: center;
+      color: var(--muted-foreground);
+      border: 1px solid transparent;
+    }
+    .stage.done {
+      background: var(--success-subtle, #dcfce7);
+      color: var(--success-foreground, #166534);
+      border-color: #86efac;
+    }
+    .stage.current {
+      background: var(--warning-subtle, #ffedd5);
+      color: var(--warning-foreground, #9a3412);
+      border-color: var(--warning);
+    }
+    .stage.risk {
+      background: var(--destructive-subtle, #fee2e2);
+      color: var(--destructive);
+      border-color: #fca5a5;
+    }
+
+    /* Product shell sample */
+    .shell-demo {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-panel);
+      overflow: hidden;
+      min-height: 280px;
+      box-shadow: var(--elevation-sm);
+    }
+    .shell-demo-aside {
+      background: var(--sidebar);
+      color: var(--sidebar-foreground);
+      padding: var(--space-4);
+      font-size: 12px;
+    }
+    .shell-demo-aside .brand { font-size: 15px; font-weight: 700; margin-bottom: 2px; }
+    .shell-demo-aside .sub { font-size: 10px; color: rgba(255,255,255,0.55); margin-bottom: var(--space-4); }
+    .shell-demo-aside .sec {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin: var(--space-3) 0 var(--space-1);
+    }
+    .shell-demo-aside .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: var(--radius-control);
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 2px;
+    }
+    .shell-demo-aside .nav-item.is-active {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1);
+    }
+    .shell-demo-aside .icon-box {
+      width: 24px; height: 24px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.08);
+    }
+    .shell-demo-aside .user-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: var(--space-4);
+      padding: 8px 10px;
+      border-radius: var(--radius-control);
+      background: rgba(255,255,255,0.05);
+    }
+    .shell-demo-aside .avatar {
+      width: 28px; height: 28px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .shell-demo-main { background: var(--background); display: flex; flex-direction: column; }
+    .shell-demo-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border);
+      background: color-mix(in srgb, var(--card) 90%, transparent);
+      font-size: 12px;
+      color: var(--muted-foreground);
+    }
+    .shell-demo-body { padding: var(--space-5); flex: 1; }
+    .shell-demo-body h3 { margin-bottom: 4px; }
+    .shell-demo-body p { margin: 0; font-size: 13px; color: var(--muted-foreground); }
+
+    /* Checkpoint modal (framed sample) */
+    .cp-stage {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-panel);
+      overflow: hidden;
+      background: color-mix(in srgb, var(--foreground) 45%, transparent);
+      padding: var(--space-6);
+      display: flex;
+      justify-content: center;
+    }
+    .checkpoint-modal {
+      width: min(640px, 100%);
+      max-height: 560px;
+      display: flex;
+      flex-direction: column;
+      background: var(--modal-bg, var(--card));
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--warning);
+      border-radius: var(--modal-radius, var(--radius-sheet));
+      box-shadow: var(--modal-shadow, var(--elevation-lg));
+      overflow: hidden;
+    }
+    .cp-header {
+      padding: var(--space-5) var(--space-6);
+      border-bottom: 1px solid var(--border);
+    }
+    .cp-header .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      align-items: center;
+      margin-bottom: var(--space-3);
+    }
+    .cp-header h3 {
+      margin: 0 0 var(--space-2);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .cp-header p {
+      margin: 0;
+      color: var(--muted-foreground);
+      font-size: 13px;
+      max-width: 65ch;
+    }
+    .cp-body {
+      padding: var(--space-5) var(--space-6);
+      overflow: auto;
+      flex: 1;
+    }
+    .cp-body .diff { color: var(--warning-foreground, #9a3412); font-weight: 600; }
+    .disclaimer {
+      font-size: 12px;
+      color: var(--muted-foreground);
+      padding: var(--space-3) var(--space-4);
+      background: var(--muted);
+      border-radius: var(--radius-control);
+      margin-top: var(--space-4);
+      line-height: 1.45;
+    }
+    .cp-footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      align-items: center;
+      justify-content: flex-end;
+      padding: var(--space-4) var(--space-6);
+      border-top: 1px solid var(--border);
+      background: var(--card);
+      scroll-margin-bottom: 1rem;
+    }
+    .cp-footer .back {
+      margin-right: auto;
+      background: transparent;
+      border: none;
+      color: var(--muted-foreground);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 8px 10px;
+      border-radius: var(--radius-control);
+    }
+    .cp-footer .back:hover { background: var(--muted); color: var(--foreground); }
+
+    .toast {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      max-width: 320px;
+      padding: var(--space-4);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: var(--radius-panel);
+      background: var(--card);
+      box-shadow: var(--elevation-lg);
+    }
+    .toast strong { font-size: 13px; }
+    .toast span { font-size: 13px; color: var(--muted-foreground); }
+    .toast-row { display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: flex-start; }
+
+    .sys-banner {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 14px 16px;
+      border-radius: var(--radius-panel);
+      border: 1px solid transparent;
+      font-size: 13px;
+      line-height: 1.45;
+      margin-bottom: var(--space-3);
+    }
+    .sys-banner strong { font-weight: 600; }
+    .sys-banner--info { background: var(--info-subtle, #dbeafe); border-color: #93c5fd; color: var(--info-foreground, #1e40af); }
+    .sys-banner--warning { background: var(--warning-subtle, #ffedd5); border-color: #fdba74; color: var(--warning-foreground, #9a3412); }
+    .sys-banner--danger { background: var(--destructive-subtle, #fee2e2); border-color: #fca5a5; color: var(--destructive); }
+    .sys-banner--muted { background: var(--muted); border-color: var(--border); color: var(--foreground); }
+    .sys-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: var(--space-10) var(--space-6);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius-panel);
+      background: var(--card);
+    }
+    .sys-empty h3 { margin-bottom: 6px; }
+    .sys-empty p { margin: 0 0 var(--space-5); color: var(--muted-foreground); font-size: 13px; max-width: 32ch; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-6);
+    }
+
+    .portal-hero {
+      background: linear-gradient(135deg, var(--tvx-navy-800, #1E3A5F) 0%, var(--tvx-blue-600, #2563EB) 100%);
+      color: white;
+      border-radius: 12px;
+      padding: var(--space-8);
+      margin-top: var(--space-4);
+    }
+    .portal-hero h3 { color: white; font-size: 22px; margin-bottom: 8px; }
+    .portal-hero p { opacity: 0.9; margin: 0 0 var(--space-6); max-width: 40ch; }
+    .portal-hero .btn-primary { background: white; color: var(--primary); }
+    .portal-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: var(--muted-foreground);
+    }
+    .portal-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: var(--space-3);
+      font-size: 14px;
+    }
+    .portal-list li.done { color: var(--accent); font-weight: 600; }
+    .portal-list svg { flex-shrink: 0; margin-top: 2px; }
+
+    .icon {
+      width: 16px; height: 16px;
+      display: inline-block;
+      vertical-align: -2px;
+    }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+
+    footer {
+      margin-top: var(--space-12);
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--muted-foreground);
+    }
+
+    @media (max-width: 900px) {
+      .shell { grid-template-columns: 1fr; }
+      .nav { height: auto; position: relative; }
+      .pipeline { grid-template-columns: repeat(2, 1fr); }
+      .two-col, .shell-demo { grid-template-columns: 1fr; }
+      main { padding: var(--space-6); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        transition: none !important;
+        animation-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside class="nav" aria-label="Secciones del UI kit">
+      <div class="brand">Tribuvex</div>
+      <div class="brand-sub">UI Kit · Design system</div>
+      <p class="nav-section">Fundamentos</p>
+      <a href="#colores">Colores</a>
+      <a href="#tipografia">Tipografía</a>
+      <a href="#espaciado">Espaciado</a>
+      <p class="nav-section">Componentes</p>
+      <a href="#botones">Botones</a>
+      <a href="#estados">Estados</a>
+      <a href="#formularios">Formularios</a>
+      <a href="#tabla">Tabla / cifras</a>
+      <a href="#iconos">Iconografía</a>
+      <a href="#shell-app">Shell app</a>
+      <a href="#checkpoint">Punto de control</a>
+      <a href="#toast">Toast</a>
+      <a href="#estados-sistema">Estados de sistema</a>
+      <a href="#etapas">Etapas E1–E7</a>
+      <a href="#a12">Extemporánea / corrección</a>
+      <a href="#plataforma">Plataforma (A13 / RN / OP / LOT)</a>
+      <a href="#fase2">Fase 2 (F2 / SIM / CAL / IMP / MEM)</a>
+      <a href="#portal">Portal contribuyente</a>
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Modo oscuro</button>
+      <a class="hub-link" href="./mockup/index.html">Abrir mockup HTML</a>
+    </aside>
+
+    <main>
+      <h1>Tribuvex UI Kit</h1>
+      <p class="lede">
+        Fuente de verdad visual alineada con <code>MASTER.md</code>, <code>components.md</code>
+        y el mockup en <code>mockup/</code>. Tokens: <code>tokens.css</code>.
+        Patrón Workflow Audit Console · Minimalism &amp; Swiss · densidad 8.
+      </p>
+
+      <section id="colores" aria-labelledby="h-colores">
+        <h2 id="h-colores">Paleta</h2>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="chip" style="background:#1E3A5F"></div><div class="meta"><strong>Primary</strong><code>#1E3A5F</code></div></div>
+          <div class="swatch"><div class="chip" style="background:#2563EB"></div><div class="meta"><strong>Secondary</strong><code>#2563EB</code></div></div>
+          <div class="swatch"><div class="chip" style="background:#16A34A"></div><div class="meta"><strong>Accent / éxito</strong><code>#16A34A</code></div></div>
+          <div class="swatch"><div class="chip" style="background:#D97706"></div><div class="meta"><strong>Warning · PC / riesgo</strong><code>#D97706</code></div></div>
+          <div class="swatch"><div class="chip" style="background:#DC2626"></div><div class="meta"><strong>Destructive</strong><code>#DC2626</code></div></div>
+          <div class="swatch"><div class="chip" style="background:#F8FAFC;border-bottom:1px solid #CBD5E1"></div><div class="meta"><strong>Background</strong><code>#F8FAFC</code></div></div>
+          <div class="swatch"><div class="chip" style="background:#FFFFFF;border-bottom:1px solid #CBD5E1"></div><div class="meta"><strong>Card</strong><code>#FFFFFF</code></div></div>
+          <div class="swatch"><div class="chip" style="background:#0F172A"></div><div class="meta"><strong>Foreground</strong><code>#0F172A</code></div></div>
+          <div class="swatch"><div class="chip" style="background:#E9EEF5"></div><div class="meta"><strong>Muted</strong><code>#E9EEF5</code></div></div>
+          <div class="swatch"><div class="chip" style="background:#CBD5E1"></div><div class="meta"><strong>Border</strong><code>#CBD5E1</code></div></div>
+        </div>
+      </section>
+
+      <section id="tipografia" aria-labelledby="h-tipo">
+        <h2 id="h-tipo">Tipografía</h2>
+        <div class="card">
+          <div class="type-sample">
+            <div class="label">Page · 24px / 700</div>
+            <div style="font-size:24px;font-weight:700;letter-spacing:-0.02em">Expediente · AG 2026 · Juan Pérez</div>
+          </div>
+          <div class="type-sample">
+            <div class="label">Section · 18px / 600</div>
+            <div style="font-size:18px;font-weight:600">Cédula general · Rentas de trabajo</div>
+          </div>
+          <div class="type-sample">
+            <div class="label">Body · 14px / 400</div>
+            <div>El agente concilió el certificado 220 con la exógena. Hay una diferencia en honorarios que requiere tu decisión.</div>
+          </div>
+          <div class="type-sample">
+            <div class="label">Label · 12px / 600</div>
+            <div style="font-size:12px;font-weight:600;color:var(--muted-foreground);text-transform:uppercase;letter-spacing:0.04em">Casilla 43 · Ingresos brutos</div>
+          </div>
+          <div class="type-sample">
+            <div class="label">Mono · cifras / UVT</div>
+            <div class="mono" style="font-size:16px;font-weight:500">1.340 UVT · $ 47.065.000</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="espaciado" aria-labelledby="h-space">
+        <h2 id="h-space">Espaciado (density 8)</h2>
+        <div class="card">
+          <div class="space-row">
+            <div class="space-item"><div class="space-box" style="width:4px;height:4px"></div>1 · 4</div>
+            <div class="space-item"><div class="space-box" style="width:8px;height:8px"></div>2 · 8</div>
+            <div class="space-item"><div class="space-box" style="width:12px;height:12px"></div>3 · 12</div>
+            <div class="space-item"><div class="space-box" style="width:16px;height:16px"></div>4 · 16</div>
+            <div class="space-item"><div class="space-box" style="width:24px;height:24px"></div>6 · 24</div>
+            <div class="space-item"><div class="space-box" style="width:32px;height:32px"></div>8 · 32</div>
+            <div class="space-item"><div class="space-box" style="width:48px;height:48px"></div>12 · 48</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="botones" aria-labelledby="h-btn">
+        <h2 id="h-btn">Botones</h2>
+        <div class="card">
+          <div class="btn-row" style="margin-bottom:var(--space-4)">
+            <button type="button" class="btn btn-primary">
+              <svg class="icon" viewBox="0 0 256 256" aria-hidden="true"><path fill="currentColor" d="M229.66 77.66l-128 128a8 8 0 0 1-11.32 0l-56-56a8 8 0 0 1 11.32-11.32L96 188.69 218.34 66.34a8 8 0 0 1 11.32 11.32Z"/></svg>
+              Aprobar
+            </button>
+            <button type="button" class="btn btn-secondary">Editar</button>
+            <button type="button" class="btn btn-info">Ver traza</button>
+            <button type="button" class="btn btn-destructive">Rechazar</button>
+            <button type="button" class="btn btn-ghost">Cancelar</button>
+            <button type="button" class="btn btn-outline btn-sm">Abrir</button>
+            <button type="button" class="btn btn-primary" disabled>Deshabilitado</button>
+          </div>
+          <div class="btn-row">
+            <button type="button" class="btn btn-primary btn-sm">Aprobar · sm</button>
+            <button type="button" class="btn btn-secondary btn-sm">Editar · sm</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="estados" aria-labelledby="h-est">
+        <h2 id="h-est">Estados y pipeline</h2>
+        <div class="badge-row" style="margin-bottom:var(--space-6)">
+          <span class="badge badge-success"><span class="dot dot-success" aria-hidden="true"></span>Aprobado</span>
+          <span class="badge badge-warning"><span class="dot dot-warning" aria-hidden="true"></span>Esperando aprobación</span>
+          <span class="badge badge-warning"><span class="dot dot-warning" aria-hidden="true"></span>Diferencia exógena</span>
+          <span class="badge badge-danger"><span class="dot dot-danger" aria-hidden="true"></span>Riesgo alto</span>
+          <span class="badge badge-info"><span class="dot dot-info" aria-hidden="true"></span>En proceso</span>
+          <span class="badge badge-neutral">Borrador</span>
+        </div>
+        <div class="pipeline" role="list" aria-label="Etapas del expediente">
+          <div class="stage done" role="listitem">1 · Residencia</div>
+          <div class="stage done" role="listitem">2 · Obligación</div>
+          <div class="stage current" role="listitem">3 · Soportes</div>
+          <div class="stage" role="listitem">4 · Cédulas</div>
+          <div class="stage" role="listitem">5 · Liquidación</div>
+          <div class="stage risk" role="listitem">6 · Patrimonio</div>
+          <div class="stage" role="listitem">7 · Paquete</div>
+        </div>
+        <p style="margin:0;font-size:12px;color:var(--muted-foreground)">
+          Etapa actual con PC pendiente = <strong>warning</strong> (no info azul). Riesgo alto = destructive subtle.
+        </p>
+      </section>
+
+      <section id="formularios" aria-labelledby="h-form">
+        <h2 id="h-form">Formularios + error summary</h2>
+        <div class="card">
+          <div class="error-summary" role="alert" tabindex="-1" id="kit-error-summary" aria-labelledby="kit-error-title">
+            <h3 id="kit-error-title">Hay un problema</h3>
+            <a href="#reject-reason-demo">Indica el motivo del rechazo</a>
+          </div>
+          <div class="field-row" style="margin-bottom:var(--space-4)">
+            <label class="field">
+              NIT / documento
+              <input type="text" name="nit" value="900.123.456-7" autocomplete="off" />
+            </label>
+            <label class="field">
+              Año gravable
+              <select name="ag" aria-label="Año gravable">
+                <option>2025 (regresión)</option>
+                <option selected>2026 (producción)</option>
+              </select>
+            </label>
+          </div>
+          <div class="field-row">
+            <label class="field field-error">
+              Correo del contribuyente
+              <input type="email" name="email" value="cliente@" aria-invalid="true" aria-describedby="email-err" />
+              <span class="error-text" id="email-err">Ingresa un correo válido.</span>
+            </label>
+            <label class="field is-error" id="reject-reason-demo">
+              Motivo de rechazo
+              <span class="hint">Obligatorio si eliges Rechazar. Queda en la bitácora.</span>
+              <textarea rows="2" name="reject" aria-invalid="true" aria-describedby="reject-err"></textarea>
+              <span class="error-text" id="reject-err">Indica el motivo del rechazo.</span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <section id="tabla" aria-labelledby="h-tabla">
+        <h2 id="h-tabla">Tabla de casillas (trazabilidad)</h2>
+        <div class="card" style="padding:0;overflow:auto">
+          <table>
+            <thead>
+              <tr>
+                <th>Casilla</th>
+                <th>Concepto</th>
+                <th>Valor</th>
+                <th>Soporte</th>
+                <th>Estado</th>
+                <th><span class="sr-only">Acciones</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="num">43</td>
+                <td>Ingresos brutos rentas de trabajo</td>
+                <td class="num">$ 86.400.000</td>
+                <td>Certificado 220</td>
+                <td><span class="badge badge-success">Conciliado</span></td>
+                <td><button type="button" class="btn btn-ghost btn-sm">Ver traza</button></td>
+              </tr>
+              <tr>
+                <td class="num">49</td>
+                <td>Honorarios</td>
+                <td class="num">$ 12.200.000</td>
+                <td>Exógena vs factura</td>
+                <td><span class="badge badge-warning">Diferencia</span></td>
+                <td><button type="button" class="btn btn-ghost btn-sm">Ver traza</button></td>
+              </tr>
+              <tr>
+                <td class="num">—</td>
+                <td>Tope Art. 336 (40 % / 1.340 UVT)</td>
+                <td class="num">1.340 UVT</td>
+                <td>Motor de reglas</td>
+                <td><span class="badge badge-info">Aplicado</span></td>
+                <td><button type="button" class="btn btn-outline btn-sm">Abrir</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="iconos" aria-labelledby="h-icons">
+        <h2 id="h-icons">Iconografía · Phosphor regular</h2>
+        <p style="margin:0 0 var(--space-4);font-size:13px;color:var(--muted-foreground);max-width:70ch">
+          Fuente de verdad del mockup: <code>mockup/assets/icons.js</code>
+          (Phosphor <code>@phosphor-icons/core</code> regular · MIT).
+          Producto React: <code>@phosphor-icons/react</code> con el mismo set.
+          Una sola familia, <code>currentColor</code>, sin emoji estructural.
+        </p>
+
+        <h3 style="margin:0 0 var(--space-3);font-size:14px">Uso</h3>
+        <div class="card" style="margin-bottom:var(--space-5);font-size:12px;line-height:1.55">
+          <p style="margin:0 0 0.5rem"><strong>Markup (mockup):</strong></p>
+          <pre style="margin:0 0 0.75rem;padding:0.75rem;border-radius:0.5rem;background:var(--muted);overflow:auto;font-size:11px"><code>&lt;span data-icon="folders" data-icon-size="16"&gt;&lt;/span&gt;
+&lt;button aria-label="Cerrar"&gt;
+  &lt;span data-icon="x-circle" data-icon-size="20" data-icon-label="Cerrar"&gt;&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+          <p style="margin:0 0 0.5rem"><strong>JS:</strong> <code>TribuvexIcon.svg("gear", { size: 20, decorative: true })</code></p>
+          <p style="margin:0"><strong>Accesibilidad:</strong> decorativo junto a texto → sin label (auto <code>aria-hidden</code>). Solo-icono → <code>data-icon-label</code> o <code>aria-label</code> en el control.</p>
+        </div>
+
+        <h3 style="margin:0 0 var(--space-3);font-size:14px">Tamaños</h3>
+        <div class="card" style="display:flex;flex-wrap:wrap;align-items:flex-end;gap:1.5rem;margin-bottom:var(--space-5);padding:var(--space-4)">
+          <div style="text-align:center"><span data-icon="folders" data-icon-size="14"></span><p style="margin:0.35rem 0 0;font-size:11px;color:var(--muted-foreground)">14 · sm</p></div>
+          <div style="text-align:center"><span data-icon="folders" data-icon-size="16"></span><p style="margin:0.35rem 0 0;font-size:11px;color:var(--muted-foreground)">16 · nav / UI</p></div>
+          <div style="text-align:center"><span data-icon="folders" data-icon-size="20"></span><p style="margin:0.35rem 0 0;font-size:11px;color:var(--muted-foreground)">20 · banner</p></div>
+          <div style="text-align:center"><span data-icon="folders" data-icon-size="24"></span><p style="margin:0.35rem 0 0;font-size:11px;color:var(--muted-foreground)">24 · feature</p></div>
+          <div style="text-align:center;color:var(--muted-foreground)"><span data-icon="folders" data-icon-size="40"></span><p style="margin:0.35rem 0 0;font-size:11px">40 · empty</p></div>
+        </div>
+
+        <h3 style="margin:0 0 var(--space-3);font-size:14px">Catálogo (<span id="icon-count">—</span>)</h3>
+        <div id="icon-catalog" class="swatch-grid" style="grid-template-columns:repeat(auto-fill,minmax(6.5rem,1fr));gap:var(--space-3)"></div>
+
+        <h3 style="margin:var(--space-6) 0 var(--space-3);font-size:14px">Aliases del mockup</h3>
+        <div id="icon-aliases" class="card" style="font-size:12px;line-height:1.6"></div>
+
+        <h3 style="margin:var(--space-6) 0 var(--space-3);font-size:14px">Mapa en producto</h3>
+        <div class="card" style="overflow:auto;padding:0">
+          <table style="width:100%;border-collapse:collapse;font-size:12px">
+            <thead>
+              <tr style="background:var(--muted);text-align:left">
+                <th style="padding:0.65rem 1rem">Contexto</th>
+                <th style="padding:0.65rem 1rem">Icono</th>
+                <th style="padding:0.65rem 1rem">Nombre</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)">Nav · Expedientes</td><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)"><span data-icon="folders" data-icon-size="16"></span></td><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)"><code>folders</code></td></tr>
+              <tr><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)">Nav · Clientes</td><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)"><span data-icon="users" data-icon-size="16"></span></td><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)"><code>users</code></td></tr>
+              <tr><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)">Nav · Cola de riesgo</td><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)"><span data-icon="warning" data-icon-size="16"></span></td><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)"><code>warning</code></td></tr>
+              <tr><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)">Nav · Lotes</td><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)"><span data-icon="stack" data-icon-size="16"></span></td><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)"><code>stack</code></td></tr>
+              <tr><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)">Nav · Administración</td><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)"><span data-icon="gear" data-icon-size="16"></span></td><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)"><code>gear</code></td></tr>
+              <tr><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)">Banner info / degradación</td><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)"><span data-icon="info" data-icon-size="16"></span></td><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)"><code>info</code></td></tr>
+              <tr><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)">Banner warning / bloqueado</td><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)"><span data-icon="warning" data-icon-size="16"></span></td><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)"><code>warning</code></td></tr>
+              <tr><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)">Pausa expediente</td><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)"><span data-icon="pause" data-icon-size="16"></span></td><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)"><code>pause</code></td></tr>
+              <tr><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)">Empty / 403 / 404</td><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)"><span data-icon="lock" data-icon-size="16"></span> <span data-icon="magnifying-glass" data-icon-size="16"></span></td><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)"><code>lock</code> · <code>magnifying-glass</code></td></tr>
+              <tr><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)">Éxito / stepper done</td><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)"><span data-icon="check" data-icon-size="16"></span> <span data-icon="check-circle" data-icon-size="16"></span></td><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)"><code>check</code> · <code>check-circle</code></td></tr>
+              <tr><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)">CTA nuevo / upload</td><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)"><span data-icon="plus" data-icon-size="16"></span> <span data-icon="upload-simple" data-icon-size="16"></span></td><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)"><code>plus</code> · <code>upload-simple</code></td></tr>
+              <tr><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)">Tema claro / oscuro</td><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)"><span data-icon="moon" data-icon-size="16"></span> <span data-icon="sun" data-icon-size="16"></span></td><td style="padding:0.55rem 1rem;border-top:1px solid var(--border)"><code>moon</code> · <code>sun</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin:var(--space-3) 0 0;font-size:12px;color:var(--muted-foreground)">
+          Logos de marca (Microsoft / Google OAuth) no forman parte de este catálogo: usan SVG oficial del proveedor.
+        </p>
+      </section>
+
+      <section id="shell-app" aria-labelledby="h-shell">
+        <h2 id="h-shell">Shell app (contador)</h2>
+        <p style="margin:0 0 var(--space-4);font-size:13px;color:var(--muted-foreground);max-width:65ch">
+          Sidebar con secciones Trabajo / Entidad, iconos Phosphor, chip de usuario y topbar con motor + CTA.
+          Implementación viva: <code>mockup/assets/shell.js</code> + <code>mockup/assets/icons.js</code>.
+        </p>
+        <div class="shell-demo" aria-label="Muestra del shell de producto">
+          <aside class="shell-demo-aside">
+            <div class="brand">Tribuvex</div>
+            <div class="sub">Declaración 210 · AG 2026</div>
+            <div class="sec">Trabajo</div>
+            <div class="nav-item is-active">
+              <span class="icon-box" data-icon="folders" data-icon-size="14"></span>
+              Expedientes
+            </div>
+            <div class="nav-item">
+              <span class="icon-box" data-icon="users" data-icon-size="14"></span>
+              Clientes
+            </div>
+            <div class="nav-item">
+              <span class="icon-box" data-icon="warning" data-icon-size="14"></span>
+              Cola de riesgo
+            </div>
+            <div class="sec">Entidad</div>
+            <div class="nav-item">
+              <span class="icon-box" data-icon="gear" data-icon-size="14"></span>
+              Administración
+            </div>
+            <div class="user-chip">
+              <div class="avatar" aria-hidden="true">CF</div>
+              <div>
+                <div style="font-weight:600;color:#fff;font-size:11px">Contador Firma</div>
+                <div style="font-size:10px;color:rgba(255,255,255,0.5)">Preparador</div>
+              </div>
+            </div>
+          </aside>
+          <div class="shell-demo-main">
+            <div class="shell-demo-topbar">
+              <span>Firma Contable Andes · Multitenant aislado</span>
+              <span class="btn-row">
+                <span class="badge badge-success">Motor AG2026.1</span>
+                <button type="button" class="btn btn-primary btn-sm">Nuevo expediente</button>
+              </span>
+            </div>
+            <div class="shell-demo-body">
+              <h3>Expedientes</h3>
+              <p>Cola de trabajo de la firma. Abre un caso para continuar etapas y puntos de control.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="checkpoint" aria-labelledby="h-pc">
+        <h2 id="h-pc">Punto de control (modal PC2)</h2>
+        <p style="margin:0 0 var(--space-4);font-size:13px;color:var(--muted-foreground);max-width:65ch">
+          Chrome completo: borde warning, badge, summary, detalle, motivo de rechazo, RNF-17 y footer sticky
+          Aprobar → Editar → Rechazar. Demo interactiva: <a href="./pages/checkpoint-preview.html">checkpoint-preview.html</a>.
+        </p>
+        <div class="cp-stage">
+          <div class="checkpoint-modal" role="dialog" aria-modal="true" aria-labelledby="pc-kit-title">
+            <div class="cp-header">
+              <div class="meta">
+                <span class="badge badge-warning"><span class="dot dot-warning" aria-hidden="true"></span>PC2 · Cruce con exógena</span>
+                <span style="font-size:11px;font-weight:500;color:var(--muted-foreground)">Decisión humana requerida</span>
+              </div>
+              <h3 id="pc-kit-title">Conciliación con exógena</h3>
+              <p>
+                Hay <strong>1 diferencia</strong> en honorarios ($ 800.000). El agente propone documentar la discrepancia
+                con el soporte de la factura.
+              </p>
+            </div>
+            <div class="cp-body">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Concepto</th>
+                    <th>Soporte</th>
+                    <th>Exógena</th>
+                    <th>Diferencia</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Honorarios</td>
+                    <td class="num">$ 12.200.000</td>
+                    <td class="num">$ 13.000.000</td>
+                    <td class="num diff">− $ 800.000</td>
+                  </tr>
+                </tbody>
+              </table>
+              <label class="field" style="min-width:0">
+                Motivo de rechazo
+                <span class="hint">Obligatorio si eliges Rechazar. Queda en la bitácora.</span>
+                <textarea rows="2" placeholder=""></textarea>
+              </label>
+              <p class="disclaimer">
+                Tribuvex asiste en la preparación de la declaración. La responsabilidad profesional es del contador.
+                El sistema no presenta, firma ni paga en MUISCA.
+              </p>
+            </div>
+            <div class="cp-footer">
+              <button type="button" class="back">Volver al expediente</button>
+              <button type="button" class="btn btn-primary">Aprobar</button>
+              <button type="button" class="btn btn-secondary">Editar</button>
+              <button type="button" class="btn btn-destructive">Rechazar</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="toast" aria-labelledby="h-toast">
+        <h2 id="h-toast">Toast</h2>
+        <p style="margin:0 0 var(--space-4);font-size:13px;color:var(--muted-foreground);max-width:65ch">
+          Confirmaciones no bloqueantes (<code>role="status"</code> · <code>aria-live="polite"</code>).
+          No sustituye el error summary del punto de control.
+        </p>
+        <div class="toast-row">
+          <div class="toast" role="status" aria-live="polite">
+            <strong>Aprobación registrada</strong>
+            <span>El flujo puede continuar.</span>
+          </div>
+          <div class="toast" role="status" aria-live="polite" style="border-left-color:var(--warning)">
+            <strong>Modo edición</strong>
+            <span>El punto de control sigue abierto.</span>
+          </div>
+          <div class="toast" role="status" aria-live="polite" style="border-left-color:var(--destructive)">
+            <strong>Rechazo registrado</strong>
+            <span>Motivo en bitácora. La etapa no se cerró.</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="estados-sistema" aria-labelledby="h-sys">
+        <h2 id="h-sys">Estados de sistema</h2>
+        <p style="margin:0 0 var(--space-4);font-size:13px;color:var(--muted-foreground);max-width:65ch">
+          Patrones de empty, banners y errores. Vivos en
+          <a href="./mockup/estados.html"><code>mockup/estados.html</code></a>
+          (query params / pantallas dedicadas). Copy: <code>CONTENT_MODEL.md</code> §7 y §10.
+        </p>
+
+        <h3 style="margin-top:var(--space-6)">Banners</h3>
+        <div class="sys-banner sys-banner--danger" role="alert">
+          <div><strong>No pudimos iniciar sesión.</strong> Revisa tus datos o contacta al administrador.</div>
+        </div>
+        <div class="sys-banner sys-banner--warning" role="status">
+          <div><strong>Tu sesión expiró.</strong> Vuelve a iniciar sesión para continuar donde ibas.</div>
+        </div>
+        <div class="sys-banner sys-banner--muted" role="status">
+          <div><strong>El asistente no está disponible.</strong> Puedes seguir con el motor y los datos del expediente.</div>
+        </div>
+        <div class="sys-banner sys-banner--info" role="status">
+          <div class="btn-row" style="width:100%;justify-content:space-between">
+            <span><strong>Expediente pausado.</strong> Reanuda cuando quieras; no se pierde el avance.</span>
+            <button type="button" class="btn btn-info btn-sm">Reanudar</button>
+          </div>
+        </div>
+        <div class="sys-banner sys-banner--warning" role="status">
+          <div><strong>Paquete no disponible.</strong> Estará listo cuando apruebes el borrador final (PC5).</div>
+        </div>
+
+        <h3 style="margin-top:var(--space-8)">Empty states</h3>
+        <div class="two-col" style="margin-top:var(--space-4)">
+          <div class="sys-empty">
+            <h3>Aún no hay expedientes</h3>
+            <p>Crea el primero para este año gravable.</p>
+            <button type="button" class="btn btn-primary btn-sm">Nuevo expediente</button>
+          </div>
+          <div class="sys-empty">
+            <h3>Sin resultados</h3>
+            <p>Ningún expediente coincide con los filtros.</p>
+            <button type="button" class="btn btn-ghost btn-sm">Limpiar filtros</button>
+          </div>
+          <div class="sys-empty">
+            <h3>Sin clientes</h3>
+            <p>No hay clientes. Agrega un cliente para abrir expedientes.</p>
+            <button type="button" class="btn btn-primary btn-sm">Nuevo cliente</button>
+          </div>
+          <div class="sys-empty">
+            <h3>Sin acceso</h3>
+            <p>No tienes permiso para ver este cliente o expediente.</p>
+            <button type="button" class="btn btn-secondary btn-sm">Volver a expedientes</button>
+          </div>
+        </div>
+
+        <h3 style="margin-top:var(--space-8)">Estados de flujo (chips)</h3>
+        <div class="badge-row" style="margin-top:var(--space-3)">
+          <span class="badge badge-warning"><span class="dot dot-warning" aria-hidden="true"></span>Derivado a análisis manual</span>
+          <span class="badge badge-info"><span class="dot dot-info" aria-hidden="true"></span>Omitido — sin diferencias</span>
+          <span class="badge badge-warning"><span class="dot dot-warning" aria-hidden="true"></span>Pendiente revisor (PC5)</span>
+          <span class="badge badge-neutral">No obligado · voluntaria</span>
+        </div>
+      </section>
+
+      <section id="etapas" aria-labelledby="h-etapas">
+        <h2 id="h-etapas">Etapas E1–E7 (workspace)</h2>
+        <p style="margin:0 0 var(--space-4);font-size:13px;color:var(--muted-foreground);max-width:65ch">
+          Contenido rico del expediente asalariado vive en
+          <a href="./mockup/expediente.html"><code>mockup/expediente.html</code></a>
+          + <code>mockup/assets/stages.js</code>. Panel de traza obligatorio (valor · soporte · regla · artículo · motor).
+        </p>
+        <div class="card" style="padding:0;overflow:hidden">
+          <div style="display:grid;grid-template-columns:1.4fr 1fr;min-height:220px">
+            <div style="padding:var(--space-5);border-right:1px solid var(--border)">
+              <p class="label" style="font-size:11px;text-transform:uppercase;letter-spacing:0.04em;color:var(--muted-foreground);margin:0 0 8px">E5 · Liquidación</p>
+              <div class="btn-row" style="margin-bottom:var(--space-4)">
+                <div class="swatch" style="flex:1;min-width:100px;border:1px solid var(--border);border-radius:8px;padding:10px">
+                  <div style="font-size:10px;color:var(--muted-foreground)">Impuesto</div>
+                  <div class="mono" style="font-weight:600">$ 4.250.000</div>
+                </div>
+                <div class="swatch" style="flex:1;min-width:100px;border:1px solid var(--border);border-radius:8px;padding:10px">
+                  <div style="font-size:10px;color:var(--muted-foreground)">Saldo</div>
+                  <div class="mono" style="font-weight:700;color:var(--primary)">$ 1.180.000</div>
+                </div>
+              </div>
+              <p style="margin:0;font-size:12px;color:var(--muted-foreground)">Tablas con CTA <strong>Ver traza</strong> · cifras solo del motor.</p>
+              <div class="btn-row" style="margin-top:var(--space-4)">
+                <a class="btn btn-primary btn-sm" href="./mockup/expediente.html?etapa=1">E1</a>
+                <a class="btn btn-ghost btn-sm" href="./mockup/expediente.html?etapa=3">E3</a>
+                <a class="btn btn-ghost btn-sm" href="./mockup/expediente.html?etapa=5">E5</a>
+                <a class="btn btn-ghost btn-sm" href="./mockup/expediente.html?etapa=7">E7</a>
+              </div>
+            </div>
+            <div style="padding:var(--space-5);background:var(--muted)">
+              <p style="margin:0 0 8px;font-size:12px;font-weight:600">Traza · casilla 91</p>
+              <dl style="margin:0;font-size:12px;display:grid;gap:8px">
+                <div><dt style="color:var(--muted-foreground);font-size:10px;text-transform:uppercase">Valor</dt><dd class="mono" style="margin:0">$ 1.180.000</dd></div>
+                <div><dt style="color:var(--muted-foreground);font-size:10px;text-transform:uppercase">Soporte</dt><dd style="margin:0">Motor</dd></div>
+                <div><dt style="color:var(--muted-foreground);font-size:10px;text-transform:uppercase">Regla</dt><dd style="margin:0">Impuesto − retenciones + anticipo</dd></div>
+                <div><dt style="color:var(--muted-foreground);font-size:10px;text-transform:uppercase">Artículo</dt><dd style="margin:0">Instructivo 210</dd></div>
+                <div><dt style="color:var(--muted-foreground);font-size:10px;text-transform:uppercase">Motor</dt><dd class="mono" style="margin:0">AG2026.1</dd></div>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="a12" aria-labelledby="h-a12">
+        <h2 id="h-a12">A12 · Extemporánea / corrección</h2>
+        <p style="margin:0 0 var(--space-4);font-size:13px;color:var(--muted-foreground);max-width:65ch">
+          RF-16 / RF-17 / RF-20. Mockup vivo:
+          <a href="./mockup/extemporanea.html"><code>mockup/extemporanea.html</code></a>.
+          Amnistías solo si están parametrizadas (empty state obligatorio).
+        </p>
+        <div class="two-col">
+          <div class="card">
+            <h3>Desglose motor (ejemplo)</h3>
+            <dl style="margin:0;font-size:13px;display:grid;gap:8px">
+              <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:6px"><dt style="color:var(--muted-foreground)">Sanción Art. 641</dt><dd class="mono" style="margin:0;font-weight:600">$ 2.180.000</dd></div>
+              <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:6px"><dt style="color:var(--muted-foreground)">Mínima Art. 639</dt><dd class="mono" style="margin:0;font-weight:600">$ 523.740</dd></div>
+              <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:6px"><dt style="color:var(--muted-foreground)">Intereses Art. 634</dt><dd class="mono" style="margin:0;font-weight:600">$ 412.000</dd></div>
+              <div style="display:flex;justify-content:space-between"><dt style="font-weight:600">Total</dt><dd class="mono" style="margin:0;font-weight:700;color:var(--primary)">$ 2.592.000</dd></div>
+            </dl>
+          </div>
+          <div class="sys-empty">
+            <h3>Ninguna amnistía parametrizada</h3>
+            <p>Solo se muestran si el responsable normativo las cargó y verificó. Nunca se asumen.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="plataforma" aria-labelledby="h-plat">
+        <h2 id="h-plat">Plataforma · A13 / RN / OP / LOT</h2>
+        <p style="margin:0 0 var(--space-4);font-size:13px;color:var(--muted-foreground);max-width:65ch">
+          Consolas fuera del shell de firma (salvo LOT). Mockups:
+          <a href="./mockup/onboarding.html">onboarding</a> ·
+          <a href="./mockup/parametros.html">parámetros</a> ·
+          <a href="./mockup/operador.html">operador</a> ·
+          <a href="./mockup/lotes.html">lotes</a>.
+        </p>
+        <div class="swatch-grid">
+          <a class="card" style="text-decoration:none;color:inherit" href="./mockup/onboarding.html">
+            <h3>A13 Onboarding</h3>
+            <p style="margin:0;font-size:12px;color:var(--muted-foreground)">Alta independiente · 3 roles en un usuario</p>
+          </a>
+          <a class="card" style="text-decoration:none;color:inherit" href="./mockup/parametros.html">
+            <h3>RN Parámetros</h3>
+            <p style="margin:0;font-size:12px;color:var(--muted-foreground)">Firma + regresión verde (RNF-16)</p>
+          </a>
+          <a class="card" style="text-decoration:none;color:inherit" href="./mockup/operador.html">
+            <h3>OP Operador</h3>
+            <p style="margin:0;font-size:12px;color:var(--muted-foreground)">Alta/suspende · cero datos tributarios</p>
+          </a>
+          <a class="card" style="text-decoration:none;color:inherit" href="./mockup/lotes.html">
+            <h3>LOT Lotes</h3>
+            <p style="margin:0;font-size:12px;color:var(--muted-foreground)">Cola por entidad · no salta PC</p>
+          </a>
+        </div>
+        <div class="sys-banner sys-banner--warning" style="margin-top:var(--space-4)" role="status">
+          <div><strong>Gate RNF-16.</strong> No se puede habilitar: la regresión debe estar en verde y la firma del responsable registrada.</div>
+        </div>
+      </section>
+
+      <section id="fase2" aria-labelledby="h-fase2">
+        <h2 id="h-fase2">Fase 2 · Multi-cédula / SIM / CAL / IMP / MEM</h2>
+        <p style="margin:0 0 var(--space-4);font-size:13px;color:var(--muted-foreground);max-width:65ch">
+          Extensiones D2–D6 y workspace multi-cédula.
+          <a href="./mockup/expediente.html?etapa=4&amp;perfil=multi">multi-cédula</a> ·
+          <a href="./mockup/simulador.html">simulador</a> ·
+          <a href="./mockup/calendario.html">calendario</a> ·
+          <a href="./mockup/importacion.html">importación</a> ·
+          <a href="./mockup/memoria.html">memoria</a>.
+        </p>
+        <div class="swatch-grid">
+          <a class="card" style="text-decoration:none;color:inherit" href="./mockup/expediente.html?etapa=4&amp;perfil=multi">
+            <h3>F2 Multi-cédula</h3>
+            <p style="margin:0;font-size:12px;color:var(--muted-foreground)">E4 · varias cédulas · límites cruzados</p>
+          </a>
+          <a class="card" style="text-decoration:none;color:inherit" href="./mockup/simulador.html">
+            <h3>SIM Simulador</h3>
+            <p style="margin:0;font-size:12px;color:var(--muted-foreground)">25 % vs costos → PC3</p>
+          </a>
+          <a class="card" style="text-decoration:none;color:inherit" href="./mockup/calendario.html">
+            <h3>CAL Calendario</h3>
+            <p style="margin:0;font-size:12px;color:var(--muted-foreground)">Vencimientos por NIT</p>
+          </a>
+          <a class="card" style="text-decoration:none;color:inherit" href="./mockup/importacion.html">
+            <h3>IMP Import / export</h3>
+            <p style="margin:0;font-size:12px;color:var(--muted-foreground)">Contabilidad · paquete · sin MUISCA</p>
+          </a>
+          <a class="card" style="text-decoration:none;color:inherit" href="./mockup/memoria.html">
+            <h3>MEM Memoria</h3>
+            <p style="margin:0;font-size:12px;color:var(--muted-foreground)">Anticipo · patrimonio AG-1</p>
+          </a>
+        </div>
+      </section>
+
+      <section id="portal" aria-labelledby="h-portal">
+        <h2 id="h-portal">Portal contribuyente (menor densidad)</h2>
+        <div class="two-col">
+          <div class="portal-hero">
+            <h3>Tribuvex</h3>
+            <p>Sube tus soportes y revisa el borrador de tu declaración. Sin jerga tributaria.</p>
+            <button type="button" class="btn btn-primary">Subir documentos</button>
+          </div>
+          <div class="card">
+            <h3>Qué falta</h3>
+            <ul class="portal-list">
+              <li>
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/></svg>
+                Certificado de ingresos y retenciones (220)
+              </li>
+              <li>
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/></svg>
+                Extractos bancarios diciembre
+              </li>
+              <li class="done">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
+                Cédula de ciudadanía
+              </li>
+            </ul>
+            <div style="margin-top:var(--space-6)">
+              <button type="button" class="btn btn-secondary">Aceptar borrador</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        Tribuvex design system · IBM Plex Sans / Mono · tokens.css ·
+        Spec: <code>MASTER.md</code> · <code>components.md</code> · Mockup: <code>mockup/</code>
+      </footer>
+    </main>
+  </div>
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var btn = document.getElementById("theme-toggle");
+      if (!btn) return;
+      btn.addEventListener("click", function () {
+        var dark = root.classList.toggle("dark");
+        btn.setAttribute("aria-pressed", dark ? "true" : "false");
+        btn.textContent = dark ? "Modo claro" : "Modo oscuro";
+      });
+    })();
+  </script>
+  <script src="./mockup/assets/icons.js"></script>
+  <script>
+    (function () {
+      var I = window.TribuvexIcon;
+      if (!I) return;
+      var catalog = document.getElementById("icon-catalog");
+      var aliases = document.getElementById("icon-aliases");
+      var count = document.getElementById("icon-count");
+      if (count) count.textContent = I.names.length + " iconos";
+      if (catalog) {
+        catalog.innerHTML = I.names
+          .slice()
+          .sort()
+          .map(function (name) {
+            return (
+              '<div class="card" style="text-align:center;padding:var(--space-4)">' +
+              '<span data-icon="' + name + '" data-icon-size="24"></span>' +
+              '<p style="margin:0.5rem 0 0;font-size:11px;font-family:var(--font-mono,ui-monospace,monospace)">' +
+              name +
+              "</p></div>"
+            );
+          })
+          .join("");
+      }
+      if (aliases) {
+        var rows = Object.keys(I.aliases)
+          .sort()
+          .map(function (a) {
+            return "<div><code>" + a + "</code> → <code>" + I.aliases[a] + "</code></div>";
+          });
+        aliases.innerHTML = rows.length
+          ? rows.join("")
+          : "<p style='margin:0'>Sin aliases.</p>";
+      }
+      I.mount(document.getElementById("iconos") || document);
+    })();
+  </script>
+</body>
+</html>
