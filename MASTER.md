@@ -13,7 +13,7 @@
 **Stack:** React + Tailwind CSS  
 **Design Dials:** Variance 4/10 | Motion 4/10 | Density 8/10 (Dense / Dashboard)
 
-**Preview:** open `ui-kit-preview.html` in a browser (aligned with mockup polish: shell, PC modal, toast, error summary, no emoji icons).
+**Preview:** open `ui-kit-preview.html` in a browser (Principios → Guía de estilo → Patrones → Componentes). Aligned with mockup: shell, Control modal, toast, error summary, Phosphor icons.
 
 **Tokens (implementable):**
 - `tokens.css` — primitive → semantic → component + Tailwind v4 `@theme inline`

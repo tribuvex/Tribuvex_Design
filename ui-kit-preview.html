@@ -636,6 +636,129 @@
       main { padding: var(--space-6); }
     }
 
+    /* UI kit documentation chrome */
+    .principle-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: var(--space-4);
+    }
+    .principle {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-panel);
+      padding: var(--space-5);
+      box-shadow: var(--elevation-sm);
+    }
+    .principle h3 { margin: 0 0 var(--space-2); font-size: 15px; }
+    .principle p { margin: 0 0 var(--space-3); font-size: 13px; color: var(--muted-foreground); }
+    .principle ul {
+      margin: 0;
+      padding-left: 1.1rem;
+      font-size: 12px;
+      color: var(--foreground);
+      line-height: 1.45;
+    }
+    .tone-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
+      margin-top: var(--space-4);
+    }
+    .tone {
+      border-radius: var(--radius-panel);
+      border: 1px solid var(--border);
+      padding: var(--space-4);
+      font-size: 13px;
+    }
+    .tone.no { border-color: var(--destructive); background: var(--destructive-subtle); }
+    .tone.yes { border-color: var(--accent); background: var(--success-subtle); }
+    .tone strong { display: block; margin-bottom: var(--space-2); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .scale-row {
+      display: grid;
+      grid-template-columns: 88px 1fr 1fr 1fr;
+      gap: var(--space-2);
+      align-items: center;
+      margin-bottom: var(--space-3);
+      font-size: 12px;
+    }
+    .scale-row .chip-sm {
+      height: 36px;
+      border-radius: var(--radius-control);
+      border: 1px solid var(--border);
+    }
+    .type-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .type-table th, .type-table td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .type-table th {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted-foreground);
+      font-weight: 600;
+    }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: var(--space-4);
+    }
+    .kpi {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-panel);
+      padding: var(--space-5);
+      box-shadow: var(--elevation-sm);
+    }
+    .kpi .kpi-name { font-size: 12px; font-weight: 600; color: var(--muted-foreground); }
+    .kpi .kpi-value {
+      margin-top: 6px;
+      font-family: var(--font-family-mono);
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--primary);
+    }
+    .kpi .kpi-meta { margin-top: 6px; font-size: 12px; color: var(--muted-foreground); }
+    .kpi .kpi-meta.up { color: var(--success-foreground); font-weight: 600; }
+    .kpi.sm .kpi-value { font-size: 20px; }
+    .icon-size-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-6);
+      align-items: flex-end;
+    }
+    .icon-size-item { text-align: center; font-size: 11px; color: var(--muted-foreground); }
+    .search-demo {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-4);
+    }
+    .search-demo input {
+      min-width: 220px;
+      flex: 1;
+      max-width: 320px;
+    }
+    .kit-note {
+      margin: var(--space-3) 0 0;
+      font-size: 12px;
+      color: var(--muted-foreground);
+      max-width: 70ch;
+    }
+
+    @media (max-width: 900px) {
+      .tone-pair, .scale-row { grid-template-columns: 1fr; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after {
@@ -650,81 +773,203 @@
     <aside class="nav" aria-label="Secciones del UI kit">
       <div class="brand">Tribuvex</div>
       <div class="brand-sub">UI Kit · Design system</div>
-      <p class="nav-section">Fundamentos</p>
-      <a href="#colores">Colores</a>
+      <p class="nav-section">Principios</p>
+      <a href="#principios">Principios</a>
+      <p class="nav-section">Guía de estilo</p>
+      <a href="#colores">Color</a>
       <a href="#tipografia">Tipografía</a>
+      <a href="#iconos">Iconografía</a>
       <a href="#espaciado">Espaciado</a>
+      <p class="nav-section">Patrones</p>
+      <a href="#patrones-nav">Navegación</a>
+      <a href="#patrones-busqueda">Búsqueda</a>
+      <a href="#patrones-notif">Notificaciones</a>
+      <a href="#patrones-kpi">KPIs</a>
       <p class="nav-section">Componentes</p>
       <a href="#botones">Botones</a>
-      <a href="#estados">Estados</a>
+      <a href="#estados">Etiquetas</a>
       <a href="#formularios">Formularios</a>
-      <a href="#tabla">Tabla / cifras</a>
-      <a href="#iconos">Iconografía</a>
+      <a href="#tabla">Tablas</a>
       <a href="#shell-app">Shell app</a>
       <a href="#checkpoint">Control</a>
       <a href="#toast">Toast</a>
       <a href="#estados-sistema">Estados de sistema</a>
       <a href="#etapas">Etapas E1–E7</a>
-      <a href="#a12">Extemporánea / corrección</a>
-      <a href="#plataforma">Plataforma (A13 / RN / OP / LOT)</a>
-      <a href="#fase2">Fase 2 (F2 / SIM / CAL / IMP / MEM)</a>
-      <a href="#portal">Portal contribuyente</a>
+      <a href="#a12">Extemporánea</a>
+      <a href="#plataforma">Plataforma</a>
+      <a href="#fase2">Fase 2</a>
+      <a href="#portal">Portal</a>
       <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">Modo oscuro</button>
+      <a class="hub-link" href="./index.html">Inicio · Design system</a>
       <a class="hub-link" href="./mockup/index.html">Abrir mockup HTML</a>
     </aside>
 
     <main>
       <h1>Tribuvex UI Kit</h1>
       <p class="lede">
-        Fuente de verdad visual alineada con <code>MASTER.md</code>, <code>components.md</code>
-        y el mockup en <code>mockup/</code>. Tokens: <code>tokens.css</code>.
-        Patrón Workflow Audit Console · Minimalism &amp; Swiss · densidad 8.
+        Fuente de verdad visual de la marca Tribuvex:
+        <strong>Principios → Guía de estilo → Patrones → Componentes</strong>.
+        Tokens en <code>MASTER.md</code> y <code>tokens.css</code>.
+        <a href="./index.html">Inicio</a> ·
+        <a href="./mockup/index.html">Mockup</a> ·
+        <a href="./ux/wireflows/index.html">Wireflows</a>.
       </p>
 
+      <section id="principios" aria-labelledby="h-prin">
+        <h2 id="h-prin">Principios</h2>
+        <p class="kit-note">Filosofía de producto para que diseño, contenido y desarrollo trabajen alineados.</p>
+        <div class="principle-grid">
+          <article class="principle">
+            <h3>Simplemente práctico</h3>
+            <p>Cada control cumple una función y facilita la decisión del contador.</p>
+            <ul>
+              <li>¿Resuelve un problema real del expediente?</li>
+              <li>¿Se ve claro cómo aprobar, editar o rechazar?</li>
+              <li>¿Acorta el camino a MUISCA (manual)?</li>
+            </ul>
+          </article>
+          <article class="principle">
+            <h3>Humano decide</h3>
+            <p>El motor calcula; la UI nunca simula “IA que liquida sola”.</p>
+            <ul>
+              <li>¿El Control N pide una decisión explícita?</li>
+              <li>¿La cifra muestra traza (soporte → regla → artículo)?</li>
+              <li>¿El copy evita “mágico” / copiloto que decide?</li>
+            </ul>
+          </article>
+          <article class="principle">
+            <h3>Enfocado y unificado</h3>
+            <p>Misma paleta, mismos CTAs y densidad coherente entre pantallas.</p>
+            <ul>
+              <li>¿Cada bloque refuerza al resto (shell + Control + portal)?</li>
+              <li>¿Hay elementos que resten coherencia o jerga de portal?</li>
+              <li>¿La marca Tribuvex se reconoce sin competir con el contenido?</li>
+            </ul>
+          </article>
+          <article class="principle">
+            <h3>Mentalidad iterativa</h3>
+            <p>El kit y el mockup se prueban con el equipo y el piloto.</p>
+            <ul>
+              <li>¿Mejora una fricción ya vista en temporada?</li>
+              <li>¿El componente mejora lo que había?</li>
+              <li>¿Se puede validar en HTML antes de React?</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
       <section id="colores" aria-labelledby="h-colores">
-        <h2 id="h-colores">Paleta</h2>
+        <h2 id="h-colores">Color</h2>
+        <p class="kit-note">Roles semánticos de marca. Cada estado tiene tono fuerte / medio / suave (texto · acción · fondo).</p>
         <div class="swatch-grid">
-          <div class="swatch"><div class="chip" style="background:#1E3A5F"></div><div class="meta"><strong>Primary</strong><code>#1E3A5F</code></div></div>
-          <div class="swatch"><div class="chip" style="background:#2563EB"></div><div class="meta"><strong>Secondary</strong><code>#2563EB</code></div></div>
-          <div class="swatch"><div class="chip" style="background:#16A34A"></div><div class="meta"><strong>Accent / éxito</strong><code>#16A34A</code></div></div>
-          <div class="swatch"><div class="chip" style="background:#D97706"></div><div class="meta"><strong>Warning · PC / riesgo</strong><code>#D97706</code></div></div>
-          <div class="swatch"><div class="chip" style="background:#DC2626"></div><div class="meta"><strong>Destructive</strong><code>#DC2626</code></div></div>
+          <div class="swatch"><div class="chip" style="background:#1E3A5F"></div><div class="meta"><strong>Primary</strong><code>#1E3A5F</code> · títulos, chrome</div></div>
+          <div class="swatch"><div class="chip" style="background:#2563EB"></div><div class="meta"><strong>Secondary</strong><code>#2563EB</code> · traza / info</div></div>
+          <div class="swatch"><div class="chip" style="background:#16A34A"></div><div class="meta"><strong>Accent</strong><code>#16A34A</code> · aprobar / éxito</div></div>
+          <div class="swatch"><div class="chip" style="background:#D97706"></div><div class="meta"><strong>Warning</strong><code>#D97706</code> · Control / riesgo</div></div>
+          <div class="swatch"><div class="chip" style="background:#DC2626"></div><div class="meta"><strong>Destructive</strong><code>#DC2626</code> · rechazar</div></div>
           <div class="swatch"><div class="chip" style="background:#F8FAFC;border-bottom:1px solid #CBD5E1"></div><div class="meta"><strong>Background</strong><code>#F8FAFC</code></div></div>
           <div class="swatch"><div class="chip" style="background:#FFFFFF;border-bottom:1px solid #CBD5E1"></div><div class="meta"><strong>Card</strong><code>#FFFFFF</code></div></div>
           <div class="swatch"><div class="chip" style="background:#0F172A"></div><div class="meta"><strong>Foreground</strong><code>#0F172A</code></div></div>
           <div class="swatch"><div class="chip" style="background:#E9EEF5"></div><div class="meta"><strong>Muted</strong><code>#E9EEF5</code></div></div>
           <div class="swatch"><div class="chip" style="background:#CBD5E1"></div><div class="meta"><strong>Border</strong><code>#CBD5E1</code></div></div>
         </div>
+
+        <h3 style="margin-top:var(--space-8)">Colores de estado (escala 100 / 80 / 20)</h3>
+        <div class="card">
+          <div class="scale-row">
+            <strong>Éxito</strong>
+            <div><div class="chip-sm" style="background:#15803d"></div><code>--success-foreground</code></div>
+            <div><div class="chip-sm" style="background:#16a34a"></div><code>--accent</code></div>
+            <div><div class="chip-sm" style="background:#dcfce7"></div><code>--success-subtle</code></div>
+          </div>
+          <div class="scale-row">
+            <strong>Info</strong>
+            <div><div class="chip-sm" style="background:#1e40af"></div><code>--info-foreground</code></div>
+            <div><div class="chip-sm" style="background:#2563eb"></div><code>--secondary</code></div>
+            <div><div class="chip-sm" style="background:#dbeafe"></div><code>--info-subtle</code></div>
+          </div>
+          <div class="scale-row">
+            <strong>Aviso</strong>
+            <div><div class="chip-sm" style="background:#b45309"></div><code>--warning-foreground</code></div>
+            <div><div class="chip-sm" style="background:#d97706"></div><code>--warning</code></div>
+            <div><div class="chip-sm" style="background:#ffedd5"></div><code>--warning-subtle</code></div>
+          </div>
+          <div class="scale-row">
+            <strong>Error</strong>
+            <div><div class="chip-sm" style="background:#b91c1c"></div><code>--destructive-hover</code></div>
+            <div><div class="chip-sm" style="background:#dc2626"></div><code>--destructive</code></div>
+            <div><div class="chip-sm" style="background:#fee2e2"></div><code>--destructive-subtle</code></div>
+          </div>
+          <div class="tone-pair">
+            <div class="tone no">
+              <strong>No</strong>
+              Usar accent verde para “pagar / presentar en MUISCA”, o warning naranja para CTAs de éxito.
+            </div>
+            <div class="tone yes">
+              <strong>Sí</strong>
+              Accent = Aprobar / listo · Warning = Control humano · Destructive = Rechazar / riesgo alto.
+            </div>
+          </div>
+        </div>
       </section>
 
       <section id="tipografia" aria-labelledby="h-tipo">
         <h2 id="h-tipo">Tipografía</h2>
-        <div class="card">
-          <div class="type-sample">
-            <div class="label">Page · 24px / 700</div>
-            <div style="font-size:24px;font-weight:700;letter-spacing:-0.02em">Expediente · AG 2026 · Juan Pérez</div>
-          </div>
-          <div class="type-sample">
-            <div class="label">Section · 18px / 600</div>
-            <div style="font-size:18px;font-weight:600">Cédula general · Rentas de trabajo</div>
-          </div>
-          <div class="type-sample">
-            <div class="label">Body · 14px / 400</div>
-            <div>El agente concilió el certificado 220 con la exógena. Hay una diferencia en honorarios que requiere tu decisión.</div>
-          </div>
-          <div class="type-sample">
-            <div class="label">Label · 12px / 600</div>
-            <div style="font-size:12px;font-weight:600;color:var(--muted-foreground);text-transform:uppercase;letter-spacing:0.04em">Casilla 43 · Ingresos brutos</div>
-          </div>
-          <div class="type-sample">
-            <div class="label">Mono · cifras / UVT</div>
-            <div class="mono" style="font-size:16px;font-weight:500">1.340 UVT · $ 47.065.000</div>
+        <p class="kit-note">Familia de marca: <strong>IBM Plex Sans</strong> + <strong>IBM Plex Mono</strong> (cifras / UVT). Escala tipográfica con uso definido.</p>
+        <div class="card" style="overflow-x:auto">
+          <table class="type-table">
+            <thead>
+              <tr><th>Estilo</th><th>Peso · tamaño</th><th>Uso</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-size:24px;font-weight:700;letter-spacing:-0.02em">Título página</td>
+                <td>Bold · 24px</td>
+                <td>Un título principal por pantalla</td>
+              </tr>
+              <tr>
+                <td style="font-size:18px;font-weight:600">Título sección</td>
+                <td>Semibold · 18px</td>
+                <td>Módulos, tablas, cards</td>
+              </tr>
+              <tr>
+                <td>Párrafo / dato</td>
+                <td>Regular · 14px</td>
+                <td>Cuerpo y filas de trabajo</td>
+              </tr>
+              <tr>
+                <td style="font-size:12px;font-weight:600;color:var(--muted-foreground);text-transform:uppercase;letter-spacing:0.04em">Label</td>
+                <td>Semibold · 12px</td>
+                <td>Labels de campo, meta de casilla</td>
+              </tr>
+              <tr>
+                <td style="font-size:12px;font-weight:600">Botón / CTA</td>
+                <td>Semibold · 12–14px</td>
+                <td>Aprobar, Editar, Rechazar</td>
+              </tr>
+              <tr>
+                <td class="mono" style="font-size:16px;font-weight:500">1.340 UVT</td>
+                <td>Mono Medium · 16px</td>
+                <td>Cifras, saldos, topes</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="tone-pair">
+            <div class="tone no">
+              <strong>No</strong>
+              Título principal en secondary azul de acción, o párrafos en warning.
+            </div>
+            <div class="tone yes">
+              <strong>Sí</strong>
+              Primary para títulos y datos clave · Secondary solo en acciones/enlaces · Estados solo en badges o texto de estado.
+            </div>
           </div>
         </div>
       </section>
 
       <section id="espaciado" aria-labelledby="h-space">
-        <h2 id="h-space">Espaciado (density 8)</h2>
+        <h2 id="h-space">Espaciado</h2>
+        <p class="kit-note">Escala de <strong>4px</strong> (density 8 / consola densa). Pocos pasos y reglas de uso claras.</p>
         <div class="card">
           <div class="space-row">
             <div class="space-item"><div class="space-box" style="width:4px;height:4px"></div>1 · 4</div>
@@ -735,6 +980,89 @@
             <div class="space-item"><div class="space-box" style="width:32px;height:32px"></div>8 · 32</div>
             <div class="space-item"><div class="space-box" style="width:48px;height:48px"></div>12 · 48</div>
           </div>
+          <ul style="margin:var(--space-5) 0 0;padding-left:1.1rem;font-size:13px;color:var(--muted-foreground)">
+            <li><strong>4–8px</strong> — label + input, icono + texto.</li>
+            <li><strong>12–24px</strong> — elementos dentro del mismo bloque.</li>
+            <li><strong>32–48px</strong> — separación entre bloques / secciones del kit.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="patrones-nav" aria-labelledby="h-pnav">
+        <h2 id="h-pnav">Patrón · Navegación</h2>
+        <p class="kit-note">App contador: sidebar sticky (Trabajo / Entidad). Portal: cabecera simple sin shell denso. Máx. ~5 destinos primarios visibles.</p>
+        <div class="card">
+          <div class="btn-row">
+            <span class="badge badge-neutral">Expedientes</span>
+            <span class="badge badge-info">Clientes</span>
+            <span class="badge badge-neutral">Cola de riesgo</span>
+            <span class="badge badge-neutral">Administración</span>
+          </div>
+          <p class="kit-note">Control 1–5 no son ítems de menú: interrumpen el expediente (modal / overlay).</p>
+        </div>
+      </section>
+
+      <section id="patrones-busqueda" aria-labelledby="h-psearch">
+        <h2 id="h-psearch">Patrón · Búsqueda</h2>
+        <div class="card">
+          <div class="search-demo">
+            <h3 style="margin:0">Expedientes</h3>
+            <label class="field" style="min-width:0;flex:1;max-width:320px;margin:0">
+              <span class="sr-only">Buscar</span>
+              <input type="search" placeholder="Buscar cliente, NIT o AG…" />
+            </label>
+          </div>
+          <p class="kit-note">Búsqueda de tabla = filtro predictivo en listados. Búsqueda general solo si la página es densa (admin / temporada).</p>
+        </div>
+      </section>
+
+      <section id="patrones-notif" aria-labelledby="h-pnotif">
+        <h2 id="h-pnotif">Patrón · Notificaciones</h2>
+        <p class="kit-note">Relevante, inmediata e informativa · mensaje corto (≈ 8–10 palabras) · sin saturar.</p>
+        <div class="card">
+          <div class="btn-row" style="margin-bottom:var(--space-4)">
+            <span class="badge badge-success"><span class="dot dot-success" aria-hidden="true"></span> Éxito · toast</span>
+            <span class="badge badge-warning"><span class="dot dot-warning" aria-hidden="true"></span> Aviso · banner Control</span>
+            <span class="badge badge-danger"><span class="dot dot-danger" aria-hidden="true"></span> Error · bloquea</span>
+            <span class="badge badge-info"><span class="dot dot-info" aria-hidden="true"></span> Info · contexto</span>
+          </div>
+          <div class="tone-pair">
+            <div class="tone no">
+              <strong>Flotante (toast)</strong>
+              Confirmaciones cortas; puede desvanecerse. No para errores de formulario.
+            </div>
+            <div class="tone yes">
+              <strong>Banner / summary</strong>
+              Errores de Control y validación: permanentes hasta resolver + error summary enlazado.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="patrones-kpi" aria-labelledby="h-pkpi">
+        <h2 id="h-pkpi">Patrón · KPIs</h2>
+        <p class="kit-note">Máx. 4 grandes arriba del dashboard · máx. 8 pequeños en columnas. Nombre ≤ 5 palabras · cifra en mono · contexto YoY / cola.</p>
+        <div class="kpi-grid">
+          <article class="kpi">
+            <div class="kpi-name">Expedientes en curso</div>
+            <div class="kpi-value">128</div>
+            <div class="kpi-meta up">+12% vs semana anterior</div>
+          </article>
+          <article class="kpi">
+            <div class="kpi-name">Esperando Control</div>
+            <div class="kpi-value">23</div>
+            <div class="kpi-meta">7 alto riesgo</div>
+          </article>
+          <article class="kpi sm">
+            <div class="kpi-name">Paquetes listos</div>
+            <div class="kpi-value">41</div>
+            <div class="kpi-meta">AG 2026</div>
+          </article>
+          <article class="kpi sm">
+            <div class="kpi-name">Cola revisor</div>
+            <div class="kpi-value">5</div>
+            <div class="kpi-meta">Control 5 dual</div>
+          </article>
         </div>
       </section>
 
@@ -866,6 +1194,15 @@
 
       <section id="iconos" aria-labelledby="h-icons">
         <h2 id="h-icons">Iconografía · Phosphor regular</h2>
+        <p class="kit-note">Tamaños de marca: 16 / 18 junto a texto · 24 / 36 para títulos o empty states. Un solo estilo (regular), sin emoji.</p>
+        <div class="card" style="margin-bottom:var(--space-4)">
+          <div class="icon-size-row">
+            <div class="icon-size-item"><span data-icon="folders" data-icon-size="16"></span><div>16px</div></div>
+            <div class="icon-size-item"><span data-icon="folders" data-icon-size="18"></span><div>18px</div></div>
+            <div class="icon-size-item"><span data-icon="folders" data-icon-size="24"></span><div>24px</div></div>
+            <div class="icon-size-item"><span data-icon="folders" data-icon-size="36"></span><div>36px</div></div>
+          </div>
+        </div>
         <p style="margin:0 0 var(--space-4);font-size:13px;color:var(--muted-foreground);max-width:70ch">
           Fuente de verdad del mockup: <code>mockup/assets/icons.js</code>
           (Phosphor <code>@phosphor-icons/core</code> regular · MIT).

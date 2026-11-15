@@ -1,5 +1,14 @@
 # Design decisions — Tribuvex
 
+## 2026-11-15 · UI kit como sistema de marca
+
+| Campo | Valor |
+|-------|-------|
+| **Problema** | El kit era sobre todo un catálogo de componentes, sin narrativa de marca. |
+| **Decisión** | `ui-kit-preview.html` documenta Principios → Guía de estilo → Patrones → Componentes con tokens y voz Tribuvex. |
+| **Añadido** | Principios (práctico / humano decide / unificado / iterativo), escalas de estado, tipografía con usos, patrones de búsqueda / notificación / KPI, tamaños de icono. |
+| **Revisar si** | Brand book formal sustituye o amplía esta capa |
+
 ## 2026-11-15 · Renombrar PC → Control N (UI)
 
 | Campo | Valor |
