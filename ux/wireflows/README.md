@@ -24,3 +24,5 @@ Wireflow = pantallas del mockup + flechas SVG.
 | WF-16 | [Memoria](./WF-16-memoria.html) | D6 |
 
 Motor: `assets/wireflow-board.css` + `assets/wireflow-board.js`.
+
+**Interacción:** clic en miniatura abre **modal** con el mockup (Esc / Cerrar). Ctrl/Cmd+clic o “Abrir en pestaña” si hace falta pantalla completa.

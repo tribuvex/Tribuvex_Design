@@ -2,8 +2,11 @@
  * Tribuvex wireflow board renderer.
  * Config: { width, height, mockBase, sections, screens, happy, branches }
  * screen: { id, num, name, href, x, y, pc?, hub? }
+ * Click thumbnail → modal preview (Ctrl/Cmd+click still opens a new tab).
  */
 (function () {
+  var previewState = { lastFocus: null, href: "" };
+
   function el(tag, attrs, html) {
     var node = document.createElement(tag);
     if (attrs) {
@@ -20,17 +23,121 @@
     return node;
   }
 
-  function screenCard(s, mockBase) {
-    var href = s.href.indexOf("http") === 0 ? s.href : mockBase + s.href.replace(/^\.\.\//, "").replace(/^\.\//, "");
-    // hrefs in config use paths relative to mockup/ e.g. login.html or pc/pc1.html
-    if (s.href.indexOf("../") === -1 && s.href.indexOf("http") !== 0) {
-      href = mockBase + s.href;
-    } else if (s.href.indexOf("../../mockup/") === 0) {
-      href = s.href;
-    } else if (s.href.indexOf("../mockup/") === 0) {
-      href = s.href;
-    }
+  function ensurePreviewStyles() {
+    if (document.getElementById("wf-preview-styles")) return;
+    if (document.querySelector('link[href*="wireflow-board.css"]')) return;
+    var script = document.querySelector('script[src*="wireflow-board.js"]');
+    var href = script && script.src
+      ? script.src.replace(/wireflow-board\.js(\?.*)?$/, "wireflow-board.css")
+      : "./assets/wireflow-board.css";
+    var link = document.createElement("link");
+    link.id = "wf-preview-styles";
+    link.rel = "stylesheet";
+    link.href = href;
+    document.head.appendChild(link);
+  }
 
+  function ensureModal() {
+    ensurePreviewStyles();
+    var root = document.getElementById("wf-preview");
+    if (root) return root;
+    root = el("div", {
+      id: "wf-preview",
+      className: "wf-preview",
+      hidden: "hidden",
+    });
+    root.innerHTML =
+      '<div class="wf-preview-dialog" role="dialog" aria-modal="true" aria-labelledby="wf-preview-title">' +
+      '<div class="wf-preview-bar">' +
+      '<h2 id="wf-preview-title">Vista previa</h2>' +
+      '<div class="wf-preview-actions">' +
+      '<a id="wf-preview-ext" href="#" target="_blank" rel="noopener">Abrir en pestaña</a>' +
+      '<button type="button" class="primary" id="wf-preview-close">Cerrar</button>' +
+      "</div></div>" +
+      '<div class="wf-preview-frame-wrap">' +
+      '<iframe id="wf-preview-frame" title="Vista previa del mockup"></iframe>' +
+      "</div>" +
+      '<p class="wf-preview-note">Esc o Cerrar para volver al wireflow. Ctrl/Cmd+clic en la miniatura abre pestaña nueva.</p>' +
+      "</div>";
+    document.body.appendChild(root);
+
+    function close() {
+      closePreview();
+    }
+    root.addEventListener("click", function (e) {
+      if (e.target === root) close();
+    });
+    document.getElementById("wf-preview-close").addEventListener("click", close);
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !root.hidden) {
+        e.preventDefault();
+        close();
+      }
+    });
+    return root;
+  }
+
+  function openPreview(href, title) {
+    var root = ensureModal();
+    previewState.lastFocus = document.activeElement;
+    previewState.href = href;
+    document.getElementById("wf-preview-title").textContent = title || "Vista previa";
+    var ext = document.getElementById("wf-preview-ext");
+    ext.href = href;
+    var frame = document.getElementById("wf-preview-frame");
+    frame.src = href;
+    root.hidden = false;
+    document.body.classList.add("wf-preview-open");
+    document.getElementById("wf-preview-close").focus();
+  }
+
+  function closePreview() {
+    var root = document.getElementById("wf-preview");
+    if (!root || root.hidden) return;
+    root.hidden = true;
+    document.body.classList.remove("wf-preview-open");
+    var frame = document.getElementById("wf-preview-frame");
+    if (frame) frame.src = "about:blank";
+    if (previewState.lastFocus && typeof previewState.lastFocus.focus === "function") {
+      try {
+        previewState.lastFocus.focus();
+      } catch (e) {}
+    }
+  }
+
+  function resolveHref(s, mockBase) {
+    var href = s.href;
+    if (href.indexOf("http") === 0) return href;
+    if (href.indexOf("../../mockup/") === 0 || href.indexOf("../mockup/") === 0) return href;
+    if (href.indexOf("../") === -1) return mockBase + href;
+    return mockBase + href.replace(/^\.\.\//, "").replace(/^\.\//, "");
+  }
+
+  function bindDevice(anchor) {
+    if (!anchor || anchor.dataset.wfBound === "1") return;
+    anchor.dataset.wfBound = "1";
+    anchor.setAttribute("aria-haspopup", "dialog");
+    anchor.addEventListener("click", function (e) {
+      if (e.defaultPrevented) return;
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+      var href = anchor.getAttribute("href");
+      if (!href || href === "#") return;
+      e.preventDefault();
+      var article = anchor.closest(".screen");
+      var title = article && article.querySelector(".screen-label .name")
+        ? article.querySelector(".screen-label .name").textContent
+        : anchor.getAttribute("aria-label") || "Mockup";
+      openPreview(href, title.trim());
+    });
+  }
+
+  function bindPreview(root) {
+    ensureModal();
+    (root || document).querySelectorAll("a.device[href]").forEach(bindDevice);
+  }
+
+  function screenCard(s, mockBase) {
+    var href = resolveHref(s, mockBase);
     var article = el("article", {
       className: "screen" + (s.pc ? " is-pc" : "") + (s.hub ? " is-hub" : ""),
       id: s.id,
@@ -39,7 +146,7 @@
     article.style.top = s.y + "px";
     article.innerHTML =
       '<div class="screen-label"><span class="name"></span><span class="id"></span></div>' +
-      '<a class="device" target="_blank" rel="noopener">' +
+      '<a class="device" rel="noopener">' +
       '<div class="device-chrome" aria-hidden="true"><i></i><i></i><i></i></div>' +
       '<div class="viewport">' +
       '<iframe loading="lazy"></iframe>' +
@@ -51,9 +158,11 @@
     article.querySelector(".id").textContent = s.num;
     var a = article.querySelector("a.device");
     a.href = href;
+    a.title = "Ver detalle · " + s.name;
     var iframe = article.querySelector("iframe");
     iframe.title = s.name;
     iframe.src = href;
+    bindDevice(a);
     return article;
   }
 
@@ -170,7 +279,21 @@
     redraw();
     window.addEventListener("resize", redraw);
     watchIframes(board);
+    ensureModal();
+
+    var hint = document.querySelector(".hint");
+    if (hint && hint.dataset.wfHint !== "1") {
+      hint.dataset.wfHint = "1";
+      hint.textContent =
+        (hint.textContent ? hint.textContent.replace(/\s*$/, "") + " · " : "") +
+        "Clic en miniatura = modal · Ctrl/Cmd+clic = pestaña nueva.";
+    }
   }
 
-  window.TribuvexWireflow = { mount: mount };
+  window.TribuvexWireflow = {
+    mount: mount,
+    bindPreview: bindPreview,
+    openPreview: openPreview,
+    closePreview: closePreview,
+  };
 })();

@@ -255,3 +255,99 @@
       text-transform: uppercase;
       color: var(--wf-muted);
     }
+
+    /* Preview modal — stay on wireflow board */
+    .wf-preview {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      padding: 0.75rem;
+      background: rgb(15 23 42 / 0.55);
+      backdrop-filter: blur(3px);
+    }
+    .wf-preview[hidden] { display: none !important; }
+    .wf-preview-dialog {
+      display: flex;
+      flex-direction: column;
+      width: min(1120px, 100%);
+      max-height: calc(100vh - 1.5rem);
+      margin: auto;
+      border-radius: 0.85rem;
+      border: 1px solid var(--wf-border);
+      background: #fff;
+      box-shadow: 0 24px 48px rgb(15 23 42 / 0.28);
+      overflow: hidden;
+    }
+    .wf-preview-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding: 0.65rem 0.85rem;
+      border-bottom: 1px solid var(--wf-border);
+      background: #f8fafc;
+    }
+    .wf-preview-bar h2 {
+      margin: 0;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--wf-ink);
+    }
+    .wf-preview-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .wf-preview-actions a,
+    .wf-preview-actions button {
+      font-family: inherit;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 0.45rem;
+      padding: 0.4rem 0.7rem;
+      border: 1px solid var(--wf-border);
+      background: #fff;
+      color: var(--wf-ink);
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .wf-preview-actions button.primary {
+      background: var(--wf-ink);
+      border-color: var(--wf-ink);
+      color: #fff;
+    }
+    .wf-preview-actions a:hover,
+    .wf-preview-actions button:hover { background: #eef2f6; }
+    .wf-preview-actions button.primary:hover { background: #152a45; }
+    .wf-preview-actions a:focus-visible,
+    .wf-preview-actions button:focus-visible {
+      outline: 2px solid var(--wf-ink);
+      outline-offset: 2px;
+    }
+    .wf-preview-frame-wrap {
+      position: relative;
+      flex: 1;
+      min-height: 0;
+      background: #e2e8f0;
+    }
+    .wf-preview-frame-wrap iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: min(72vh, 720px);
+      border: 0;
+      background: #fff;
+    }
+    .wf-preview-note {
+      margin: 0;
+      padding: 0.45rem 0.85rem;
+      font-size: 0.68rem;
+      color: var(--wf-muted);
+      border-top: 1px solid var(--wf-border);
+      background: #f8fafc;
+    }
+    body.wf-preview-open { overflow: hidden; }
