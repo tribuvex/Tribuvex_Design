@@ -57,6 +57,17 @@ Fecha: 2026-11-14 · Fuente: ui-ux-pro-max (`ux`, `html-tailwind`) + MASTER Trib
 - [x] Stepper del expediente: estados completed / current / upcoming más explícitos
 - [x] Unificar tokens mockup (`theme.js`) ↔ `tokens.css` (evitar drift)
 
+## Oleada responsive (2026-11-15)
+
+Fuente: auditoría ui-ux-pro-max (mobile-first, tables, horizontal scroll).
+
+| Sev | Hallazgo | Fix |
+|-----|----------|-----|
+| Alta | Sidebar `w-60` fijo en móvil | Drawer off-canvas + `#nav-toggle` / scrim (&lt;md) |
+| Alta | Tablas con `overflow-hidden` | `tvx-table-scroll` + `overflow-x-auto` + `min-w` |
+| Media | Topbar denso | Tenant truncado · CTA “Nuevo” en xs · padding `p-4` |
+| Media | Stepper `grid-cols-2` alto | `.tvx-stepper` scroll-x → grid 7 desde md |
+
 ## Oleada dark contrast / a11y (2026-11-15)
 
 Fuente: capturas Expedientes + topbar dark + ui-ux-pro-max (contrast ≥4.5:1).

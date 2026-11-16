@@ -44,7 +44,7 @@
       if (voluntario) {
         html.body =
           '<div class="tvx-banner tvx-banner--info mb-4" role="status"><div><strong>No obligado a declarar</strong> según umbrales UVT del AG. Puedes cerrar el expediente o declarar de forma voluntaria.</div></div>' +
-          '<div class="overflow-hidden rounded-xl border border-border">' +
+          '<div class="tvx-table-scroll overflow-x-auto rounded-xl border border-border">' +
           '<table class="tvx-table w-full text-left text-sm"><thead class="bg-muted text-[11px] uppercase text-muted-foreground"><tr>' +
           "<th class='px-3 py-2.5'>Condición</th><th class='px-3 py-2.5'>Umbral</th><th class='px-3 py-2.5'>Valor</th><th class='px-3 py-2.5'>Resultado</th></tr></thead><tbody class='divide-y divide-border'>" +
           "<tr><td class='px-3 py-2.5'>Patrimonio bruto</td><td class='px-3 py-2.5 font-mono text-xs'>4.500 UVT</td><td class='px-3 py-2.5 font-mono text-xs'>$ 48.000.000</td><td class='px-3 py-2.5'><span class='rounded-full bg-success-subtle px-2 py-0.5 text-xs font-semibold text-success-foreground'>Bajo</span></td></tr>" +
@@ -59,7 +59,7 @@
           '<a class="rounded-lg px-3 py-2 text-xs font-semibold text-muted-foreground hover:underline" href="./expediente.html?etapa=2">Ver caso obligado</a>';
       } else {
         html.body =
-          '<div class="overflow-hidden rounded-xl border border-border">' +
+          '<div class="tvx-table-scroll overflow-x-auto rounded-xl border border-border">' +
           '<table class="tvx-table w-full text-left text-sm"><thead class="bg-muted text-[11px] uppercase text-muted-foreground"><tr>' +
           "<th class='px-3 py-2.5'>Condición</th><th class='px-3 py-2.5'>Umbral</th><th class='px-3 py-2.5'>Valor</th><th class='px-3 py-2.5'>Resultado</th></tr></thead><tbody class='divide-y divide-border'>" +
           "<tr><td class='px-3 py-2.5'>Patrimonio bruto</td><td class='px-3 py-2.5 font-mono text-xs'>4.500 UVT</td><td class='px-3 py-2.5 font-mono text-xs'>$ 210.000.000</td><td class='px-3 py-2.5'><span class='rounded-full bg-warning-subtle px-2 py-0.5 text-xs font-semibold text-warning-foreground'>Supera</span></td></tr>" +
@@ -164,7 +164,7 @@
         '<div class="rounded-xl border border-border bg-muted/40 p-3"><dt class="text-[11px] font-semibold uppercase text-muted-foreground">Retenciones</dt><dd class="mt-1 font-mono text-lg font-semibold">$ 3.070.000</dd></div>' +
         '<div class="rounded-xl border border-border bg-card p-3 shadow-sm"><dt class="text-[11px] font-semibold uppercase text-muted-foreground">Saldo a pagar</dt><dd class="mt-1 font-mono text-lg font-semibold text-primary">$ 1.180.000</dd></div>' +
         "</dl>" +
-        '<div class="overflow-hidden rounded-xl border border-border">' +
+        '<div class="tvx-table-scroll overflow-x-auto rounded-xl border border-border">' +
         '<table class="tvx-table w-full text-left text-sm"><thead class="bg-muted text-[11px] uppercase text-muted-foreground"><tr>' +
         "<th class='px-3 py-2.5'>Concepto</th><th class='px-3 py-2.5'>Valor</th><th class='px-3 py-2.5'></th></tr></thead><tbody class='divide-y divide-border'>" +
         "<tr><td class='px-3 py-2.5'>Renta líquida gravable</td><td class='px-3 py-2.5 font-mono'>$ 48.200.000</td><td class='px-3 py-2.5'>" +
@@ -199,7 +199,7 @@
         '<span class="rounded-full bg-success-subtle px-2.5 py-0.5 text-xs font-semibold text-success-foreground">Verificador: 0 bloqueantes</span>' +
         '<span class="rounded-full bg-muted px-2.5 py-0.5 text-xs font-semibold text-muted-foreground">Borrador 210</span></div>' +
         '<p class="mb-3 font-mono text-2xl font-bold tracking-tight">Saldo a pagar: $ 1.180.000</p>' +
-        '<div class="overflow-hidden rounded-xl border border-border">' +
+        '<div class="tvx-table-scroll overflow-x-auto rounded-xl border border-border">' +
         '<table class="tvx-table w-full text-left text-sm"><thead class="bg-muted text-[11px] uppercase text-muted-foreground"><tr>' +
         "<th class='px-3 py-2.5'>Casilla</th><th class='px-3 py-2.5'>Concepto</th><th class='px-3 py-2.5'>Valor</th><th class='px-3 py-2.5'></th></tr></thead><tbody class='divide-y divide-border'>" +
         "<tr><td class='px-3 py-2.5 font-mono text-xs'>43</td><td class='px-3 py-2.5'>Ingresos brutos</td><td class='px-3 py-2.5 font-mono'>$ 86.400.000</td><td class='px-3 py-2.5'>" +

@@ -3,6 +3,86 @@ html {
   scroll-behavior: smooth;
 }
 
+/* -------------------------------------------------------------------------- */
+/* Responsive shell — mobile drawer (<md), sticky sidebar (md+)               */
+/* -------------------------------------------------------------------------- */
+.tvx-nav-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 35;
+  background: rgb(15 23 42 / 0.55);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease;
+}
+.dark .tvx-nav-scrim {
+  background: rgb(0 0 0 / 0.65);
+}
+.tvx-shell--nav-open .tvx-nav-scrim {
+  opacity: 1;
+  pointer-events: auto;
+}
+.tvx-sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 40;
+  transform: translateX(-100%);
+  transition: transform 200ms ease;
+}
+.tvx-shell--nav-open .tvx-sidebar {
+  transform: translateX(0);
+}
+body.tvx-nav-lock {
+  overflow: hidden;
+}
+@media (min-width: 768px) {
+  .tvx-nav-scrim,
+  .tvx-nav-toggle {
+    display: none !important;
+  }
+  .tvx-sidebar {
+    position: sticky;
+    transform: none !important;
+  }
+  body.tvx-nav-lock {
+    overflow: auto;
+  }
+}
+
+/* Stepper — horizontal scroll on small screens; 7-col grid from md */
+.tvx-stepper {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+}
+.tvx-stepper .tvx-step {
+  flex: 0 0 auto;
+  width: 5.75rem;
+  scroll-snap-align: start;
+}
+@media (min-width: 768px) {
+  .tvx-stepper {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+  .tvx-stepper .tvx-step {
+    width: auto;
+  }
+}
+
+/* Tables — prefer scroll over clipping wide grids */
+.tvx-table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
